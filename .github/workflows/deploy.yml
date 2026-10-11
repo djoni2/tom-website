@@ -17,16 +17,38 @@ jobs:
           HYVOR_KEY: ${{ secrets.HYVOR_CONSOLE_KEY }}
           SUBDOMAIN: "dev-d287e71c-2526-4197-ae4c-a7f2efbf7c83"
         run: |
-          # Loop through all files in templates, styles, and root config
-          find templates styles config.yaml -type f 2>/dev/null | while read filepath; do
-            echo "Syncing $filepath..."
-            
-            # Read file content safely
+          set -euo pipefail
+
+          if [ -z "${HYVOR_KEY:-}" ]; then
+            echo "::error::HYVOR_CONSOLE_KEY secret is not set"
+            exit 1
+          fi
+
+          synced=0
+          failed=0
+
+          while IFS= read -r -d '' filepath; do
             content=$(jq -sR . "$filepath")
-            
-            # Update/Create file via Hyvor Console API
-            curl -X POST "https://blogs.hyvor.com/api/console/v0/blog/$SUBDOMAIN/theme/file" \
+            body=$(mktemp)
+
+            status=$(curl -sS -X POST \
+              "https://blogs.hyvor.com/api/console/v0/blog/$SUBDOMAIN/theme/file" \
               -H "X-API-KEY: $HYVOR_KEY" \
               -H "Content-Type: application/json" \
-              -d "{\"path\": \"$filepath\", \"content\": $content}"
-          done
+              -d "{\"path\": \"$filepath\", \"content\": $content}" \
+              -o "$body" -w '%{http_code}') || status="000"
+
+            if [ "$status" -ge 200 ] && [ "$status" -lt 300 ]; then
+              echo "ok    $status  $filepath"
+              synced=$((synced + 1))
+            else
+              echo "::error::sync failed ($status) $filepath -- $(head -c 500 "$body")"
+              failed=$((failed + 1))
+            fi
+
+            rm -f "$body"
+          done < <(find templates styles config.yaml -type f -print0)
+
+          echo "----"
+          echo "synced: $synced   failed: $failed"
+          [ "$failed" -eq 0 ]
