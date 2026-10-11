@@ -1,0 +1,32 @@
+name: Deploy Theme to Hyvor Blogs
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Sync Theme Files via Hyvor Console API
+        env:
+          HYVOR_KEY: ${{ secrets.HYVOR_CONSOLE_KEY }}
+          SUBDOMAIN: "dev-d287e71c-2526-4197-ae4c-a7f2efbf7c83"
+        run: |
+          # Loop through all files in templates, styles, and root config
+          find templates styles config.yaml -type f 2>/dev/null | while read filepath; do
+            echo "Syncing $filepath..."
+            
+            # Read file content safely
+            content=$(jq -sR . "$filepath")
+            
+            # Update/Create file via Hyvor Console API
+            curl -X POST "https://blogs.hyvor.com/api/console/v0/blog/$SUBDOMAIN/theme/file" \
+              -H "X-API-KEY: $HYVOR_KEY" \
+              -H "Content-Type: application/json" \
+              -d "{\"path\": \"$filepath\", \"content\": $content}"
+          done
