@@ -58,4 +58,15 @@
 
     </div>
   </div>
+
+  {# Full-width promo band. The first row is 3 cards (col-3 + col-6 + col-3),
+     so this lands between row one and row two. On a short final page with
+     fewer than 3 posts it falls after the last card instead of vanishing. #}
+  {% if loop.index == 3 or (loop.last and loop.length < 3) %}
+    <div class="col col-12" style="text-align:center; margin:10px 0 30px;">
+      <a href="https://www.takemylead.de" target="_blank" style="background-color:#007bff; color:white; padding:10px 20px; text-decoration:none; border-radius:5px; font-weight:bold;">
+        I make sure your project ranks on Google and gets leads!
+      </a>
+    </div>
+  {% endif %}
 {% endfor %}
