@@ -1,0 +1,19 @@
+{% extends '@base.twig' %}
+
+{% block body %}
+
+<div id="fb-root"></div>
+<script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2"></script>
+
+<h1 class="hidden">Madeira News</h1>
+  <main class="content" role="main" aria-label="Content">
+    {% include '_hero.twig' %}
+    <div class="container">
+      <div class="row">
+        {% include '_loop.twig' %}
+      </div>
+    </div>
+    {% include '_pagination.twig' %}
+  </main>
+
+{% endblock %}

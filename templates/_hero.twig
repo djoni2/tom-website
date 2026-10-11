@@ -1,0 +1,118 @@
+<!-- begin hero -->
+<section class="hero">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+        <div class="hero__inner">
+           
+          <div><a href="https://www.timesofmadeira.com" title="Madeira News | Times of Madeira">
+              <img src="https://www.timesofmadeira.com/media/times-of-madeira.svg" alt="Madeira News | Times of Madeira">
+          </a></div>
+          <div class="col col-12" style="text-align:center; margin-top:20px;">
+            <a href="https://www.takemylead.de" target="_blank" style="background-color:#007bff; color:white; padding:10px 20px; text-decoration:none; border-radius:5px; font-weight:bold;">
+              I make sure your project ranks on Google and gets leads!
+            </a>
+          </div>
+          <!-- Placeholder for the slogan -->
+          <div class="col col-12" id="slogan"></div>
+          <p></p>
+            
+            
+            
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- end hero -->
+
+<div style="text-align:center;"><hyvor-post-form newsletter="times-of-madeira" style="text-align:center;"></hyvor-post-form></div>
+
+
+<!-- begin find article -->
+<p>
+<div style="display:flex; justify-content:center; align-items:center; width:100%;" class="nav-search fade-in">
+  <a href="#" class="red-button">
+    <span class="red-bg-text">Find Your Article!</span>
+    <span class="icon-background">
+      <svg xmlns="http://www.w3.org/2000/svg" 
+           width="28" height="28" fill="none" stroke="#c91400" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
+           viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="7" />
+        <line x1="16.5" y1="16.5" x2="21" y2="21" />
+      </svg>
+    </span>
+  </a>
+</div>
+
+<style>
+  .fade-in {
+    opacity: 0;
+    animation: fadeIn 2.9s forwards;
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  .red-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #c91400;
+    color: white;
+    font-weight: 800;
+    font-size: 20px;
+    border-radius: 32px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    margin-bottom:20px;  
+  }
+  .red-button:hover {
+    background-color: #f21b05;
+  }
+  .red-bg-text {
+    padding: 10px 20px;
+    display: inline-block;
+  }
+  .icon-background {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 0px 12px 12px 0px;
+    padding: 5px 12px;
+    height: 52px;
+  }
+  .icon-background svg {
+    display: block;
+  }
+</style>
+</p>
+<!-- end find article -->
+
+
+<script>
+// Array of slogans
+var slogans = [
+    "Madeira news, wrapped in context.",
+    "Madeira news. Be political!",
+    "Be informed, be engaged & demand better from your leaders.",
+    "Madeira in scope. Know more, understand better.",
+    "News from Madeira Island.",
+    "No democracy without civic engagement.",
+    "Read more!",
+
+];
+
+// Function to select a random slogan and display it
+function showRandomSlogan() {
+    var sloganContainer = document.getElementById('slogan');
+    var randomIndex = Math.floor(Math.random() * slogans.length);
+    sloganContainer.textContent = slogans[randomIndex];
+}
+
+// Call the function to display a slogan on page load
+showRandomSlogan();
+</script>

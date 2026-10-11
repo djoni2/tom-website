@@ -1,0 +1,87 @@
+{% extends '@base.twig' %}
+
+{% block body %}
+<main role="main" class="tag-page">
+    
+  <!-- begin hero -->
+<section class="hero">
+    
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+        <div class="hero__inner">
+           
+        <div><a href="https://www.timesofmadeira.com" title="Times of Madeira"> <img src="https://www.timesofmadeira.com/media/times-of-madeira.svg" alt="Times of Madeira">   </a></div>
+           
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- end hero -->  
+    
+    
+  <div class="container">
+    <div class="row">
+      <div  class="col col-12">
+          
+          
+          
+          <section class="tag-head">
+  {% if _tag.name == "Politics" %}
+    <h1 class="tag-title tag-title--politics">Times of Madeira | Politics</h1>
+    <div class="tag-description tag-description--politics">
+      <p>Madeira's political landscape has undergone significant changes over time. As an autonomous region of Portugal, Madeira has its own regional government and parliament, allowing for self-rule in many areas. The <b>Social Democratic Party (PSD)</b> has traditionally dominated local politics, but in recent years, the Socialist Party (PS) and other smaller parties have gained influence, shaping policy in areas like tourism, economic development, and social welfare.</p> 
+        
+        <p> Political dynamics continue to evolve, reflecting both local concerns and broader national trends in Portugal, with governance adapting to the region's changing needs and challenges. Stay informed about the latest developments in Madeira's political landscape. Get breaking Madeira news on government decisions, political party activities, and laws impacting the island. Engage in the political circus!</p> 
+    </div>
+  {% elseif _tag.name == "Culture" %}
+    <h1 class="tag-title tag-title--culture">Times of Madeira | Culture</h1>
+    <div class="tag-description tag-description--culture">Culture in Madeira.</div>
+              
+    {% elseif _tag.name == "Funchal" %}
+    <h1 class="tag-title tag-title--culture">Times of Madeira | Funchal News</h1>
+    <div class="tag-description tag-description--culture">News from Funchal. Madeira's capital. It's where things are happening!</div>
+              
+              
+          {% else %}
+    <h1 class="tag-title">{{ _tag.name }}</h1>
+    {% if _tag.description %}
+      <div class="tag-description">{{ _tag.description }}</div>
+    {% endif %}    
+            
+
+  
+              
+  {% endif %}
+</section>
+
+          
+          
+          
+          
+          
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="section-title">
+      {{ 'check_out_posts' | lang }}
+      <span>
+        {{ _pagination.total | lang_by_number(
+          zero="posts_num_zero",
+          one="posts_num_one",
+          multi="posts_num_multi"
+        )}}
+      </span>
+    </div>
+    <div class="row">
+      {% include '_loop.twig' %}
+    </div>
+  </div>
+
+  {% include '_pagination.twig' %}
+</main>
+
+{% endblock %}

@@ -1,0 +1,17 @@
+#pieChart {
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background-color: #eee;
+  margin: auto;
+}
+
+.slice {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  top: 25%;
+  left: 25%;
+  clip-path: polygon(50% 50%, 0 0, 100% 0);
+  transform-origin: 50% 100%;
+}

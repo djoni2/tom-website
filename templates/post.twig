@@ -1,0 +1,135 @@
+{% extends '@base.twig' %}
+
+{% block body %}
+
+
+
+
+  <main role="main">
+
+    <div class="container">
+      <div class="post-head">
+	  <div class="col col-12">
+        <div class="hero__inner">
+           
+        <div><a href="https://www.timesofmadeira.com" title="Times of Madeira"> <img src="https://www.timesofmadeira.com/media/times-of-madeira.svg" alt="Madeira News">   </a></div>
+           
+        </div>
+      </div>
+        {% if _post.featured_image_url and _config.settings.post.featured_image %}
+          <div class="image-box">
+            <img src="{{ _post.featured_image_url }}" alt="{{ _post.title }}" class="post-image" loading="lazy">
+          </div>
+        {% endif %}
+
+        <div class="post-head__inner">
+          <div class="post__meta">
+            {% if (_config.settings.loop.tags) %}
+              <div class="post__tags">
+                {% for tag in _post.tags %}
+                  <a href="{{ tag.url }}" class="post__tag">{{ tag.name }}</a>
+                {% endfor %}
+              </div>
+            {% endif %}
+            <time class="post__date" datetime="{{ _post.published_at | date('d-m-Y') }}">
+              {{ _post.published_at | format_date('medium', locale=_lang.code) }}
+            </time>
+          </div>
+
+          <h1 class="post-title">{{ _post.title }}</h1>
+
+          {% if _post.description %}
+            <p class="post-description">{{ _post.description }}</p>
+          {% endif %}
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- begin post -->
+      <article class="post">
+
+        <section class="post-content">
+          {{ _post.content | raw }}
+        </section>
+          
+         
+          
+          
+          
+         
+        <div>
+<br><br>
+           
+
+ <p style="text-align:center;">
+  <a
+    href="https://blogs.hyvor.com?partner=timesofmadeira"
+    target="_blank"
+    rel="noopener"
+    style="
+      display: inline-block;
+      background-color: #000;
+      color: #fff;
+      padding: 5px 20px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      font-family: sans-serif;
+      transition: all 0.25s ease;
+    "
+    onmouseover="this.style.backgroundColor='#c91400';"
+    onmouseout="this.style.backgroundColor='#000';"
+  >
+    Times of Madeira runs on Hyvor ✍️ 
+  </a>
+  <br>
+  <a>a fast ⚡ modern publishing platform.</a>
+</p>
+ </div>
+       
+
+
+          
+          
+          
+
+
+        {% if _route.name != 'page' %}
+
+          {% if _newsletter %}
+            <section class="newsletter-box">
+              <h3>{{ 'newsletter' | lang }}</h3>
+              <div>
+                {{ _newsletter | template }}
+              </div>
+            </section>
+          {% endif %}
+
+          {% if _comments %}
+            <section class="comments-box">
+              <h3>{{ 'comments' | lang }}</h3>
+                
+
+                
+              <div>{{ _comments | template }}</div>
+            </section>
+          {% endif %}
+
+        {% endif %}
+      </article>
+      <!-- end post -->
+    </div>
+      
+           
+   
+   
+
+      
+      
+  </main>
+
+
+
+{% endblock %}

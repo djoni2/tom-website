@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="{{ _lang.code }}" dir="{{ _lang.direction }}">
+<head>
+
+  <style>
+    :root {
+      --base-font-family: {{ _config.fonts.base_font_family | raw }};
+      --heading-font-family: {{ _config.fonts.heading_font_family | raw }};
+      --base-font-size: {{ _config.size }}px;
+      --base-font-style: {{ _config.style }};
+      --base-font-weight: {{ _config.weight }};
+      --base-line-height: {{ _config.line_height }};
+    }
+    .mode-light:root {
+      --color-accent: {{ _config.colors.light.accent }};
+      --background-color: {{ _config.colors.light.background_color }};
+      --background-alt-color: {{ _config.colors.light.background_alt_color }};
+      --background-gradient-start: {{ _config.colors.light.background_gradient_start }};
+      --background-gradient-end: {{ _config.colors.light.background_gradient_end }};
+      --text-color: {{ _config.colors.light.text_color }};
+      --text-alt-color: {{ _config.colors.light.text_alt_color }};
+      --heading-font-color: {{ _config.colors.light.heading_font_color }};
+      --link-color: {{ _config.colors.light.link_color }};
+      --link-color-hover: {{ _config.colors.light.link_color_hover }};
+      --border-color: {{ _config.colors.light.border_color }};
+      --code-color: {{ _config.colors.light.code_color }};
+      --code-background-color: {{ _config.colors.light.code_background_color }};
+    }
+    .mode-dark:root {
+      --color-accent: {{ _config.colors.dark.accent }};
+      --background-color: {{ _config.colors.dark.background_color }};
+      --background-alt-color: {{ _config.colors.dark.background_alt_color }};
+      --background-gradient-start: {{ _config.colors.dark.background_gradient_start }};
+      --background-gradient-end: {{ _config.colors.dark.background_gradient_end }};
+      --text-color: {{ _config.colors.dark.text_color }};
+      --text-alt-color: {{ _config.colors.dark.text_alt_color }};
+      --heading-font-color: {{ _config.colors.dark.heading_font_color }};
+      --link-color: {{ _config.colors.dark.link_color }};
+      --link-color-hover: {{ _config.colors.dark.link_color_hover }};
+      --border-color: {{ _config.colors.dark.border_color }};
+      --code-color: {{ _config.colors.dark.code_color }};
+      --code-background-color: {{ _config.colors.dark.code_background_color }};
+    }
+  </style>
+
+{% block head %}
+    {# Check if _tag is defined for tag pages #}
+    {% if _tag is defined %}
+      <title>
+  {% if _tag.name == "Politics" %}
+    Politics in Madeira | Government News & Legislative Updates
+  {% elseif _tag.name == "Funchal" %}
+    Funchal News | Latest Updates from Madeira's Capital
+  {% elseif _tag.name == "traffic" %}
+    Madeira Traffic | Roads, Cars & Transport in Madeira
+  {% elseif _tag.name == "Airport" %}
+    Madeira Airport News | Flight Status, Delays & Updates
+  {% elseif _tag.name == "Rescue" %}
+    Rescue Operations Madeira | Emergency Services & Safety News
+  {% elseif _tag.name == "Nature" %}
+    Madeira Nature & Environment | Laurissilva Forest & Wildlife
+  {% elseif _tag.name == "Tourism" %}
+    Madeira Tourism News | Travel Trends & Visitor Information
+  {% elseif _tag.name == "Record" %}
+    Madeira Records | Achievements & Historic Milestones
+  {% elseif _tag.name == "Real-estate" %}
+    Madeira Real Estate Market | Property News & Investments
+  {% elseif _tag.name == "Society" %}
+    Madeira Society | Community News, People & Lifestyle
+  {% elseif _tag.name == "Weather forecast" %}
+    Madeira Weather Forecast | Local Climate & Daily Outlook
+  {% elseif _tag.name == "Economy" %}
+    Madeira Economy | Business, Finance & Trade News
+  {% elseif _tag.name == "Natural disaster" %}
+    Madeira Natural Disasters | Alerts, Recovery & Safety
+  {% elseif _tag.name == "Crime" %}
+    Crime News Madeira | Public Safety & Local Incident Reports
+  {% elseif _tag.name == "Police-investigation" %}
+    Police Investigations Madeira | Judiciary & Legal Updates
+  {% elseif _tag.name == "History" %}
+    Madeira History | Exploring the Archipelago's Rich Past
+  {% elseif _tag.name == "Climate transition" %}
+    Climate Transition Madeira | Sustainability & Green Energy
+  {% elseif _tag.name == "Culture" %}
+    Culture in Madeira | Traditions, Arts & Local Heritage
+  {% else %}
+    Times of Madeira | Breaking Madeira Island News
+  {% endif %}
+</title>
+
+<meta name="description" content="
+  {% if _tag.name == "Politics" %}
+    Stay updated on Madeira’s political landscape, government decisions, and regional assembly news. Reliable political analysis from the Times of Madeira.
+  {% elseif _tag.name == "Funchal" %}
+    The latest news from Funchal. From local government to city events, stay informed about everything happening in the heart of Madeira.
+  {% elseif _tag.name == "traffic" %}
+    Stay informed on traffic, accidents, and transport related news that affect mobility.
+  {% elseif _tag.name == "Airport" %}
+    Breaking news from Cristiano Ronaldo International Airport. Track flight updates, airport infrastructure news, and travel alerts for Madeira.
+  {% elseif _tag.name == "Rescue" %}
+    Updates on search and rescue missions in Madeira. News from civil protection, mountain rescues, and emergency services.
+  {% elseif _tag.name == "Nature" %}
+    Explore Madeira’s natural beauty. News on the Laurissilva forest, levadas, environmental conservation, and local biodiversity.
+  {% elseif _tag.name == "Tourism" %}
+    Insights on the sector that drives Madeira. Latest news on tourism-related infos, travel statistics, and attractions for travelers.
+  {% elseif _tag.name == "Real-estate" %}
+    Follow the Madeira property market. Updates on Madeira's housing crisis, real-estate trends and short-term rentals.
+  {% elseif _tag.name == "Weather forecast" %}
+    Weather forecasts in Madeira are often a gamble. Let’s keep you briefed anyway with live updates, microclimate alerts, and temperature reports.
+  {% elseif _tag.name == "Economy" %}
+    In-depth coverage of Madeira’s economy. Business news, local trade, employment trends, and regional financial updates.
+  {% elseif _tag.name == "Natural disaster" %}
+    Essential alerts and news regarding natural events in Madeira, including weather warnings, forest fires, and recovery efforts.
+  {% elseif _tag.name == "Crime" or _tag.name == "Police-investigation" %}
+    Reports on public safety, police operations, and judicial news in Madeira. Stay informed on local security and investigations.
+  {% elseif _tag.name == "History" %}
+    Discover the stories that shaped Madeira. From the age of discovery to modern heritage, explore our historical archives.
+  {% elseif _tag.name == "Climate transition" %}
+    Tracking Madeira’s journey to sustainability. News on renewable energy, carbon footprints, and local environmental policies.
+  {% elseif _tag.name == "Culture" %}
+    Dive into the heart of Madeira. News on local festivals, traditional arts, music, and the unique cultural identity of the island.
+  {% else %}
+    Times of Madeira: Your leading source for breaking news, cultural insights, and political stories from across the Madeira archipelago.
+  {% endif %}
+">
+    {% endif %}
+{% endblock %}                         
+                
+    
+    
+{{ _head | template }}
+    
+
+
+  <script src="{{ 'script.js' | asset_url }}"></script>
+
+
+</head>
+
+<body>
+
+{% include '_header.twig' %}
+
+{% block body %}{% endblock %}
+
+{% include '_search.twig' %}
+
+{% include '_footer.twig' %}
+
+{{ _foot | template }}
+
+</body>
