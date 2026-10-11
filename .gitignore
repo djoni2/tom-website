@@ -1,0 +1,10 @@
+# Node / Playwright tooling. None of this belongs in the theme that syncs
+# to Hyvor -- the deploy workflow only reads templates/ styles/ lang/ assets/.
+node_modules/
+
+# Playwright output
+test-results/
+playwright-report/
+blob-report/
+.playwright/
+screenshots/

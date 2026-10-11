@@ -1,0 +1,25 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test tests/site.spec.js",
+    "shot": "playwright test tests/shot.spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/djoni2/tom-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/djoni2/tom-website/issues"
+  },
+  "homepage": "https://github.com/djoni2/tom-website#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.64.0"
+  }
+}
