@@ -24,31 +24,76 @@ jobs:
             exit 1
           fi
 
-          synced=0
-          failed=0
+          BASE="https://blogs.hyvor.com/api/console/v0/blog/$SUBDOMAIN"
 
+          api() {
+            # api <method> <path> [body-file] -> prints body, returns status via $API_STATUS
+            local method="$1" path="$2" bodyfile="${3:-}"
+            local out; out=$(mktemp)
+            local args=(-sS -X "$method" "$BASE$path" -H "X-API-KEY: $HYVOR_KEY")
+            if [ -n "$bodyfile" ]; then
+              args+=(-H "Content-Type: application/json" --data-binary "@$bodyfile")
+            fi
+            API_STATUS=$(curl "${args[@]}" -o "$out" -w '%{http_code}') || API_STATUS="000"
+            cat "$out"; rm -f "$out"
+          }
+
+          # 1. Existing files on the blog, keyed "folder/name" -> id
+          echo "Fetching current theme files..."
+          index=$(mktemp)
+          api GET /theme/files > "$index"
+          if [ "$API_STATUS" -lt 200 ] || [ "$API_STATUS" -ge 300 ]; then
+            echo "::error::GET /theme/files failed ($API_STATUS): $(head -c 400 "$index")"
+            exit 1
+          fi
+          map=$(mktemp)
+          jq -r '.[] | "\(.folder)/\(.name)\t\(.id)"' "$index" > "$map"
+          echo "Blog currently has $(wc -l < "$map") theme file(s)."
+
+          created=0; updated=0; skipped=0; failed=0
+
+          # 2. Only these folders exist in the Hyvor theme model. config.yaml has no
+          #    valid folder and is intentionally not synced -- manage it in the Console.
           while IFS= read -r -d '' filepath; do
-            content=$(jq -sR . "$filepath")
+            folder="${filepath%%/*}"
+            name="${filepath##*/}"
+
+            # content is sent as a JSON string, so restrict to text files. Binary
+            # assets (fonts, images) need the multipart `file` field on create.
+            case "$name" in
+              *.twig|*.scss|*.css|*.js|*.yaml|*.yml|*.json|*.svg|*.xml|*.txt|*.md)
+                ;;
+              *)
+                echo "skip  (binary, not synced)  $filepath"
+                skipped=$((skipped + 1))
+                continue
+                ;;
+            esac
+
+            id=$(awk -F'\t' -v k="$folder/$name" '$1 == k { print $2; exit }' "$map")
             body=$(mktemp)
 
-            status=$(curl -sS -X POST \
-              "https://blogs.hyvor.com/api/console/v0/blog/$SUBDOMAIN/theme/file" \
-              -H "X-API-KEY: $HYVOR_KEY" \
-              -H "Content-Type: application/json" \
-              -d "{\"path\": \"$filepath\", \"content\": $content}" \
-              -o "$body" -w '%{http_code}') || status="000"
-
-            if [ "$status" -ge 200 ] && [ "$status" -lt 300 ]; then
-              echo "ok    $status  $filepath"
-              synced=$((synced + 1))
+            if [ -n "$id" ]; then
+              jq -n --rawfile c "$filepath" '{content: $c}' > "$body"
+              resp=$(api PATCH "/theme/file/$id" "$body")
+              action="update"
             else
-              echo "::error::sync failed ($status) $filepath -- $(head -c 500 "$body")"
+              jq -n --arg f "$folder" --arg n "$name" --rawfile c "$filepath" \
+                '{folder: $f, name: $n, content: $c}' > "$body"
+              resp=$(api POST /theme/file "$body")
+              action="create"
+            fi
+            rm -f "$body"
+
+            if [ "$API_STATUS" -ge 200 ] && [ "$API_STATUS" -lt 300 ]; then
+              echo "ok    $action $API_STATUS  $filepath"
+              [ "$action" = update ] && updated=$((updated + 1)) || created=$((created + 1))
+            else
+              echo "::error::$action failed ($API_STATUS) $filepath -- $(printf '%s' "$resp" | head -c 400)"
               failed=$((failed + 1))
             fi
-
-            rm -f "$body"
-          done < <(find templates styles config.yaml -type f -print0)
+          done < <(find templates styles lang assets -type f -print0 2>/dev/null)
 
           echo "----"
-          echo "synced: $synced   failed: $failed"
+          echo "updated: $updated  created: $created  skipped: $skipped  failed: $failed"
           [ "$failed" -eq 0 ]
