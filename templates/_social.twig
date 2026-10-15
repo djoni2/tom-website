@@ -11,9 +11,33 @@
   </i>
 </a>
 {% endif %}
-{% if social.facebook %}{{ macro.social_icon("Facebook", social.facebook, 'logo-facebook') }}{% endif %}
-{% if social.linkedin %}{{ macro.social_icon("Linkedin", social.linkedin, 'logo-linkedin') }}{% endif %}
-{% if social.youtube %}{{ macro.social_icon("Youtube", social.youtube, 'logo-youtube') }}{% endif %}
+{% if social.facebook %}
+<a class="social-link" target="_blank" href="{{ social.facebook }}" title="Facebook">
+  <i class="icon" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="40" height="40" fill="currentColor" style="vertical-align:middle">
+      <path d="M480 257.35c0-123.7-100.3-224-224-224s-224 100.3-224 224c0 111.8 81.9 204.47 189 221.29V322.12h-56.89v-64.77H221V208c0-56.13 33.45-87.16 84.61-87.16 24.51 0 50.15 4.38 50.15 4.38v55.13H327.5c-27.81 0-36.51 17.26-36.51 35v42h62.12l-9.92 64.77H291v156.54c107.1-16.81 189-109.48 189-221.31z" fill-rule="evenodd"/>
+    </svg>
+  </i>
+</a>
+{% endif %}
+{% if social.linkedin %}
+<a class="social-link" target="_blank" href="{{ social.linkedin }}" title="Linkedin">
+  <i class="icon" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="40" height="40" fill="currentColor" style="vertical-align:middle">
+      <path d="M0 40v432h64V40H0zm272 0v202.4h-48V336h-64V40h64v178.4h48V464h64V400c0-26.5 10.2-48 28.6-48h42.6c18.4 0 33.6 21.5 33.6 48v112h64V40H424zm96 432H416V256h-64V160h64v72.2h192v160z"/>
+    </svg>
+  </i>
+</a>
+{% endif %}
+{% if social.youtube %}
+<a class="social-link" target="_blank" href="{{ social.youtube }}" title="Youtube">
+  <i class="icon" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="40" height="40" fill="currentColor" style="vertical-align:middle">
+      <path d="M508.64 148.79c0-45-33.1-81.2-74-81.2C379.24 65 322.74 64 265 64h-18c-57.6 0-114.2 1-169.6 3.6C36.6 67.6 3.5 104 3.5 149 1 184.59-.06 220.19 0 255.79q-.15 53.4 3.4 106.9c0 45 33.1 81.5 73.9 81.5 58.2 2.7 117.9 3.9 178.6 3.8q91.2.3 178.6-3.8c40.9 0 74-36.5 74-81.5 2.4-35.7 3.5-71.3 3.4-107q.34-53.4-3.26-106.9zM207 353.89v-196.5l145 98.2z"/>
+    </svg>
+  </i>
+</a>
+{% endif %}
 {# The Threads URL is stored in Hyvor's TikTok field, hence social.tiktok here. #}
 {% if social.tiktok %}
 <a class="social-link" target="_blank" href="{{ social.tiktok }}" title="Threads">
@@ -24,5 +48,22 @@
   </i>
 </a>
 {% endif %}
-{% if social.instagram %}{{ macro.social_icon("Instagram", social.instagram, 'logo-instagram') }}{% endif %}
-{% if social.github %}{{ macro.social_icon("Github", social.github, 'logo-github') }}{% endif %}
+{% if social.instagram %}
+<a class="social-link" target="_blank" href="{{ social.instagram }}" title="Instagram">
+  <i class="icon" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="40" height="40" fill="currentColor" style="vertical-align:middle">
+      <path d="M349.33 69.33a93.62 93.62 0 0193.34 93.34v186.66a93.62 93.62 0 01-93.34-93.34H162.67a93.62 93.62 0 01-93.34-93.34V162.67a93.62 93.62 0 0193.34-93.34h186.66m0-37.33H162.67C90.8 32 32 90.8 32 162.67v186.66C32 421.2 90.8 480 162.67 480h186.66C421.2 480 480 421.2 480 349.33V162.67C480 90.8 421.2 32 349.33 32z"/>
+      <path d="M377.33 162.67a28 28 0 1128-28 27.94 27.94 0"/>
+    </svg>
+  </i>
+</a>
+{% endif %}
+{% if social.github %}
+<a class="social-link" target="_blank" href="{{ social.github }}" title="Github">
+  <i class="icon" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="40" height="40" fill="currentColor" style="vertical-align:middle">
+      <path d="M256 0c-141.4 0-256 114.6-256 256s114.6 256 256 256 256-114.6 256-256-114.6-256-256-256zm0 448c-106.1 0-192-85.9-192-192s85.9-192 192-192 192 85.9 192 192-85.9 192-192 192zm0-320c-35.3 0-64 28.7-64 64v34.4c0 35.3 28.7 64 64 64h37.6c35.3 0 64-28.7 64-64v-34.4c0-35.3-28.7-64-64-64h-37.6zm120.6-28.2c-18.4 0-31.9 17.3-31.9 38.6v38.4c0 21.3 13.5 38.6 31.9 38.6h44.3c18.4 0 31.9-17.3 31.9-38.6v-38.4c0-21.3-13.5-38.6-31.9-38.6h-44.3z"/>
+    </svg>
+  </i>
+</a>
+{% endif %}
