@@ -1,0 +1,39 @@
+{# "More in <primary tag>": 3 recent posts sharing the post's first tag, topped up
+   from its second tag when the first has too few. Ends with a link to the tag page. #}
+{% set primary = _post.tags|first %}
+{% if primary %}
+  {% set related = data(endpoint="posts", filter="tag.slug=" ~ primary.slug ~ "&id!=" ~ _post.id, limit=3).data %}
+
+  {% if related|length < 3 and _post.tags|length > 1 %}
+    {% set exclude = "&id!=" ~ _post.id %}
+    {% for post in related %}
+      {% set exclude = exclude ~ "&id!=" ~ post.id %}
+    {% endfor %}
+    {% set extra = data(endpoint="posts", filter="tag.slug=" ~ _post.tags[1].slug ~ exclude, limit=3 - related|length).data %}
+    {% set related = related|merge(extra) %}
+  {% endif %}
+
+  {% if related|length %}
+    <section class="related" aria-label="More in {{ primary.name }}">
+      <h3 class="related__title">More in <a href="{{ primary.url }}">{{ primary.name }}</a></h3>
+
+      <div class="related__grid">
+        {% for post in related %}
+          <a class="related__card" href="{{ post.url }}">
+            {% if post.featured_image_url %}
+              <img class="related__image" src="{{ post.featured_image_url }}" alt="{{ post.title }}" loading="lazy">
+            {% else %}
+              <span class="related__image related__image--empty"></span>
+            {% endif %}
+            <time class="related__date" datetime="{{ post.published_at|date('c') }}">
+              {{ post.published_at|format_date('medium', locale=_lang.code) }}
+            </time>
+            <span class="related__name">{{ post.title }}</span>
+          </a>
+        {% endfor %}
+      </div>
+
+      <a class="related__all" href="{{ primary.url }}">All {{ primary.name }} stories &rarr;</a>
+    </section>
+  {% endif %}
+{% endif %}

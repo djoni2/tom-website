@@ -1,5 +1,47 @@
 {% extends '@base.twig' %}
 
+{# Section pages: the main newspaper sections get a "Start here" row and
+   CollectionPage structured data. Pilot on dev: Politics and Tourism. #}
+{% set section_picks = {
+  'politics': [
+    'king-of-madeira-alberto-joao-jardims-37-year-legacy-of-power',
+    'babylon-madeira-12-months-of-scandals',
+    'can-a-court-lift-president-albuquerques-immunity',
+    'rhetoric-vs-reality-chegas-push-for-a-fourth-republic'
+  ],
+  'tourism': [
+    'madeira-by-bus-public-transport-in-madeira',
+    'rent-a-car-madeira-no-credit-card',
+    'how-to-buy-your-madeira-hiking-trail-ticket-with-simplifica',
+    'colossus-the-rise-and-fall-of-madeiras-hotel-atlantis'
+  ]
+} %}
+
+{% block head %}
+  {{ parent() }}
+
+  {% if section_picks[_tag.slug] is defined %}
+    {% set ld = {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      'name': _tag.name|capitalize ~ ' - Times of Madeira',
+      'url': _tag.url,
+      'isPartOf': { '@type': 'WebSite', 'name': 'Times of Madeira', 'url': 'https://www.timesofmadeira.com' },
+      'breadcrumb': {
+        '@type': 'BreadcrumbList',
+        'itemListElement': [
+          { '@type': 'ListItem', 'position': 1, 'name': 'Times of Madeira', 'item': 'https://www.timesofmadeira.com' },
+          { '@type': 'ListItem', 'position': 2, 'name': _tag.name|capitalize, 'item': _tag.url }
+        ]
+      }
+    } %}
+    {% if _tag.description %}
+      {% set ld = ld|merge({ 'description': _tag.description }) %}
+    {% endif %}
+    <script type="application/ld+json">{{ ld|json_encode|raw }}</script>
+  {% endif %}
+{% endblock %}
+
 {% block body %}
 <main role="main" class="tag-page">
     
@@ -55,6 +97,32 @@
               
   {% endif %}
 </section>
+
+          {% if section_picks[_tag.slug] is defined and _pagination.page == 1 %}
+            {% set start_here = data(endpoint="posts", filter=section_picks[_tag.slug]|map(slug => 'slug=' ~ slug)|join('|'), limit=4).data %}
+            {# Fallback while picks are missing (e.g. on the dev blog): the tag's longest articles. #}
+            {% if start_here|length < 4 %}
+              {% set start_here = data(endpoint="posts", filter="tag.slug=" ~ _tag.slug, sort="words DESC", limit=4).data %}
+            {% endif %}
+
+            {% if start_here|length %}
+              <section class="start-here" aria-label="Start here">
+                <h2 class="start-here__title">Start here</h2>
+                <div class="related__grid related__grid--4">
+                  {% for post in start_here %}
+                    <a class="related__card" href="{{ post.url }}">
+                      {% if post.featured_image_url %}
+                        <img class="related__image" src="{{ post.featured_image_url }}" alt="{{ post.title }}" loading="lazy">
+                      {% else %}
+                        <span class="related__image related__image--empty"></span>
+                      {% endif %}
+                      <span class="related__name">{{ post.title }}</span>
+                    </a>
+                  {% endfor %}
+                </div>
+              </section>
+            {% endif %}
+          {% endif %}
 
           
           
