@@ -1,5 +1,56 @@
 {% extends '@base.twig' %}
 
+{% block head %}
+  {{ parent() }}
+
+  {# NewsArticle structured data for Google (Top Stories, article rich results).
+     Pages (_post.is_page) are not articles, so they get none.
+     json_encode escapes "/" as "\/", so a "</script>" in a title cannot close the tag. #}
+  {% if not _post.is_page %}
+    {# The name is fixed: _blog.name holds the SEO title "Madeira News, ... | Times of Madeira". #}
+    {% set ld_publisher = {
+      '@type': 'NewsMediaOrganization',
+      'name': 'Times of Madeira',
+      'url': 'https://www.timesofmadeira.com',
+      'logo': { '@type': 'ImageObject', 'url': _blog.logo_url ?: 'https://www.timesofmadeira.com/media/times-of-madeira.svg' }
+    } %}
+
+    {% set ld_authors = [] %}
+    {% for author in _post.authors %}
+      {% set ld_authors = ld_authors|merge([{ '@type': 'Person', 'name': author.name, 'url': author.url }]) %}
+    {% endfor %}
+
+    {% set ld = {
+      '@context': 'https://schema.org',
+      '@type': 'NewsArticle',
+      'mainEntityOfPage': { '@type': 'WebPage', '@id': _post.url },
+      'url': _post.url,
+      'headline': _post.title|slice(0, 110),
+      'datePublished': _post.published_at|date('c'),
+      'dateModified': (_post.updated_at > _post.published_at ? _post.updated_at : _post.published_at)|date('c'),
+      'inLanguage': _lang.code,
+      'author': ld_authors ?: [ld_publisher],
+      'publisher': ld_publisher,
+      'isAccessibleForFree': true
+    } %}
+
+    {% if _post.description %}
+      {% set ld = ld|merge({ 'description': _post.description }) %}
+    {% endif %}
+    {% if _post.featured_image_url %}
+      {% set ld = ld|merge({ 'image': [_post.featured_image_url] }) %}
+    {% endif %}
+    {% if _post.tags|length %}
+      {% set ld = ld|merge({ 'articleSection': _post.tags[0].name, 'keywords': _post.tags|map(t => t.name)|join(', ') }) %}
+    {% endif %}
+    {% if _post.words %}
+      {% set ld = ld|merge({ 'wordCount': _post.words }) %}
+    {% endif %}
+
+    <script type="application/ld+json">{{ ld|json_encode|raw }}</script>
+  {% endif %}
+{% endblock %}
+
 {% block body %}
 
 
