@@ -15,7 +15,7 @@
   ['Public Transport', 'public-transport']
 ] %}
 
-{# More: the newsletter and contact items from the Console menu (_header.twig leaves them out) #}
+{# More: the newsletter and contact items from the Console menu (_header.twig leaves them out), then the Madeira Quiz #}
 {% set more = _blog.nav_header|filter(n => n.url ends with '/contact' or 'newsletter' in n.url) %}
 
 <li class="nav__item nav__item--dropdown">
@@ -34,23 +34,24 @@
   </details>
 </li>
 
-{% if more|length %}
-  <li class="nav__item nav__item--dropdown">
-    <details class="nav-dropdown nav-dropdown--more">
-      <summary class="nav__link nav-dropdown__toggle">
-        More
-        <svg class="nav-dropdown__chevron" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </summary>
-      <ul class="nav-dropdown__list list-reset">
-        {% for nav in more %}
-          <li>
-            <a href="{{ nav.url }}" class="nav-dropdown__link{% if is_current_url(nav.url) %} is-active{% endif %}">{{ 'newsletter' in nav.url ? 'Subscribe to the Newsletter' : nav.name }}</a>
-          </li>
-        {% endfor %}
-      </ul>
-    </details>
-  </li>
-{% endif %}
+<li class="nav__item nav__item--dropdown">
+  <details class="nav-dropdown nav-dropdown--more">
+    <summary class="nav__link nav-dropdown__toggle">
+      More
+      <svg class="nav-dropdown__chevron" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </summary>
+    <ul class="nav-dropdown__list list-reset">
+      {% for nav in more %}
+        <li>
+          <a href="{{ nav.url }}" class="nav-dropdown__link{% if is_current_url(nav.url) %} is-active{% endif %}">{{ 'newsletter' in nav.url ? 'Subscribe to the Newsletter' : nav.name }}</a>
+        </li>
+      {% endfor %}
+      <li>
+        <a href="/madeira-quiz" class="nav-dropdown__link{% if is_current_url('/madeira-quiz') %} is-active{% endif %}">Madeira Quiz</a>
+      </li>
+    </ul>
+  </details>
+</li>
 
 <script>
   // One dropdown open at a time; close on a click outside or on Escape.

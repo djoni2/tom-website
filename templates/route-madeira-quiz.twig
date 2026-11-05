@@ -1,0 +1,382 @@
+{% extends '@base.twig' %}
+
+{# The Madeira Quiz at /madeira-quiz, linked from the header's "More" dropdown.
+   Each round draws {{ per_round }} random questions from the pool in the
+   quiz-data script below and shuffles their options.
+   Add a question: one line { "q": question, "o": [right answer, wrong, wrong] }.
+   The right answer always goes first; the page shuffles the order. #}
+{% set per_round = 10 %}
+
+{% block head %}
+  <title>Madeira Quiz | How Well Do You Know the Island? - Times of Madeira</title>
+  <meta name="description" content="Test your knowledge of Madeira's history, nature, food and traditions with the Times of Madeira quiz.">
+{% endblock %}
+
+{% block body %}
+<main role="main" class="quiz-page">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+        <article class="quiz" data-quiz data-per-round="{{ per_round }}">
+          <header class="quiz__masthead">
+            <p class="quiz__kicker">Times of Madeira &middot; The Quiz</p>
+            <h1 class="quiz__title">How Well Do You Know Madeira?</h1>
+            <p class="quiz__dek">{{ per_round }} questions on the island's history, nature, food and traditions, drawn fresh each round. Pick an answer; if it is wrong, try again.</p>
+          </header>
+
+          <div class="quiz__progress" aria-hidden="true">
+            <span class="quiz__progress-bar" data-quiz-bar></span>
+          </div>
+
+          <div data-quiz-cards></div>
+
+          <noscript><p class="quiz__dek">Please enable JavaScript to take the quiz.</p></noscript>
+
+          <section class="quiz__card quiz__result" data-quiz-result hidden aria-live="polite">
+            <p class="quiz__count">Your result</p>
+            <p class="quiz__score"><span data-quiz-score>0</span><span class="quiz__score-of">/{{ per_round }}</span></p>
+            <p class="quiz__verdict" data-quiz-verdict></p>
+            <p class="quiz__note">Answers right at the first attempt.</p>
+            <div class="quiz__actions">
+              <button type="button" class="quiz__next quiz__next--ghost" data-quiz-restart>Play a new round</button>
+              <a class="quiz__next" href="/tag/history">Read Madeira's history</a>
+            </div>
+          </section>
+        </article>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script type="application/json" id="quiz-data">
+[
+  {"q":"Who was Christopher Columbus's wife, daughter of Porto Santo's first donatary captain?","o":["Filipa Moniz Perestrelo","Isabel da Câmara","Beatriz Zarco"]},
+  {"q":"What Madeiran beverage originating in Câmara de Lobos is made with dark beer, stout, wine, and chocolate powder?","o":["Pé de Cabra","Nikita","Poncha"]},
+  {"q":"What is the highest peak on the island of Madeira?","o":["Pico Ruivo","Pico do Arieiro","Pico das Torres"]},
+  {"q":"Which endemic forest type in Madeira is designated as a UNESCO World Heritage site?","o":["Laurissilva (Laurel Forest)","Boreal Forest","Rainforest"]},
+  {"q":"What is the name of the second largest inhabited island in the Madeira Archipelago?","o":["Porto Santo","Desertas","Selvagens"]},
+  {"q":"What is the prominent volcanic peninsula on the eastern tip of Madeira called?","o":["Ponta de São Lourenço","Cabo Girão","Ponta do Pargo"]},
+  {"q":"Which high sea cliff on Madeira features a skywalk with a glass floor?","o":["Cabo Girão","Ponta do Rosto","Pico dos Barcelos"]},
+  {"q":"What are the traditional irrigation channels in Madeira called?","o":["Levadas","Acequias","Aqueducts"]},
+  {"q":"Which group of uninhabited islands near Madeira is a protected natural reserve for sea birds and monk seals?","o":["Desertas Islands","Canary Islands","Azores"]},
+  {"q":"What town on the north coast of Madeira is famous for its natural volcanic lava pools?","o":["Porto Moniz","São Vicente","Santana"]},
+  {"q":"What is the plateau located in the central-western part of Madeira called?","o":["Paul da Serra","Curral das Freiras","Queimadas"]},
+  {"q":"Which valley is famous for being surrounded by steep mountains and known as the Valley of the Nuns?","o":["Curral das Freiras","Ribeira Brava","Valle das Freiras"]},
+  {"q":"What famous waterfalls area on Madeira features a circuit route with 25 springs?","o":["25 Fontes","Caldeirão Verde","Cascata dos Anjos"]},
+  {"q":"What is the second highest peak on Madeira island?","o":["Pico das Torres","Pico do Arieiro","Pico Ruivo"]},
+  {"q":"What island group macro-region does Madeira belong to alongside the Azores and Canaries?","o":["Macaronesia","Polynesia","Micronesia"]},
+  {"q":"Which central mountain trail connects Pico do Arieiro to Pico Ruivo?","o":["PR1 Vereda do Arieiro","PR6 Levada das 25 Fontes","PR9 Levada do Caldeirão Verde"]},
+  {"q":"What is the name of the nature reserve encompassing Madeira's high mountain peaks?","o":["Parque Natural da Madeira","Laurissilva Reserve","Pico Natural Park"]},
+  {"q":"In which year was Madeira officially discovered by Portuguese navigators?","o":["1419","1492","1500"]},
+  {"q":"Who was one of the primary Portuguese explorers credited with discovering Madeira?","o":["João Gonçalves Zarco","Vasco da Gama","Pedro Álvares Cabral"]},
+  {"q":"What traditional vehicle mode of transport slides down the steep streets from Monte to Funchal?","o":["Wicker toboggan (Carro de Cesto)","Tuk-tuk","Cable car"]},
+  {"q":"What are the traditional triangular houses with thatched roofs in Madeira called?","o":["Palheiros of Santana","Trulli","Casas de Colmo"]},
+  {"q":"Which famous British statesman visited Madeira in 1950 to paint and relax in Câmara de Lobos?","o":["Winston Churchill","Neville Chamberlain","Anthony Eden"]},
+  {"q":"Which famous explorer lived on Porto Santo for a period before setting sail for the Americas?","o":["Christopher Columbus","Ferdinand Magellan","Amerigo Vespucci"]},
+  {"q":"Which Austrian Empress sought health treatment in Madeira during the 19th century?","o":["Empress Sisi (Elisabeth)","Empress Maria Theresa","Empress Marie Louise"]},
+  {"q":"What main export product fueled Madeira's economy during the 15th and 16th centuries?","o":["Sugar (White Gold)","Cotton","Coffee"]},
+  {"q":"What year did Madeira gain autonomous region status within Portugal?","o":["1976","1986","1992"]},
+  {"q":"Where is the church containing the tomb of Blessed Karl I of Austria located?","o":["Church of Our Lady of Monte","Funchal Cathedral","São Pedro Church"]},
+  {"q":"What is the name of the cathedral located in central Funchal built in the 15th century?","o":["Sé Cathedral of Funchal","São Martinho Church","Nossa Senhora do Monte"]},
+  {"q":"Who was the first donatary captain of Porto Santo?","o":["Bartolomeu Perestrelo","João Gonçalves Zarco","Tristão Vaz Teixeira"]},
+  {"q":"Who was the first donatary captain of Machico?","o":["Tristão Vaz Teixeira","João Gonçalves Zarco","Bartolomeu Perestrelo"]},
+  {"q":"What traditional Madeiran alcoholic beverage is made with aguardente de cana, honey, and lemon juice?","o":["Poncha","Nikita","Ginjinha"]},
+  {"q":"What type of bread is typical in Madeira, usually served hot with garlic butter?","o":["Bolo do Caco","Broa de Milho","Pão de Deus"]},
+  {"q":"What traditional Madeiran dish features skewered beef grilled over laurel wood?","o":["Espetada","Cozido à Portuguesa","Feijoada"]},
+  {"q":"What deep-sea fish is a signature delicacy of Madeira, often served with fried banana?","o":["Espada (Scabbardfish)","Bacalhau","Sardine"]},
+  {"q":"What is Madeira Wine famous for in its production process?","o":["Heating process (Estufagem)","Freezing process","Underground aging"]},
+  {"q":"What traditional Madeiran cake is made with sugarcane molasses, spices, and nuts?","o":["Bolo de Mel","Pastel de Nata","Bolo Rei"]},
+  {"q":"What creamy cocktail made with ice cream, beer, and white wine or rum is popular in Madeira?","o":["Nikita","Poncha","Caipirinhas"]},
+  {"q":"Which Madeira wine grape variety produces the sweetest fortified wine?","o":["Malmsey (Malvasia)","Sercial","Verdelho"]},
+  {"q":"Which Madeira wine grape produces the driest fortified wine style?","o":["Sercial","Bual","Malmsey"]},
+  {"q":"What soft drink unique to Madeira is flavored with passion fruit?","o":["Brisa Maracujá","Laranjada","Kima"]},
+  {"q":"Which orange-flavored soft drink introduced in 1872 is the oldest in Portugal?","o":["Laranjada","Sumol","Fanta"]},
+  {"q":"What traditional shellfish is served hot on a sizzling skillet with garlic butter and lemon in Madeira?","o":["Limpets (Lapas)","Clams","Mussels"]},
+  {"q":"What is the traditional name of the wooden pestle used to mix Poncha?","o":["Caralhinho","Pau de Poncha","Pilão"]},
+  {"q":"What side dish made of fried cornmeal cubes is traditionally served with Espetada?","o":["Milho Frito","Polenta","Batatas Fritas"]},
+  {"q":"What is 'Bolo de Caco' named after?","o":["The basalt stone tile (caco) it was originally baked on","A famous chef named Caco","The coconut content"]},
+  {"q":"Which fruit is known locally in Madeira as 'Anona'?","o":["Custard Apple (Cherimoya)","Passion fruit","Guava"]},
+  {"q":"Which fortified Madeira wine aging method relies on natural heat stored in attics?","o":["Canteiro","Estufa","Solera"]},
+  {"q":"What is the minimum aging time for Vintage Madeira (Frasqueira) in wooden casks?","o":["At least 20 years","5 years","10 years"]},
+  {"q":"Which historic US document is famed for being celebrated with a toast of Madeira wine in 1776?","o":["US Declaration of Independence","US Constitution","Bill of Rights"]},
+  {"q":"Which town on Madeira is famous for its trout farms and lush green valley starting point for hikes?","o":["Ribeiro Frio","Calheta","Ponta do Sol"]},
+  {"q":"What airport in Madeira features a runway partially built on columns over the sea?","o":["Cristiano Ronaldo International Airport","Porto Santo Airport","Funchal Bay Airport"]},
+  {"q":"What coastal village in Madeira is known for its picturesque bay and connection to Winston Churchill?","o":["Câmara de Lobos","Caniço","Santa Cruz"]},
+  {"q":"What is the name of the famous street in Funchal's Old Town known for painted doors?","o":["Rua de Santa Maria","Rua do Aljube","Avenida do Mar"]},
+  {"q":"What yellow fortress in the Old Town (Zona Velha) of Funchal once housed Madeira's contemporary art museum?","o":["Fortress of São Tiago","Fortress of São João Baptista","Fortress of Ilhéu"]},
+  {"q":"What fortress overlooks the harbor of Funchal on top of a central hill?","o":["Fortress of Pico","Fortress of São Tiago","Fortress of São Lourenço"]},
+  {"q":"Which village in Madeira hosts an annual Chestnut Festival (Festa da Castanha)?","o":["Curral das Freiras","Porto Moniz","Ponta Delgada"]},
+  {"q":"Which town in Madeira imported golden sand from Morocco to build an artificial beach?","o":["Calheta","Santana","São Vicente"]},
+  {"q":"Besides Calheta, which other Madeira municipality has an artificial golden sand beach?","o":["Machico","Funchal","Porto Moniz"]},
+  {"q":"What coastal village in Madeira is known as a premier surf spot alongside Paul do Mar?","o":["Jardim do Mar","Caniço","Caniçal"]},
+  {"q":"Where on Madeira is the main fishing port and Whale Museum located?","o":["Caniçal","Machico","Porto Moniz"]},
+  {"q":"What famous statue standing on the cliffhead at Garajau resembles Rio's landmark?","o":["Christ the King (Cristo Rei)","Statue of Liberty","Monumento ao Zarco"]},
+  {"q":"Which northern village on Madeira is set against an imposing basalt rock called Penha d'Águia?","o":["Porto da Cruz","Santana","São Vicente"]},
+  {"q":"What does 'Penha d'Águia' translate to in English?","o":["Eagle's Rock","Falcon's Nest","Crow's Cliff"]},
+  {"q":"Which village is famous for its rose garden (Quinta do Arco) containing thousands of rose species?","o":["Arco de São Jorge","Santana","Ponta Delgada"]},
+  {"q":"What open-air park in Santana showcases Madeira's history and traditions?","o":["Madeira Theme Park (Parque Temático)","Laurissilva Park","Santana Heritage Center"]},
+  {"q":"What soup in Madeira features cabbage, potatoes, olive oil, and chouriço sausage?","o":["Caldo Verde","Sopa de Pedra","Açorda"]},
+  {"q":"What is Madeira's 'Açorda' soup traditionally made with?","o":["Bread, garlic, poached egg, hot water, and herbs","Tomatoes and fish","Meat broth and noodles"]},
+  {"q":"Which soup in Madeira is made with tomato, onion, and a poached egg?","o":["Sopa de Tomate e Ovo","Caldo Verde","Sopa de Peixe"]},
+  {"q":"What passion fruit hybrid commonly found in Madeira smells like banana?","o":["Banana passion fruit (Maracujá-banana)","Lemon passion fruit","Orange passion fruit"]},
+  {"q":"What stream/river runs through the center of Funchal into the ocean?","o":["Ribeira de Santa Luzia","Ribeira Brava","Ribeira Seca"]},
+  {"q":"Which public park in Funchal overlooks the harbour and features a lake and statue of Columbus?","o":["Santa Catarina Park","Jardim Municipal","Monte Palace"]},
+  {"q":"What is the town hall of Funchal called in Portuguese?","o":["Câmara Municipal do Funchal","Palácio do Governo","Junta de Freguesia"]},
+  {"q":"Which Madeira festival in June features street decorations and bonfires for Saints?","o":["Santos Populares","Flower Festival","Wine Festival"]},
+  {"q":"What village on Madeira's north side is famous for its natural ocean pool and black sand beach?","o":["Seixal","Ponta Delgada","São Jorge"]},
+  {"q":"What iconic black sand beach with green mountain backdrop is located in Seixal?","o":["Praia do Porto do Seixal","Praia Formosa","Calheta Beach"]},
+  {"q":"What waterfall in Seixal falls near the sea along the old road?","o":["Véu da Noiva (Bridal Veil)","25 Fontes","Cascata do Sol"]},
+  {"q":"What road in Madeira was famous for waterfalls hitting cars, notably Cascata dos Anjos?","o":["Ponta do Sol Old Road","VE3 Expressway","ER101 North Coast"]},
+  {"q":"What high plateau is home to Madeira's wind farm turbines and grazing cows?","o":["Paul da Serra","Achada do Teixeira","Chão dos Louros"]},
+  {"q":"What ancient forest site on Paul da Serra is famous for centuries-old crooked Laurel trees?","o":["Fanal Forest","Queimadas","Ribeiro Frio"]},
+  {"q":"What tree species forms the ancient stands in Fanal?","o":["Ocotea foetens (Til)","Laurus novocanariensis","Eucalyptus"]},
+  {"q":"What atmospheric weather condition often covers Fanal creating dramatic views?","o":["Thick mountain fog / mist","Heavy snow","Dust storm"]},
+  {"q":"Where does the popular PR9 Levada do Caldeirão Verde trail start?","o":["Parque Florestal das Queimadas","Ribeiro Frio","Rabaçal"]},
+  {"q":"What architecture style characterizes the shelter house at Queimadas?","o":["Traditional thatched roof (palheiro style)","Modern glass box","Colonial stone castle"]},
+  {"q":"What main location serves as the hub for several levada walks including 25 Fontes and Risco?","o":["Rabaçal","Ribeiro Frio","Encumeada"]},
+  {"q":"Which mountain pass connects the north and south coasts between Ribeira Brava and São Vicente?","o":["Encumeada Pass","Pico do Arieiro Pass","Ponta do Pargo Pass"]},
+  {"q":"What cable car in Madeira descends down a cliff to seaside terraced gardens at Fajã dos Padres?","o":["Fajã dos Padres Cable Car","Achadas da Cruz Cable Car","Garajau Cable Car"]},
+  {"q":"Which cable car on the northwest coast has one of the steepest gradient drops in Europe?","o":["Achadas da Cruz Cable Car","Monte Cable Car","Botanical Garden Cable Car"]},
+  {"q":"What is a 'Fajã' in Madeiran geography?","o":["A flat coastal strip formed by landslides or lava at the foot of cliffs","A high mountain peak","A deep river valley"]},
+  {"q":"What is the largest public beach in Funchal composed of black pebbles and volcanic sand?","o":["Praia Formosa","Gorgulho","Barreirinha"]},
+  {"q":"What complex of public swimming pools in Funchal is built right into the ocean lava rock?","o":["Lido Bathing Complex","Pontinha","Ponta Gorda"]},
+  {"q":"What promenade links the Lido area of Funchal to Praia Formosa?","o":["Passeio Público Marítimo (Lido Promenade)","Avenida do Mar","Estrada Monumental"]},
+  {"q":"What main hotel street in Funchal runs parallel to the western coast?","o":["Estrada Monumental","Rua da Carreira","Rua 31 de Janeiro"]},
+  {"q":"Which flower species gives Madeira's hillsides a purple hue in late spring?","o":["Pride of Madeira (Echium candicans)","Lavender","Violet"]},
+  {"q":"What is the botanical name for the 'Pride of Madeira' plant?","o":["Echium candicans","Strelitzia reginae","Hydrangea macrophylla"]},
+  {"q":"Which island in the archipelago was raided by French pirate Bertrand de Montluc in 1566?","o":["Madeira (Funchal)","Porto Santo","Deserta Grande"]},
+  {"q":"What prominent Jesuit church in Funchal's Town Hall Square is known for rich gold leaf woodwork?","o":["Igreja do Colégio","Igreja de San Pedro","Igreja da Sé"]},
+  {"q":"Which square in central Funchal features black and white basalt paving in wave patterns?","o":["Praça do Município","Praça do Mar","Praça da Autonomia"]},
+  {"q":"What natural reserve area protects the easternmost tip of Madeira peninsula?","o":["Ponta de São Lourenço Reserve","Garajau Reserve","Rocha do Navio Reserve"]},
+  {"q":"What is the name of the nature reserve in Santana accessible via cable car down to coastal farmland?","o":["Rocha do Navio Nature Reserve","Ponta do Pargo Reserve","Garajau Reserve"]},
+  {"q":"What driver guides the wicker toboggan down from Monte?","o":["Carreiro","Toureiro","Marinheiro"]},
+  {"q":"What special footwear do Carreiros wear to brake and steer the wicker toboggans?","o":["Rubber-soled boots made from tires","Metal-spiked boots","Wooden clogs"]},
+  {"q":"How long is the traditional wicker sled route from Monte to Livramento?","o":["About 2 kilometers","About 5 kilometers","About 10 kilometers"]},
+  {"q":"What maximum speed can wicker toboggans reach on the downhill run?","o":["Up to 38 km/h (24 mph)","Up to 80 km/h","Up to 15 km/h"]},
+  {"q":"What annual motorsport rally races across Madeira's mountain roads?","o":["Rali Vinho da Madeira","Madeira Classic Grand Prix","Formula E Madeira"]},
+  {"q":"In which month is the Rali Vinho da Madeira usually held?","o":["August","January","May"]},
+  {"q":"What distance is the ultra-trail running event (MIUT) across Madeira island?","o":["115 kilometers","42 kilometers","200 kilometers"]},
+  {"q":"What does the abbreviation MIUT stand for?","o":["Madeira Island Ultra Trail","Madeira International Urban Tour","Mountain Island Trek"]},
+  {"q":"Where does the MIUT ultra-trail run start and end?","o":["Starts in Porto Moniz and ends in Machico","Starts in Funchal and ends in Santana","Starts in Calheta and ends in Caniçal"]},
+  {"q":"What freshwater fish introduced to Madeira reservoirs is angled in mountain streams?","o":["Trout (Truta)","Salmon","Pike"]},
+  {"q":"Which levada route leads to the Caldeirão Verde waterfall?","o":["PR9","PR1","PR6"]},
+  {"q":"Which levada route leads to the 25 Fontes waterfall?","o":["PR6","PR9","PR11"]},
+  {"q":"Which short walk offers views over the Ponta de São Lourenço peninsula?","o":["PR8 Vereda da Ponta de São Lourenço","PR1 Vereda do Arieiro","PR12 Vereda da Encumeada"]},
+  {"q":"What is the name of the islet off Ponta de São Lourenço that houses a lighthouse?","o":["Ilhéu do Farol (Ilhéu de Fora)","Ilhéu Chão","Deserta Grande"]},
+  {"q":"What is the average ocean sea temperature range around Madeira throughout the year?","o":["18°C to 24°C","10°C to 15°C","25°C to 30°C"]},
+  {"q":"Which Madeira town is famous for growing sweet bananas on south-facing terraces?","o":["Madalena do Mar","Porto da Cruz","São Vicente"]},
+  {"q":"What short themed walk in Madalena do Mar takes visitors through banana plantations?","o":["Rota da Banana (Banana Route)","Levada do Sol","Vereda do Mar"]},
+  {"q":"What dish combines Madeiran passion fruit pulp with condensed milk and cream?","o":["Pudim de Maracujá","Mousse de Chocolate","Leite Creme"]},
+  {"q":"What small round fried dough treat dusted with sugar/cinnamon is eaten during Carnival?","o":["Malasadas / Sonhos","Pastel de Nata","Filhós"]},
+  {"q":"When is Madeira Carnival traditionally celebrated?","o":["40 days before Easter (February/March)","October","December"]},
+  {"q":"What main theme parade highlights Madeira Carnival on Saturday night?","o":["Allegoric Parade (Cortejo Alegórico)","Flower Parade","Wine Procession"]},
+  {"q":"What is the name of the fun, satirical parade during Madeira Carnival open to everyone?","o":["Cortejo Trapalhão","Cortejo Alegórico","Festa dos Compadres"]},
+  {"q":"Which northern town kicks off Madeira's Carnival season with 'Festa dos Compadres'?","o":["Santana","Porto Moniz","São Vicente"]},
+  {"q":"What island group lies southeast of Madeira island across the sea channel?","o":["Desertas Islands","Porto Santo","Canary Islands"]},
+  {"q":"What group of islands lies approximately 250 km south of Madeira and belongs to its autonomous region?","o":["Selvagens Islands","Cape Verde","Azores"]},
+  {"q":"Which Portuguese king raised Funchal to the status of a city in 1508?","o":["King Manuel I","King Afonso V","King John I"]},
+  {"q":"What historic museum in Funchal was formerly the residence of Zarco's descendants?","o":["Quinta das Cruzes Museum","Museu de Arte Sacra","CR7 Museum"]},
+  {"q":"What museum in Funchal contains Flemish paintings acquired during the sugar trade boom?","o":["Museu de Arte Sacra (Sacred Art Museum)","CR7 Museum","Museu de Fotografia"]},
+  {"q":"Why did 15th-century Flemish painters trade paintings with Madeira?","o":["In exchange for Madeiran sugar","In exchange for Madeira wine","As royal gifts"]},
+  {"q":"What photography museum in Funchal is located in the oldest photography studio in Portugal?","o":["Vicentes Photography Museum","Photo Madeira","Atelier Funchal"]},
+  {"q":"What peak in Madeira is famous for sunrise watching above the cloud level?","o":["Pico do Arieiro","Pico da Urze","Pico de Ana Ferreira"]},
+  {"q":"At what altitude is Pico do Arieiro located?","o":["1,818 meters","1,862 meters","1,500 meters"]},
+  {"q":"At what altitude is Pico Ruivo, Madeira's highest point, located?","o":["1,862 meters","1,818 meters","2,000 meters"]},
+  {"q":"What small bird in Madeira often lands on hikers' hands at viewpoints like Balcões?","o":["Madeira Chaffinch (Tentilhão)","Canary","Sparrow"]},
+  {"q":"What sea turtle species is regularly seen feeding in Madeiran waters?","o":["Loggerhead Sea Turtle","Green Iguana","Komodo Dragon"]},
+  {"q":"What species of lizard is extremely common across all rocky areas of Madeira?","o":["Madeiran Wall Lizard (Teira dugesii)","Gecko","Chameleon"]},
+  {"q":"Are there any dangerous venomous snakes native to Madeira?","o":["No, there are no snakes on Madeira","Yes, viper snakes","Yes, cobras"]},
+  {"q":"What is the primary international ocean liner harbor of the archipelago?","o":["Funchal Harbour","Caniçal Port","Porto Santo Harbor"]},
+  {"q":"What famous fortified wine is produced on the island of Madeira?","o":["Madeira Wine","Port Wine","Moscatel"]},
+  {"q":"What is the name of Madeira's airport code?","o":["FNC","PXO","LIS"]},
+  {"q":"What does 'Câmara de Lobos' translate to in English?","o":["Chamber of Sea Wolves / Seals","Bay of Wolves","Cave of Lions"]},
+  {"q":"Which viewpoint offers a stunning precipitous view down into Curral das Freiras?","o":["Eira do Serrado","Balcões","Cabo Girão"]},
+  {"q":"What short levada walk leads to the famous Balcões viewpoint in Ribeiro Frio?","o":["Levada dos Balcões (PR11)","Levada do Rei","Levada do Alecrim"]},
+  {"q":"What is the continuation hike past Caldeirão Verde called?","o":["Caldeirão do Inferno","Pico Ruivo Trail","Levada do Rei"]},
+  {"q":"Which northern town hosts a popular Levada walk named Levada do Rei (PR18)?","o":["São Jorge","Porto Moniz","Pontinha"]},
+  {"q":"What is the main coastal valley town located between Ponta do Sol and Câmara de Lobos?","o":["Ribeira Brava","Calheta","Machico"]},
+  {"q":"What does 'Ribeira Brava' mean in Portuguese?","o":["Wild River","Brave Shore","Deep Ravine"]},
+  {"q":"Which town in Madeira features a lighthouse located at the far western tip?","o":["Ponta do Pargo","Paul do Mar","Jardim do Mar"]},
+  {"q":"In what year did Madeira ban commercial whaling in its territorial waters?","o":["1981","1965","1995"]},
+  {"q":"What underwater nature reserve near Caniço is popular for scuba diving?","o":["Garajau Partial Nature Reserve","Desertas Reserve","Ponta do Sol Reserve"]},
+  {"q":"Was the Cristo Rei statue at Garajau built before or after Rio's Christ the Redeemer?","o":["Before (1927 vs 1931)","After","Same year"]},
+  {"q":"What coastal suburb east of Funchal is popular for hotel resorts and diving?","o":["Caniço de Baixo","Porto da Cruz","Madalena do Mar"]},
+  {"q":"What bird endemic to Madeira is known as the Madeira Laurel Pigeon?","o":["Trocaz Pigeon (Columba trocaz)","Madeira Petrel","Firecrest"]},
+  {"q":"What tiny bird endemic to Madeira is one of Europe's smallest birds?","o":["Madeira Firecrest (Regulus madeirensis)","Robin","Chaffinch"]},
+  {"q":"Which rare seabird nests exclusively in the central mountain massif of Madeira?","o":["Zino's Petrel (Freira da Madeira)","Cory's Shearwater","Yellow-legged Gull"]},
+  {"q":"What Marine species is protected in the waters around the Desertas Islands?","o":["Mediterranean Monk Seal","Manatee","Sea Otter"]},
+  {"q":"What marine mammal is commonly spotted on whale watching tours off Funchal?","o":["Bottlenose Dolphin","Blue Whale","Narwhal"]},
+  {"q":"How long does the ferry ride from Funchal to Porto Santo usually take?","o":["About 2.5 hours","About 30 minutes","About 5 hours"]},
+  {"q":"What is the name of the main ferry operating between Funchal and Porto Santo?","o":["Lobo Marinho","Madeira Express","Porto Santo Wave"]},
+  {"q":"What mountain is the highest peak on Porto Santo island?","o":["Pico do Facho","Pico Ana Ferreira","Pico do Castelo"]},
+  {"q":"Which geological formation on Porto Santo features striking hexagonal basalt columns?","o":["Pico Ana Ferreira","Fonte da Areia","Zimbralinho"]},
+  {"q":"Where did the first Portuguese navigators land when they reached the archipelago in 1418?","o":["Porto Santo","Funchal","Machico"]},
+  {"q":"Why was Porto Santo named 'Holy Port'?","o":["They found shelter there during a severe storm","It was discovered on All Saints Day","A bishop named it"]},
+  {"q":"Where did João Gonçalves Zarco and Tristão Vaz Teixeira first land on Madeira island in 1419?","o":["Machico","Funchal","Câmara de Lobos"]},
+  {"q":"What main avenue runs along the waterfront in Funchal?","o":["Avenida do Mar","Avenida Arriaga","Avenida Zarco"]},
+  {"q":"Which shaded central boulevard in Funchal is lined with Jacaranda trees?","o":["Avenida Arriaga","Rua Fernão de Magalhães","Avenida das Madalenas"]},
+  {"q":"What historical theater in Funchal was opened in 1888?","o":["Teatro Municipal Baltazar Dias","Teatro das Beiras","Teatro Nacional"]},
+  {"q":"What type of lace/embroidery craft from Madeira is internationally renowned?","o":["Madeira Embroidery (Bordado Madeira)","Bobbin Lace","Needlepoint"]},
+  {"q":"Which official body regulates and certifies authentic Madeira Embroidery?","o":["IVBAM","AICEP","UNESCO Portugal"]},
+  {"q":"Which flower garden in Monte features a large collection of oriental tile panels (Azulejos)?","o":["Monte Palace Tropical Garden","Jardim da Quinta do Palheiro","Jardim de Santa Luzia"]},
+  {"q":"Who created the foundation that established the Monte Palace Tropical Garden?","o":["Berardo Foundation (José Berardo)","Blandy Family","Reid Family"]},
+  {"q":"What famous luxury hotel opened in Funchal in 1891 overlooking the bay?","o":["Belmond Reid's Palace","Savoy Palace","The Cliff Bay"]},
+  {"q":"Which English author wrote a detective story inspired by her stay in Madeira?","o":["Agatha Christie","Virginia Woolf","Mary Shelley"]},
+  {"q":"What traditional music stringed instrument originated in Madeira and influenced the Ukulele?","o":["Braguinha (Machete)","Cavaquinho","Guitarra Portuguesa"]},
+  {"q":"What is the traditional Madeiran folk dance called?","o":["Bailinho da Madeira","Fado","Vira"]},
+  {"q":"What traditional percussion instrument featured in Madeiran folklore consists of wood figures on a stick?","o":["Brinquinho","Castanets","Pandeiro"]},
+  {"q":"What percent of Madeira island's total land area is covered by the Laurissilva forest?","o":["Around 20%","Around 50%","Around 5%"]},
+  {"q":"What is the name of Machico's main parish church, dating from the 15th century?","o":["Igreja Matriz de Machico","Capela dos Milagres","Igreja de São Pedro"]},
+  {"q":"Which small chapel in Machico was built over the site of the first Mass celebrated on Madeira soil?","o":["Capela dos Milagres","Igreja da Misericórdia","Capela de São Roque"]},
+  {"q":"What is the name of the historic fort located right on the seafront in Machico?","o":["Forte de Nossa Senhora do Amparo","Forte de São João Baptista","Forte do Ilhéu"]},
+  {"q":"Which island of the Desertas group is the largest in surface area?","o":["Deserta Grande","Ilhéu Chão","Bugio"]},
+  {"q":"Which island of the Desertas group is shaped like a long narrow ridge at the southern tip?","o":["Bugio","Deserta Grande","Ilhéu Chão"]},
+  {"q":"What is the name of the lighthouse islet off the east coast of Porto Santo?","o":["Ilhéu de Cima","Ilhéu de Baixo","Ilhéu de Ferro"]},
+  {"q":"Which islet off Porto Santo hosted extensive limestone quarrying operations historically?","o":["Ilhéu de Baixo (Ilhéu da Cal)","Ilhéu das Cenouras","Ilhéu de Cima"]},
+  {"q":"What is the name of the highest mountain peak in the Selvagens archipelago?","o":["Pico da Atalaia","Pico do Inferno","Pico da Torrinha"]},
+  {"q":"On which island of the Selvagens is the permanent nature warden station located?","o":["Selvagem Grande","Selvagem Pequena","Ilhéu de Fora"]},
+  {"q":"What species of shearwater seabird has its largest breeding colony in the world on Selvagens?","o":["Cory's Shearwater (Cagarro)","Manx Shearwater","Barolo Shearwater"]},
+  {"q":"What tree endemic to the Macaronesian region has red sap known historically as 'Dragon's Blood'?","o":["Dragon Tree (Dracaena draco)","Til","Vinhático"]},
+  {"q":"What native tree species of the Laurissilva forest is widely used for fine furniture (Madeiran Mahogany)?","o":["Vinhático (Persea indica)","Barbusano","Marmulano"]},
+  {"q":"Which endemic evergreen tree species in Madeira's Laurissilva has very hard wood used for axles?","o":["Barbusano (Apolonias barbujana)","Til","Folhado"]},
+  {"q":"What mountain viewpoint above Funchal is situated at 1,095 meters next to an old hotel?","o":["Eira do Serrado","Pico dos Barcelos","Pico do Arieiro"]},
+  {"q":"What valley village can be seen 500 meters straight down from the Eira do Serrado viewpoint?","o":["Curral das Freiras","Ribeira Brava","Serra de Água"]},
+  {"q":"What village located above Ribeira Brava is famous for its poncha bars and hydroelectric plant?","o":["Serra de Água","Tabua","Campanário"]},
+  {"q":"Which Madeiran municipality produces a large portion of the island's sugarcane harvest for rum?","o":["Calheta","Machico","Ponta do Sol"]},
+  {"q":"What microclimate village on the south coast is famous for producing high-quality sugar cane and bananas?","o":["Madalena do Mar","Porto da Cruz","São Jorge"]},
+  {"q":"What is the name of the coastal marine reserve off Caniço, protected since 1986?","o":["Garajau Partial Natural Reserve","Rocha do Navio","Pontinha Reserve"]},
+  {"q":"What giant marine fish (up to 1.5m long) is frequently met by divers in Garajau Reserve?","o":["Dusky Grouper (Mero)","Barracuda","Manta Ray"]}
+]
+</script>
+
+<script>
+  (function () {
+    var root = document.querySelector('[data-quiz]');
+    if (!root) return;
+    var pool = JSON.parse(document.getElementById('quiz-data').textContent);
+    var perRound = Math.min(+root.dataset.perRound, pool.length);
+    var holder = root.querySelector('[data-quiz-cards]');
+    var result = root.querySelector('[data-quiz-result]');
+    var bar = root.querySelector('[data-quiz-bar]');
+    var wrongLines = ['Not quite. Try again.', 'Not this one. Have another go.', 'Close, but no. Pick again.'];
+    var cards, current, score;
+
+    function shuffle(list) {
+      var a = list.slice();
+      for (var i = a.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var t = a[i]; a[i] = a[j]; a[j] = t;
+      }
+      return a;
+    }
+
+    function el(tag, cls, text) {
+      var n = document.createElement(tag);
+      if (cls) n.className = cls;
+      if (text != null) n.textContent = text;
+      return n;
+    }
+
+    function progress(n) { bar.style.width = (n / perRound * 100) + '%'; }
+
+    function show(node) {
+      node.hidden = false;
+      node.classList.remove('is-entering');
+      void node.offsetWidth; // restart the entrance animation
+      node.classList.add('is-entering');
+      var focusable = node.querySelector('.quiz__option, .quiz__next');
+      if (focusable) focusable.focus({ preventScroll: true });
+    }
+
+    function buildCard(item, index) {
+      var answer = item.o[0];
+      var card = el('section', 'quiz__card');
+      card.hidden = true;
+      card.setAttribute('aria-labelledby', 'quiz-q' + index);
+
+      var count = el('p', 'quiz__count', 'Question ' + (index + 1) + ' ');
+      count.appendChild(el('span', null, 'of ' + perRound));
+      var question = el('h2', 'quiz__question', item.q);
+      question.id = 'quiz-q' + index;
+      var list = el('ol', 'quiz__options list-reset');
+      var feedback = el('p', 'quiz__feedback');
+      feedback.setAttribute('role', 'status');
+      feedback.setAttribute('aria-live', 'polite');
+      var actions = el('div', 'quiz__actions');
+      var next = el('button', 'quiz__next', index === perRound - 1 ? 'See your result ' : 'Next question ');
+      next.type = 'button';
+      next.hidden = true;
+      next.insertAdjacentHTML('beforeend', '<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+      actions.appendChild(next);
+
+      var tries = 0;
+      shuffle(item.o).forEach(function (option, i) {
+        var li = el('li');
+        var btn = el('button', 'quiz__option');
+        btn.type = 'button';
+        btn.appendChild(el('span', 'quiz__letter', 'ABCDEFGH'.charAt(i))).setAttribute('aria-hidden', 'true');
+        btn.appendChild(el('span', 'quiz__label', option));
+        btn.addEventListener('click', function () {
+          if (card.classList.contains('is-solved') || btn.disabled) return;
+          if (option === answer) {
+            card.classList.add('is-solved');
+            btn.classList.add('is-correct');
+            list.querySelectorAll('button').forEach(function (b) { b.disabled = true; });
+            if (!tries) score++;
+            feedback.className = 'quiz__feedback is-correct';
+            feedback.textContent = tries ? 'Correct. You got it this time.' : 'Correct. Well done.';
+            next.hidden = false;
+            progress(index + 1);
+          } else {
+            tries++;
+            btn.disabled = true;
+            btn.classList.add('is-wrong');
+            feedback.className = 'quiz__feedback is-wrong';
+            void feedback.offsetWidth;
+            feedback.classList.add('is-pulse');
+            feedback.textContent = wrongLines[(tries - 1) % wrongLines.length];
+          }
+        });
+        li.appendChild(btn);
+        list.appendChild(li);
+      });
+
+      next.addEventListener('click', function () {
+        card.hidden = true;
+        current++;
+        if (current < cards.length) {
+          show(cards[current]);
+        } else {
+          root.querySelector('[data-quiz-score]').textContent = score;
+          root.querySelector('[data-quiz-verdict]').textContent =
+            score === perRound ? 'A true Madeirense. Every answer right at the first try.'
+            : score >= perRound * .7 ? 'Impressive. You know the island better than most visitors.'
+            : score >= perRound * .4 ? 'A solid showing. The island still holds a few secrets for you.'
+            : 'Plenty left to discover. Our History section is a good place to start.';
+          show(result);
+        }
+      });
+
+      [count, question, list, feedback, actions].forEach(function (n) { card.appendChild(n); });
+      return card;
+    }
+
+    function start(focus) {
+      current = 0; score = 0;
+      holder.textContent = '';
+      cards = shuffle(pool).slice(0, perRound).map(buildCard);
+      cards.forEach(function (c) { holder.appendChild(c); });
+      result.hidden = true;
+      progress(0);
+      if (focus) {
+        show(cards[0]);
+      } else {
+        cards[0].hidden = false;
+      }
+    }
+
+    root.querySelector('[data-quiz-restart]').addEventListener('click', function () { start(true); });
+    start(false);
+  })();
+</script>
+{% endblock %}
