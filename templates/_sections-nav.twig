@@ -1,0 +1,71 @@
+{# The two dropdowns at the end of the header menu: "Sections" and "More".
+   All links stay in the HTML, so crawlers still see them.
+   Sections: [label, tag slug], each linking to its tag page. #}
+{% set sections = [
+  ['Politics', 'politics'],
+  ['Economy', 'economy'],
+  ['Society', 'society'],
+  ['Tourism', 'tourism'],
+  ['Culture', 'culture'],
+  ['History', 'history'],
+  ['Crime', 'crime'],
+  ['Funchal', 'funchal'],
+  ['Airport', 'airport'],
+  ['Traffic', 'traffic'],
+  ['Public Transport', 'public-transport']
+] %}
+
+{# More: the newsletter and contact items from the Console menu (_header.twig leaves them out) #}
+{% set more = _blog.nav_header|filter(n => n.url ends with '/contact' or 'newsletter' in n.url) %}
+
+<li class="nav__item nav__item--dropdown">
+  <details class="nav-dropdown nav-dropdown--sections">
+    <summary class="nav__link nav-dropdown__toggle{% if _tag is defined and _tag.slug in sections|map(s => s[1]) %} active-link{% endif %}">
+      Sections
+      <svg class="nav-dropdown__chevron" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </summary>
+    <ul class="nav-dropdown__list list-reset">
+      {% for section in sections %}
+        <li>
+          <a href="/tag/{{ section[1] }}" class="nav-dropdown__link{% if _tag is defined and _tag.slug == section[1] %} is-active{% endif %}">{{ section[0] }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </details>
+</li>
+
+{% if more|length %}
+  <li class="nav__item nav__item--dropdown">
+    <details class="nav-dropdown nav-dropdown--more">
+      <summary class="nav__link nav-dropdown__toggle">
+        More
+        <svg class="nav-dropdown__chevron" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </summary>
+      <ul class="nav-dropdown__list list-reset">
+        {% for nav in more %}
+          <li>
+            <a href="{{ nav.url }}" class="nav-dropdown__link{% if is_current_url(nav.url) %} is-active{% endif %}">{{ 'newsletter' in nav.url ? 'Subscribe to the Newsletter' : nav.name }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </details>
+  </li>
+{% endif %}
+
+<script>
+  // One dropdown open at a time; close on a click outside or on Escape.
+  (function () {
+    var all = function () { return document.querySelectorAll('.nav-dropdown'); };
+    document.addEventListener('toggle', function (e) {
+      if (!e.target.classList || !e.target.classList.contains('nav-dropdown') || !e.target.open) return;
+      all().forEach(function (d) { if (d !== e.target) d.open = false; });
+    }, true);
+    document.addEventListener('click', function (e) {
+      all().forEach(function (d) { if (d.open && !d.contains(e.target)) d.open = false; });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      all().forEach(function (d) { if (d.open) { d.open = false; d.querySelector('summary').focus(); } });
+    });
+  })();
+</script>

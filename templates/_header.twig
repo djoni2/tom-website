@@ -19,11 +19,13 @@
         <nav class="main-nav" aria-label="Main menu" id="menuList">
           <div class="main-nav__box">
             <ul class="nav__list list-reset">
-              {% for nav in _blog.nav_header %}
+              {# The newsletter and contact items move into the "More" dropdown (_sections-nav.twig uses the same test) #}
+              {% for nav in _blog.nav_header|filter(n => not (n.url ends with '/contact' or 'newsletter' in n.url)) %}
                 <li class="nav__item">
                   <a href="{{ nav.url }}" class="nav__link nav__{{ nav.name | lower | slug }}{% if is_current_url(nav.url) %} active-link{% endif %}">{{ nav.name }}</a>
                 </li>
               {% endfor %}
+              {% include '_sections-nav.twig' %}
             </ul>
           </div>
 
