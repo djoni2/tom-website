@@ -14,6 +14,11 @@
 .quiz {
   max-width: 720px;
   margin: 0 auto;
+
+  /* The theme's display rules would otherwise show hidden cards and buttons */
+  [hidden] {
+    display: none !important;
+  }
 }
 
 .quiz__masthead {
