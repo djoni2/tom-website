@@ -19,14 +19,9 @@
       <div class="col col-12">
         <article class="quiz" data-quiz data-per-round="{{ per_round }}">
           <header class="quiz__masthead">
-            <p class="quiz__kicker">Times of Madeira &middot; The Quiz</p>
             <h1 class="quiz__title">How Well Do You Know Madeira?</h1>
             <p class="quiz__dek">{{ per_round }} questions on the island's history, nature, food and traditions, drawn fresh each round. Pick an answer; if it is wrong, try again.</p>
           </header>
-
-          <div class="quiz__progress" aria-hidden="true">
-            <span class="quiz__progress-bar" data-quiz-bar></span>
-          </div>
 
           <div data-quiz-cards></div>
 
@@ -257,7 +252,6 @@
     var perRound = Math.min(+root.dataset.perRound, pool.length);
     var holder = root.querySelector('[data-quiz-cards]');
     var result = root.querySelector('[data-quiz-result]');
-    var bar = root.querySelector('[data-quiz-bar]');
     var wrongLines = ['Not quite. Try again.', 'Not this one. Have another go.', 'Close, but no. Pick again.'];
     var cards, current, score;
 
@@ -276,8 +270,6 @@
       if (text != null) n.textContent = text;
       return n;
     }
-
-    function progress(n) { bar.style.width = (n / perRound * 100) + '%'; }
 
     function show(node) {
       node.hidden = false;
@@ -326,7 +318,6 @@
             feedback.className = 'quiz__feedback is-correct';
             feedback.textContent = tries ? 'Correct. You got it this time.' : 'Correct. Well done.';
             next.hidden = false;
-            progress(index + 1);
           } else {
             tries++;
             btn.disabled = true;
@@ -367,7 +358,6 @@
       cards = shuffle(pool).slice(0, perRound).map(buildCard);
       cards.forEach(function (c) { holder.appendChild(c); });
       result.hidden = true;
-      progress(0);
       if (focus) {
         show(cards[0]);
       } else {
