@@ -118,7 +118,9 @@
 .strip-label {
   position: absolute;
   top: -12px;
-  left: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
   padding: 3px 12px;
   border-radius: 4px;
   background: var(--text-color);
