@@ -7,13 +7,13 @@
      Pages (_post.is_page) are not articles, so they get none.
      json_encode escapes "/" as "\/", so a "</script>" in a title cannot close the tag. #}
   {% if not _post.is_page %}
-    {# The name is fixed: _blog.name holds the SEO title "Madeira News, ... | Times of Madeira". #}
-    {% set ld_publisher = {
-      '@type': 'NewsMediaOrganization',
-      'name': 'Times of Madeira',
-      'url': 'https://www.timesofmadeira.com',
-      'logo': { '@type': 'ImageObject', 'url': _blog.logo_url ?: 'https://www.timesofmadeira.com/media/times-of-madeira.svg' }
-    } %}
+    {# The publisher is the site-wide NewsMediaOrganization from @base.twig, referenced by its @id. #}
+    {% set ld_publisher = { '@id': 'https://www.timesofmadeira.com/#organization' } %}
+
+    {# The section is the first tag that is also a header-nav section (keep in sync with
+       _sections-nav.twig), so "Employment, Economy" gives "Economy". Falls back to the first tag. #}
+    {% set section_slugs = ['politics', 'economy', 'society', 'tourism', 'culture', 'history', 'crime', 'funchal', 'airport', 'traffic', 'public-transport'] %}
+    {% set section = _post.tags|filter(t => t.slug in section_slugs)|first ?: _post.tags|first %}
 
     {% set ld_authors = [] %}
     {% for author in _post.authors %}
@@ -40,14 +40,23 @@
     {% if _post.featured_image_url %}
       {% set ld = ld|merge({ 'image': [_post.featured_image_url] }) %}
     {% endif %}
-    {% if _post.tags|length %}
-      {% set ld = ld|merge({ 'articleSection': _post.tags[0].name, 'keywords': _post.tags|map(t => t.name)|join(', ') }) %}
+    {% if section %}
+      {% set ld = ld|merge({ 'articleSection': section.name, 'keywords': _post.tags|map(t => t.name)|join(', ') }) %}
     {% endif %}
     {% if _post.words %}
       {% set ld = ld|merge({ 'wordCount': _post.words }) %}
     {% endif %}
 
     <script type="application/ld+json">{{ ld|json_encode|raw }}</script>
+
+    {# Home › Section › Article #}
+    {% set crumbs = [{ '@type': 'ListItem', 'position': 1, 'name': 'Times of Madeira', 'item': 'https://www.timesofmadeira.com' }] %}
+    {% if section %}
+      {% set crumbs = crumbs|merge([{ '@type': 'ListItem', 'position': 2, 'name': section.name, 'item': section.url }]) %}
+    {% endif %}
+    {% set crumbs = crumbs|merge([{ '@type': 'ListItem', 'position': crumbs|length + 1, 'name': _post.title, 'item': _post.url }]) %}
+    {% set ld_crumbs = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': crumbs } %}
+    <script type="application/ld+json">{{ ld_crumbs|json_encode|raw }}</script>
   {% endif %}
 {% endblock %}
 
@@ -69,7 +78,7 @@
       </div>
         {% if _post.featured_image_url and _config.settings.post.featured_image %}
           <div class="image-box">
-            <img src="{{ _post.featured_image_url }}" alt="{{ _post.title }}" class="post-image" loading="lazy">
+            <img src="{{ _post.featured_image_url }}" alt="{{ _post.title }}" class="post-image" width="1600" height="900" fetchpriority="high">
           </div>
         {% endif %}
 

@@ -132,6 +132,35 @@
                 
     
     
+{# The one NewsMediaOrganization for the whole site. Other blocks (NewsArticle publisher,
+   tag pages) point to it by its @id instead of repeating it.
+   Do not add a second copy in the Hyvor Console "Custom head" field. #}
+{% set ld_org_id = 'https://www.timesofmadeira.com/#organization' %}
+{% set ld_org = {
+  '@context': 'https://schema.org',
+  '@type': 'NewsMediaOrganization',
+  '@id': ld_org_id,
+  'name': 'Times of Madeira',
+  'alternateName': 'Madeira News',
+  'url': 'https://www.timesofmadeira.com',
+  'logo': { '@type': 'ImageObject', 'url': 'https://www.timesofmadeira.com/media/times-of-madeira.svg' },
+  'sameAs': [
+    'https://www.facebook.com/timesofmadeira',
+    'https://www.instagram.com/timesofmadeira',
+    'https://x.com/timesofmadeira',
+    'https://www.threads.net/@timesofmadeira',
+    'https://bsky.app/profile/timesofmadeira.bsky.social'
+  ],
+  'description': 'Providing independent news, culture, and deep historical context for the archipelago.',
+  'address': { '@type': 'PostalAddress', 'addressLocality': 'Câmara de Lobos', 'addressRegion': 'Madeira', 'addressCountry': 'PT' },
+  'contactPoint': { '@type': 'ContactPoint', 'contactType': 'Editorial office', 'email': 'info@timesofmadeira.com' },
+  'foundingDate': '2023-11-01',
+  'knowsAbout': ['Madeira politics', 'Madeira economy', 'culture', 'history'],
+  'publishingPrinciples': 'https://www.timesofmadeira.com/editorial-standards',
+  'masthead': 'https://www.timesofmadeira.com/about'
+} %}
+<script type="application/ld+json">{{ ld_org|json_encode|raw }}</script>
+
 {{ _head | template }}
     
 
