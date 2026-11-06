@@ -46,11 +46,7 @@
 }
 
 .hero {
-  margin-bottom: 50px;
-
-  @media (max-width: $tablet) {
-    margin-bottom: 40px;
-  }
+  margin-bottom: 24px;
 }
 
 .hero__inner {
@@ -87,5 +83,96 @@
     .hero__description {
       margin-top: 20px;
     }
+  }
+}
+
+/* Hero strip: newsletter + Today in Madeira, black and white */
+.hero-strip {
+  margin-bottom: 40px;
+
+  .col {
+    display: flex;
+  }
+
+  @media (max-width: $tablet) {
+    .col + .col {
+      margin-top: 24px;
+    }
+  }
+}
+
+.strip-box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  padding: 32px 24px 20px;
+  border: 2px solid var(--text-color);
+  border-radius: $global-radius;
+  background: var(--background-color);
+  color: var(--text-color);
+}
+
+/* Same badge as the cards' IN FOCUS label */
+.strip-label {
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  padding: 3px 12px;
+  border-radius: 4px;
+  background: var(--text-color);
+  color: var(--background-color);
+  font-size: 13px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  line-height: 18px;
+  text-transform: uppercase;
+}
+
+.today__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.today__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 16px;
+
+  i {
+    display: flex;
+  }
+
+  svg {
+    color: var(--text-color);
+  }
+}
+
+.today__name {
+  min-width: 70px;
+  font-weight: 600;
+}
+
+.today__value {
+  font-weight: 300;
+}
+
+.today__foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 12px;
+  font-size: 13px;
+  font-weight: 300;
+
+  a {
+    color: var(--text-color);
+    text-decoration: underline;
   }
 }

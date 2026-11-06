@@ -21,10 +21,95 @@
 </section>
 <!-- end hero -->
 
-<div style="text-align:center;"><hyvor-post-form newsletter="times-of-madeira" style="text-align:center;"></hyvor-post-form></div>
+<!-- begin hero strip: newsletter left, Today in Madeira right -->
+<section class="hero-strip">
+  <div class="container">
+    <div class="row">
 
+      <div class="col col-6 col-t-12">
+        <div class="strip-box strip-newsletter">
+          <span class="strip-label">Newsletter</span>
+          <hyvor-post-form newsletter="times-of-madeira"></hyvor-post-form>
+        </div>
+      </div>
 
+      <div class="col col-6 col-t-12">
+        <div class="strip-box today" id="today-madeira">
+          <span class="strip-label">Today in Madeira</span>
+          <ul class="today__list">
+            <li class="today__item">
+              <i aria-hidden="true">{{ icon('ionicons', 'partly-sunny-outline', 22) }}</i>
+              <span class="today__name">Funchal</span>
+              <span class="today__value" data-today="weather">&mdash;</span>
+            </li>
+            <li class="today__item">
+              <i aria-hidden="true">{{ icon('ionicons', 'airplane-outline', 22) }}</i>
+              <span class="today__name">Airport</span>
+              <span class="today__value" data-today="airport">&mdash;</span>
+            </li>
+            <li class="today__item">
+              <i aria-hidden="true">{{ icon('ionicons', 'boat-outline', 22) }}</i>
+              <span class="today__name">Sea</span>
+              <span class="today__value" data-today="sea">&mdash;</span>
+            </li>
+          </ul>
+          <div class="today__foot">
+            <a href="https://www.aeroportomadeira.pt/en/fnc/flights-destinations/find-flights/real-time-arrivals" target="_blank" rel="noopener">Live arrivals</a>
+            <span data-today="updated"></span>
+            <a href="https://open-meteo.com/" target="_blank" rel="noopener">Data: Open-Meteo</a>
+          </div>
+        </div>
+      </div>
 
+    </div>
+  </div>
+</section>
+<!-- end hero strip -->
+
+<script>
+// Today in Madeira: live weather in Funchal, wind at the airport, sea state.
+// Open-Meteo is free, keyless and CORS-open; on failure the dashes stay.
+(function () {
+  var box = document.getElementById('today-madeira');
+  if (!box) return;
+  function set(key, text) {
+    var el = box.querySelector('[data-today="' + key + '"]');
+    if (el) el.textContent = text;
+  }
+  function sky(code) {
+    if (code === 0) return 'Clear';
+    if (code <= 2) return 'Partly cloudy';
+    if (code === 3) return 'Overcast';
+    if (code <= 48) return 'Fog';
+    if (code <= 57) return 'Drizzle';
+    if (code <= 67) return 'Rain';
+    if (code <= 77) return 'Snow on peaks';
+    if (code <= 82) return 'Showers';
+    return 'Thunderstorms';
+  }
+  var tz = '&timezone=Atlantic%2FMadeira';
+  // Two locations in one call: Funchal, then Madeira Airport (FNC).
+  var weather = 'https://api.open-meteo.com/v1/forecast?latitude=32.65,32.6979&longitude=-16.91,-16.7745'
+    + '&current=temperature_2m,weather_code,wind_speed_10m,wind_gusts_10m' + tz;
+  var marine = 'https://marine-api.open-meteo.com/v1/marine?latitude=32.62&longitude=-16.92'
+    + '&current=wave_height,sea_surface_temperature' + tz;
+
+  fetch(weather).then(function (r) { return r.json(); }).then(function (d) {
+    var town = d[0].current, fnc = d[1].current;
+    set('weather', Math.round(town.temperature_2m) + '°C · ' + sky(town.weather_code));
+    // Around 25 kt (46 km/h) gusts, landings at FNC start to get diverted.
+    var windy = fnc.wind_gusts_10m >= 46;
+    set('airport', (windy ? 'Strong wind, check your flight' : 'Light wind')
+      + ' · gusts ' + Math.round(fnc.wind_gusts_10m) + ' km/h');
+    set('updated', 'Updated ' + town.time.slice(11, 16));
+  }).catch(function () {});
+
+  fetch(marine).then(function (r) { return r.json(); }).then(function (d) {
+    var c = d.current;
+    set('sea', 'Waves ' + c.wave_height.toFixed(1) + ' m · Water ' + Math.round(c.sea_surface_temperature) + '°C');
+  }).catch(function () {});
+})();
+</script>
 
 
 <script>
@@ -37,6 +122,9 @@ var slogans = [
     "News from Madeira Island.",
     "No democracy without civic engagement.",
     "Read more!",
+    "Eternal vigilance is the price of liberty.",
+    "Power concedes nothing without a demand.",
+    "Freedom is participation in power.",
 
 ];
 
