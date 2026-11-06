@@ -531,3 +531,103 @@ ul, ol {
     }
   }
 }
+
+/* Share buttons (templates/_share.twig) */
+.share {
+  margin: 24px 0 0;
+
+  &--end {
+    margin: 48px 0 8px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+  }
+
+  .share__title {
+    margin: 0 0 16px;
+    font-family: var(--heading-font-family);
+    font-weight: 600;
+    font-size: 20px;
+  }
+
+  .share__buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .share__btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 18px;
+    border: 0;
+    border-radius: 30px;
+    font-family: sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    transition: $global-transition;
+
+    &:hover {
+      color: #fff;
+      filter: brightness(.9);
+    }
+
+    svg {
+      flex-shrink: 0;
+    }
+
+    &--whatsapp { background: #25d366; }
+    &--facebook { background: #1877f2; }
+    &--x { background: #000; }
+
+    &--copy {
+      color: var(--text-color);
+      background: var(--background-alt-color);
+
+      &:hover { color: var(--text-color); }
+
+      &.is-copied {
+        color: #fff;
+        background: var(--color-accent);
+      }
+    }
+  }
+
+  .share__follow {
+    margin: 20px 0 0;
+    font-size: 16px;
+
+    a {
+      color: var(--color-accent);
+      font-weight: bold;
+
+      &:hover { color: var(--link-color-hover); }
+    }
+  }
+
+  // On phones only WhatsApp keeps its label; the rest become round icons
+  // so all four fit on one row. The copy label comes back to say "Copied".
+  @media (max-width: $mobile) {
+    .share__btn:not(.share__btn--whatsapp):not(.is-copied) {
+      justify-content: center;
+      width: 44px;
+      padding: 0;
+
+      .share__label {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+      }
+    }
+  }
+}

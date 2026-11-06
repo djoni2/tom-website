@@ -136,3 +136,43 @@ document.addEventListener('flashload:navigationEnded', function() {
   document.getElementById('lang-selector').classList.remove('open');
   document.getElementById('lang-selector-closer').classList.remove('open');
 });
+
+/* ================
+// Share: copy link
+================ */
+// Delegated, so it keeps working after flashload swaps the page.
+document.addEventListener('click', function (e) {
+  var btn = e.target.closest && e.target.closest('[data-share-copy]');
+  if (!btn) return;
+
+  var url = btn.getAttribute('data-share-copy');
+  var label = btn.querySelector('.share__label');
+
+  function done() {
+    btn.classList.add('is-copied');
+    label.textContent = 'Copied!';
+    clearTimeout(btn._shareTimer);
+    btn._shareTimer = setTimeout(function () {
+      btn.classList.remove('is-copied');
+      label.textContent = 'Copy link';
+    }, 2000);
+  }
+
+  function fallback() {
+    var input = document.createElement('textarea');
+    input.value = url;
+    input.setAttribute('readonly', '');
+    input.style.position = 'fixed';
+    input.style.opacity = '0';
+    document.body.appendChild(input);
+    input.select();
+    try { document.execCommand('copy'); done(); } catch (err) { window.prompt('Copy this link:', url); }
+    document.body.removeChild(input);
+  }
+
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(url).then(done, fallback);
+  } else {
+    fallback();
+  }
+});

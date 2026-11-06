@@ -101,6 +101,10 @@
           {% if _post.description %}
             <p class="post-description">{{ _post.description }}</p>
           {% endif %}
+
+          {% if not _post.is_page %}
+            {% include '_share.twig' with { position: 'top' } %}
+          {% endif %}
         </div>
 
       </div>
@@ -115,6 +119,7 @@
         </section>
 
         {% if not _post.is_page %}
+          {% include '_share.twig' with { position: 'end' } %}
           {% include '_related.twig' %}
         {% endif %}
           

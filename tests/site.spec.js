@@ -58,3 +58,24 @@ test.describe('homepage', () => {
     await expect(page.locator('.article').first()).toBeVisible();
   });
 });
+
+test.describe('post', () => {
+  test('has share buttons under the headline and at the end', async ({ page }) => {
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    const href = await page.locator('.article a[href]').first().getAttribute('href');
+    await page.goto(href, { waitUntil: 'domcontentloaded' });
+
+    const shares = page.locator('.share');
+    await expect(shares).toHaveCount(2);
+
+    const wa = page.locator('.share__btn--whatsapp').first();
+    await expect(wa).toBeVisible();
+    expect(await wa.getAttribute('href')).toMatch(/^https:\/\/wa\.me\/\?text=.+timesofmadeira/);
+
+    await expect(page.locator('.share__btn--facebook')).toHaveCount(2);
+    await expect(page.locator('.share__btn--x')).toHaveCount(2);
+    await expect(page.locator('[data-share-copy]')).toHaveCount(2);
+    await expect(page.locator('.share__follow a'))
+      .toHaveAttribute('href', 'https://www.facebook.com/timesofmadeira');
+  });
+});
