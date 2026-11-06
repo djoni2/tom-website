@@ -8,6 +8,11 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        subdomain:
+          - "dev-d287e71c-2526-4197-ae4c-a7f2efbf7c83"
+          - "times-of-madeira"
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -15,7 +20,7 @@ jobs:
       - name: Sync Theme Files via Hyvor Console API
         env:
           HYVOR_KEY: ${{ secrets.HYVOR_CONSOLE_KEY }}
-          SUBDOMAIN: "dev-d287e71c-2526-4197-ae4c-a7f2efbf7c83"
+          SUBDOMAIN: ${{ matrix.subdomain }}
         run: |
           set -euo pipefail
 
