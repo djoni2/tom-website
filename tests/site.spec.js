@@ -70,7 +70,7 @@ test.describe('post', () => {
 
     const wa = page.locator('.share__btn--whatsapp').first();
     await expect(wa).toBeVisible();
-    expect(await wa.getAttribute('href')).toMatch(/^https:\/\/wa\.me\/\?text=.+timesofmadeira/);
+    expect(await wa.getAttribute('href')).toMatch(/^https:\/\/wa\.me\/\?text=.+%20https%3A%2F%2F/);
 
     await expect(page.locator('.share__btn--facebook')).toHaveCount(2);
     await expect(page.locator('.share__btn--x')).toHaveCount(2);
