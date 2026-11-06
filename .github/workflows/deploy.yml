@@ -11,16 +11,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        subdomain:
-          - "dev-d287e71c-2526-4197-ae4c-a7f2efbf7c83"
-          - "times-of-madeira"
+        include:
+          - subdomain: "dev-d287e71c-2526-4197-ae4c-a7f2efbf7c83"
+            key_secret: HYVOR_CONSOLE_KEY
+          - subdomain: "times-of-madeira"
+            key_secret: HYVOR_CONSOLE_KEY_PROD
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
       - name: Sync Theme Files via Hyvor Console API
         env:
-          HYVOR_KEY: ${{ secrets.HYVOR_CONSOLE_KEY }}
+          HYVOR_KEY: ${{ secrets[matrix.key_secret] }}
           SUBDOMAIN: ${{ matrix.subdomain }}
         run: |
           set -euo pipefail
