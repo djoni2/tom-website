@@ -1,0 +1,63 @@
+---
+title: Madeira Tourism Revenue Rises 7.2% to 95.8 Million Euros in September
+slug: madeira-tourism-revenue-rises-7-2-percent-to-95-8-million-euros-in-september
+description: Tourist accommodation in Madeira earned 95.8 million euros in September, up 7.2%, while room occupancy fell to 84.4%, preliminary DREM data shows.
+tags: [Tourism, Economy]
+author: Mat
+source_url: https://app.powerbi.com/view?r=eyJrIjoiZjRlNTJkMzktODNmNi00NzhiLWE4OGYtYjg2ZDM5NWYxOWZlIiwidCI6IjcxOTQwYTg2LTUyYmQtNGVkMy04OWI3LWUwYTdjZDcwNDA0MyIsImMiOjl9
+cover_url: https://www.timesofmadeira.com/media/hotel-pestana-carlton.jpg
+---
+
+# Madeira Tourism Revenue Rises 7.2% to 95.8 Million Euros in September
+
+Hotels and other tourist accommodation in Madeira **earned more** in September than a year earlier, even though fewer of their rooms and beds were occupied.
+
+The figures are **preliminary data** from the Regional Statistics Office of Madeira (DREM), published on its Power BI tourism dashboard. All changes compare September 2026 with September 2025.
+
+:::html
+<div style="overflow-x:auto;margin:1.2em 0"><table style="width:100%;border-collapse:collapse;font-size:15px;line-height:1.4"><caption style="caption-side:top;text-align:left;font-weight:700;padding:0 0 8px">Tourist accommodation in Madeira, September 2026</caption><thead><tr><th style="padding:8px 10px;text-align:left;border-bottom:2px solid currentColor;font-weight:700">Indicator</th><th style="padding:8px 10px;text-align:left;border-bottom:2px solid currentColor;font-weight:700;text-align:right">Sept 2026</th><th style="padding:8px 10px;text-align:left;border-bottom:2px solid currentColor;font-weight:700;text-align:right">vs Sept 2025</th></tr></thead><tbody><tr><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3)">Guests checked in</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;font-weight:600;white-space:nowrap">232,872</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;white-space:nowrap;color:#1a7f37;font-weight:600">▲ +1.5%</td></tr><tr><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3)">Guests (total)</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;font-weight:600;white-space:nowrap">260,092</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;white-space:nowrap;color:#1a7f37;font-weight:600">▲ +2.1%</td></tr><tr><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3)">Overnight stays</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;font-weight:600;white-space:nowrap">1,211,816</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;white-space:nowrap;color:#1a7f37;font-weight:600">▲ +1.7%</td></tr><tr><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3)">Average stay</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;font-weight:600;white-space:nowrap">4.66 nights</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;white-space:nowrap;color:#cf222e;font-weight:600">▼ -0.4%</td></tr><tr><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3)">Room occupancy</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;font-weight:600;white-space:nowrap">84.4%</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;white-space:nowrap;color:#cf222e;font-weight:600">▼ -2.7 pts</td></tr><tr><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3)">Bed occupancy</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;font-weight:600;white-space:nowrap">71.2%</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;white-space:nowrap;color:#cf222e;font-weight:600">▼ -3.9 pts</td></tr><tr><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3)">Total revenue</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;font-weight:600;white-space:nowrap">95.8 million euros</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;white-space:nowrap;color:#1a7f37;font-weight:600">▲ +7.2%</td></tr><tr><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3)">Room revenue</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;font-weight:600;white-space:nowrap">69.5 million euros</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;white-space:nowrap;color:#1a7f37;font-weight:600">▲ +6.8%</td></tr><tr><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3)">Average daily rate (ADR)</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;font-weight:600;white-space:nowrap">143.56 euros</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;white-space:nowrap;color:#1a7f37;font-weight:600">▲ +6.0%</td></tr><tr><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3)">Revenue per available room (RevPAR)</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;font-weight:600;white-space:nowrap">121.23 euros</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;white-space:nowrap;color:#1a7f37;font-weight:600">▲ +2.7%</td></tr></tbody></table></div>
+:::
+
+## Accommodation Revenue Reaches 95.8 Million Euros, Up 7.2%
+
+Total revenue from tourist accommodation reached **95.8 million euros**, 7.2% more than a year earlier. Of that, 69.5 million euros came from room stays alone, up 6.8%.
+
+## Overnight Stays Rise 1.7% to 1,211,816
+
+The region counted **1,211,816 overnight stays** in September, up 1.7%. A total of 232,872 guests checked in during the month, 1.5% more than a year earlier.
+
+Counting all 260,092 guests, up 2.1%, the **average stay** was 4.66 nights, slightly shorter than in September 2025 (down 0.4%).
+
+## Room Occupancy Falls 2.7 Points to 84.4%
+
+Occupancy went down. The **room occupancy** rate was 84.4%, 2.7 percentage points lower than a year before. The bed occupancy rate fell 3.9 points to 71.2%.
+
+## Average Room Rate Climbs 6% to 143.56 Euros
+
+Higher prices made up for the lower occupancy. The **average daily rate** (ADR), the average price paid per occupied room, rose 6.0% to 143.56 euros.
+
+Revenue per available room (**RevPAR**), which counts empty rooms too, rose 2.7% to 121.23 euros.
+
+## Golf Rounds Played Rise 17.9% to 5,864 on Three Courses
+
+Madeira's **three golf courses** had 5,864 rounds played in September, up 17.9%. That is 28.1% of the 20,880 rounds possible, 4.3 points more than a year earlier.
+
+Golf revenue reached 304,397 euros, up 12.5%. Green fees paid by **non-members** brought in 124,103 euros, up 20.5%. The region's plans for [more golf courses](https://www.timesofmadeira.com/golf-madness-is-the-archipelago-going-to-have-seven-golf-courses) have drawn opposition from environmental groups and some parties.
+
+:::html
+<div style="overflow-x:auto;margin:1.2em 0"><table style="width:100%;border-collapse:collapse;font-size:15px;line-height:1.4"><caption style="caption-side:top;text-align:left;font-weight:700;padding:0 0 8px">Golf in Madeira, September 2026</caption><thead><tr><th style="padding:8px 10px;text-align:left;border-bottom:2px solid currentColor;font-weight:700">Indicator</th><th style="padding:8px 10px;text-align:left;border-bottom:2px solid currentColor;font-weight:700;text-align:right">Sept 2026</th><th style="padding:8px 10px;text-align:left;border-bottom:2px solid currentColor;font-weight:700;text-align:right">vs Sept 2025</th></tr></thead><tbody><tr><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3)">Golf courses</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;font-weight:600;white-space:nowrap">3</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;white-space:nowrap;color:inherit;font-weight:600"></td></tr><tr><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3)">Rounds possible</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;font-weight:600;white-space:nowrap">20,880</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;white-space:nowrap;color:inherit;font-weight:600"></td></tr><tr><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3)">Rounds played</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;font-weight:600;white-space:nowrap">5,864</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;white-space:nowrap;color:#1a7f37;font-weight:600">▲ +17.9%</td></tr><tr><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3)">Occupancy</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;font-weight:600;white-space:nowrap">28.1%</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;white-space:nowrap;color:#1a7f37;font-weight:600">▲ +4.3 pts</td></tr><tr><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3)">Total revenue</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;font-weight:600;white-space:nowrap">304,397 euros</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;white-space:nowrap;color:#1a7f37;font-weight:600">▲ +12.5%</td></tr><tr><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3)">Green fees from non-members</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;font-weight:600;white-space:nowrap">124,103 euros</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;white-space:nowrap;color:#1a7f37;font-weight:600">▲ +20.5%</td></tr></tbody></table></div>
+:::
+
+## Cruise Passengers Fall 13.3% With Only Four Ship Calls
+
+Cruise tourism was **quieter**. Only four cruise ships called in September, against six a year earlier, a fall of 33.3%. They brought 11,765 passengers in transit, 13.3% fewer.
+
+:::html
+<div style="overflow-x:auto;margin:1.2em 0"><table style="width:100%;border-collapse:collapse;font-size:15px;line-height:1.4"><caption style="caption-side:top;text-align:left;font-weight:700;padding:0 0 8px">Cruise ships in Madeira, September 2026</caption><thead><tr><th style="padding:8px 10px;text-align:left;border-bottom:2px solid currentColor;font-weight:700">Indicator</th><th style="padding:8px 10px;text-align:left;border-bottom:2px solid currentColor;font-weight:700;text-align:right">Sept 2026</th><th style="padding:8px 10px;text-align:left;border-bottom:2px solid currentColor;font-weight:700;text-align:right">vs Sept 2025</th></tr></thead><tbody><tr><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3)">Ship calls</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;font-weight:600;white-space:nowrap">4</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;white-space:nowrap;color:#cf222e;font-weight:600">▼ -33.3%</td></tr><tr><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3)">Passengers in transit</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;font-weight:600;white-space:nowrap">11,765</td><td style="padding:7px 10px;border-bottom:1px solid rgba(128,128,128,.3);text-align:right;white-space:nowrap;color:#cf222e;font-weight:600">▼ -13.3%</td></tr></tbody></table></div>
+:::
+
+Over the whole of 2025, the Port of Funchal had **331 ship calls**, with an estimated [economic impact of more than 62 million euros](https://www.timesofmadeira.com/madeira-cruise-tourism-brings-in-eur62-million-in-2025).
+
+For **local accommodation**, DREM only counts places with 10 or more beds when it calculates occupancy, revenue, RevPAR and ADR.
+
+Source: [app.powerbi.com](https://app.powerbi.com/view?r=eyJrIjoiZjRlNTJkMzktODNmNi00NzhiLWE4OGYtYjg2ZDM5NWYxOWZlIiwidCI6IjcxOTQwYTg2LTUyYmQtNGVkMy04OWI3LWUwYTdjZDcwNDA0MyIsImMiOjl9)

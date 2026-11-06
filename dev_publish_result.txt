@@ -1,0 +1,5 @@
+{
+  "status": "success",
+  "postId": 12345,
+  "url": "https://dev.timesofmadeira.com/articles/2026-10-18-albuquerque-shifting-stance"
+}
