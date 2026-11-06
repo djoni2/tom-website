@@ -18,6 +18,30 @@
 {# More: the newsletter and contact items from the Console menu (_header.twig leaves them out), then the Madeira Quiz #}
 {% set more = _blog.nav_header|filter(n => n.url ends with '/contact' or 'newsletter' in n.url) %}
 
+{% if mode == 'drawer' %}
+  {# Flat, always-visible groups for the left-drawer mobile menu: a labelled,
+     independently-scrollable Sections list (so 11 tags don't push the rest
+     of the drawer off-screen) and a plain More list. #}
+  <div class="nav-group">
+    <div class="nav-group__label">Sections</div>
+    <ul class="nav-group__scroll list-reset">
+      {% for section in sections %}
+        <li><a href="/tag/{{ section[1] }}" class="nav-group__link{% if _tag is defined and _tag.slug == section[1] %} is-active{% endif %}">{{ section[0] }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group__label">More</div>
+    <ul class="nav-group__list list-reset">
+      {% for nav in more %}
+        <li><a href="{{ nav.url }}" class="nav-group__link{% if is_current_url(nav.url) %} is-active{% endif %}">{{ 'newsletter' in nav.url ? 'Subscribe to the Newsletter' : nav.name }}</a></li>
+      {% endfor %}
+      <li><a href="/madeira-quiz" class="nav-group__link{% if is_current_url('/madeira-quiz') %} is-active{% endif %}">Madeira Quiz</a></li>
+      <li><a href="/weather-forecast" class="nav-group__link{% if is_current_url('/weather-forecast') %} is-active{% endif %}">Weather Forecast</a></li>
+    </ul>
+  </div>
+{% else %}
 <li class="nav__item nav__item--dropdown">
   <details class="nav-dropdown nav-dropdown--sections">
     <summary class="nav__link nav-dropdown__toggle{% if _tag is defined and _tag.slug in sections|map(s => s[1]) %} active-link{% endif %}">
@@ -55,6 +79,7 @@
     </ul>
   </details>
 </li>
+{% endif %}
 
 <script>
   // One dropdown open at a time; close on a click outside or on Escape.

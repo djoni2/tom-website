@@ -15,11 +15,30 @@
          </div>
 		 
 
-        <div class="hamburger" onclick="menuToggle()" id="hamburger">
+        <div class="hamburger" onclick="menuToggle()" id="hamburger" aria-expanded="false" aria-controls="menuList">
           <div></div>
         </div>
 
+        <div class="nav-overlay" id="navOverlay" onclick="menuToggle()"></div>
+
         <nav class="main-nav" aria-label="Main menu" id="menuList">
+          <div class="nav-drawer__head">
+            <div class="nav-drawer__brand">
+              <span class="nav-drawer__title">Times of Madeira</span>
+              <span class="nav-drawer__date">{{ "now"|date("l, F j, Y") }}</span>
+            </div>
+            <button type="button" class="nav-drawer__close" onclick="menuToggle()" aria-label="Close menu">
+              {{ icon('ionicons', 'close', 18) }}
+            </button>
+          </div>
+
+          <div class="nav-drawer__search">
+            <div class="nav-search">
+              <a class="nav-search-button"><i aria-hidden="true">{{ icon('ionicons', 'search', 16) }}</i> <span>Search Times of Madeira</span>
+              </a>
+            </div>
+          </div>
+
           <div class="main-nav__box">
             <ul class="nav__list list-reset">
               {# The newsletter and contact items move into the "More" dropdown (_sections-nav.twig uses the same test) #}
@@ -30,6 +49,9 @@
               {% endfor %}
               {% include '_sections-nav.twig' %}
             </ul>
+
+            {# Flat, always-visible, independently-scrollable groups used only inside the mobile drawer #}
+            {% include '_sections-nav.twig' with { mode: 'drawer' } %}
           </div>
 
           <div class="nav-button">

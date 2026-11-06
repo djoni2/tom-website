@@ -2,9 +2,19 @@
 // Menu
 ================ */
 function menuToggle() {
-  document.getElementById('hamburger').classList.toggle("is-open");
-  document.getElementById('menuList').classList.toggle("is-visible");
+  var hamburger = document.getElementById('hamburger');
+  var isOpen = hamburger.classList.toggle("is-open");
+  document.getElementById('menuList').classList.toggle("is-visible", isOpen);
+  document.getElementById('navOverlay').classList.toggle("is-visible", isOpen);
+  document.body.classList.toggle("nav-open", isOpen);
+  hamburger.setAttribute('aria-expanded', String(isOpen));
 };
+
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape' && document.body.classList.contains('nav-open')) {
+    menuToggle();
+  }
+});
 
 
 /* ================
