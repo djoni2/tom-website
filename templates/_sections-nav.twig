@@ -24,7 +24,7 @@
      of the drawer off-screen) and a plain More list. #}
   <div class="nav-group">
     <div class="nav-group__label">Sections</div>
-    <ul class="nav-group__scroll list-reset">
+    <ul class="nav-group__grid list-reset">
       {% for section in sections %}
         <li><a href="/tag/{{ section[1] }}" class="nav-group__link{% if _tag is defined and _tag.slug == section[1] %} is-active{% endif %}">{{ section[0] }}</a></li>
       {% endfor %}

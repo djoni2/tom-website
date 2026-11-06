@@ -107,7 +107,7 @@
       min-height: 0;
       overflow-y: auto;
       width: 100%;
-      padding: 4px 24px 20px;
+      padding: 4px 24px 16px;
     }
 
     .nav__list {
@@ -123,7 +123,7 @@
 
         .nav__link {
           display: block;
-          padding: 12px 0;
+          padding: 10px 0;
           font-size: 17px;
           text-align: left;
           border-bottom: 1px solid var(--border-color);
@@ -178,7 +178,7 @@ body.nav-open {
     flex: 0 0 auto;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 24px 16px;
+    padding: 16px 24px 14px;
     border-bottom: 1px solid var(--border-color);
   }
 }
@@ -223,7 +223,7 @@ body.nav-open {
   @media (max-width: $desktop) {
     display: block;
     flex: 0 0 auto;
-    padding: 14px 24px 4px;
+    padding: 10px 24px 2px;
 
     .nav-search .nav-search-button {
       display: flex;
@@ -245,13 +245,17 @@ body.nav-open {
   }
 }
 
-/* Flat, always-visible Sections / More groups inside the drawer */
+/* Flat, always-visible Sections / More groups inside the drawer. Sections
+   is a compact two-column grid of chips rather than its own nested scroll
+   box: a scrollbar inside a scrollable drawer reads as "the rest is
+   missing" rather than "scroll for more", so the whole drawer scrolls as
+   one piece instead. */
 .nav-group {
   display: none;
 
   @media (max-width: $desktop) {
     display: block;
-    margin-top: 20px;
+    margin-top: 16px;
   }
 }
 
@@ -264,22 +268,24 @@ body.nav-open {
   color: var(--text-alt-color);
 }
 
-.nav-group__scroll {
-  max-height: 44vh;
-  overflow-y: auto;
+.nav-group__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.nav-group__grid .nav-group__link {
+  display: block;
+  padding: 10px 12px;
   border: 1px solid var(--border-color);
-  border-radius: 10px;
-  padding: 0 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .nav-group__link {
-  display: block;
-  padding: 11px 0;
-  font-size: 15px;
-  font-weight: 500;
   color: var(--text-color);
   text-decoration: none;
-  border-bottom: 1px solid var(--border-color);
   transition: color .2s;
 
   &:hover,
@@ -288,14 +294,17 @@ body.nav-open {
   }
 }
 
-.nav-group__scroll .nav-group__link:last-child,
-.nav-group__list .nav-group__link:last-child {
-  border-bottom: none;
-}
-
 .nav-group__list .nav-group__link {
+  display: block;
+  padding: 10px 0;
   font-size: 14px;
+  font-weight: 500;
   color: var(--text-alt-color);
+  border-bottom: 1px solid var(--border-color);
+
+  &:last-child {
+    border-bottom: none;
+  }
 }
 
 [dir="rtl"] {
