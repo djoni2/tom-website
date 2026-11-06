@@ -90,11 +90,15 @@
     opacity: 1;
     visibility: visible;
     background: var(--background-color);
-    box-shadow: 18px 0 40px -10px rgba(0, 0, 0, 0.25);
+    box-shadow: none;
     transition: transform .3s cubic-bezier(.2, .8, .2, 1);
 
+    /* The shadow only applies once open -- while closed, the box sits just
+       off-screen, but an always-on shadow still bleeds onto the edge of
+       the viewport since it extends past the box's own edges. */
     &.is-visible {
       transform: translate3d(0, 0, 0);
+      box-shadow: 18px 0 40px -10px rgba(0, 0, 0, 0.25);
     }
 
     .main-nav__box {
@@ -308,9 +312,8 @@ body.nav-open {
 
       &.is-visible {
         transform: translate3d(0, 0, 0);
+        box-shadow: -18px 0 40px -10px rgba(0, 0, 0, 0.25);
       }
-
-      box-shadow: -18px 0 40px -10px rgba(0, 0, 0, 0.25);
     }
 
     .nav__list .nav__item .nav__link {
