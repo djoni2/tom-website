@@ -131,16 +131,9 @@
 }
 
 .today__list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 24px;
   margin: 0;
   padding: 0;
   list-style: none;
-
-  @media (max-width: $mobile) {
-    grid-template-columns: 1fr;
-  }
 }
 
 .today__item {
@@ -168,11 +161,6 @@
 
 .today__value {
   font-weight: 300;
-
-  a {
-    color: var(--text-color);
-    text-decoration: underline;
-  }
 }
 
 .today__foot {

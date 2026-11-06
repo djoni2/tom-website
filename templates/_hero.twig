@@ -43,29 +43,14 @@
               <span class="today__value" data-today="weather">&mdash;</span>
             </li>
             <li class="today__item">
-              <i aria-hidden="true">{{ icon('ionicons', 'sunny-outline', 18) }}</i>
-              <span class="today__name">Sun</span>
-              <span class="today__value" data-today="sun">&mdash;</span>
-            </li>
-            <li class="today__item">
               <i aria-hidden="true">{{ icon('ionicons', 'airplane-outline', 18) }}</i>
               <span class="today__name">Airport</span>
               <span class="today__value" data-today="airport">&mdash;</span>
             </li>
             <li class="today__item">
-              <i aria-hidden="true">{{ icon('ionicons', 'trail-sign-outline', 18) }}</i>
-              <span class="today__name">Arieiro</span>
-              <span class="today__value" data-today="peak">&mdash;</span>
-            </li>
-            <li class="today__item">
-              <i aria-hidden="true">{{ icon('ionicons', 'water-outline', 18) }}</i>
+              <i aria-hidden="true">{{ icon('ionicons', 'boat-outline', 18) }}</i>
               <span class="today__name">Sea</span>
               <span class="today__value" data-today="sea">&mdash;</span>
-            </li>
-            <li class="today__item">
-              <i aria-hidden="true">{{ icon('ionicons', 'boat-outline', 18) }}</i>
-              <span class="today__name">Ships</span>
-              <span class="today__value"><a href="https://apram.pt/movimento-navios?port=ptfnc" target="_blank" rel="noopener">Cruise calls in Funchal</a></span>
             </li>
           </ul>
           <div class="today__foot">
@@ -82,8 +67,7 @@
 <!-- end hero strip -->
 
 <script>
-// Today in Madeira: live weather in Funchal, sun times, wind at the airport,
-// conditions on Pico do Arieiro, sea state.
+// Today in Madeira: live weather in Funchal, wind at the airport, sea state.
 // Open-Meteo is free, keyless and CORS-open; on failure the dashes stay.
 (function () {
   var box = document.getElementById('today-madeira');
@@ -104,22 +88,15 @@
     return 'Thunderstorms';
   }
   var tz = '&timezone=Atlantic%2FMadeira';
-  // Three locations in one call: Funchal, Madeira Airport (FNC), Pico do Arieiro.
-  var weather = 'https://api.open-meteo.com/v1/forecast?latitude=32.65,32.6979,32.7356&longitude=-16.91,-16.7745,-16.9289'
-    + '&current=temperature_2m,weather_code,wind_speed_10m,wind_gusts_10m,cloud_cover_low'
-    + '&daily=sunrise,sunset&forecast_days=1' + tz;
+  // Two locations in one call: Funchal, then Madeira Airport (FNC).
+  var weather = 'https://api.open-meteo.com/v1/forecast?latitude=32.65,32.6979&longitude=-16.91,-16.7745'
+    + '&current=temperature_2m,weather_code,wind_speed_10m,wind_gusts_10m' + tz;
   var marine = 'https://marine-api.open-meteo.com/v1/marine?latitude=32.62&longitude=-16.92'
     + '&current=wave_height,sea_surface_temperature' + tz;
 
   fetch(weather).then(function (r) { return r.json(); }).then(function (d) {
-    var town = d[0].current, fnc = d[1].current, peak = d[2].current;
+    var town = d[0].current, fnc = d[1].current;
     set('weather', Math.round(town.temperature_2m) + '°C · ' + sky(town.weather_code));
-    set('sun', 'Rise ' + d[0].daily.sunrise[0].slice(11, 16) + ' · Set ' + d[0].daily.sunset[0].slice(11, 16));
-    // Clear on the peak while low cloud sits over the coast: the sea of clouds.
-    var peakSky = peak.weather_code >= 45 && peak.weather_code <= 48 ? 'In the clouds'
-      : peak.weather_code <= 2 && town.cloud_cover_low >= 60 ? 'Above the clouds'
-      : sky(peak.weather_code);
-    set('peak', Math.round(peak.temperature_2m) + '°C · ' + peakSky);
     // Wind gusts at FNC.
     set('airport', Math.round(fnc.wind_gusts_10m) + ' km/h');
     set('updated', 'Updated ' + town.time.slice(11, 16));
