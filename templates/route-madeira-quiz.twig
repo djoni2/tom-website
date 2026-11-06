@@ -255,8 +255,14 @@
       card.hidden = true;
       card.setAttribute('aria-labelledby', 'quiz-q' + index);
 
-      var count = el('p', 'quiz__count', 'Question ' + (index + 1) + ' ');
-      count.appendChild(el('span', null, 'of ' + perRound));
+      var count = el('div', 'quiz__count');
+      count.appendChild(el('span', 'quiz__count-num', String(index + 1).padStart(2, '0')));
+      count.appendChild(el('span', 'quiz__count-total', '/' + perRound));
+      var track = el('div', 'quiz__progress');
+      var fill = el('div', 'quiz__progress-fill');
+      fill.style.width = (((index + 1) / perRound) * 100) + '%';
+      track.appendChild(fill);
+      count.appendChild(track);
       var question = el('h2', 'quiz__question', item.q);
       question.id = 'quiz-q' + index;
       var list = el('ol', 'quiz__options list-reset');
