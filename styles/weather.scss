@@ -9,6 +9,16 @@
   text-align: center;
 }
 
+.weather__logo {
+  display: inline-block;
+  margin-bottom: 16px;
+
+  img {
+    max-width: 260px;
+    height: auto;
+  }
+}
+
 .weather__title {
   margin-bottom: 12px;
   font-size: 48px;
