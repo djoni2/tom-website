@@ -9,6 +9,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         subdomain:
           - "dev-d287e71c-2526-4197-ae4c-a7f2efbf7c83"
