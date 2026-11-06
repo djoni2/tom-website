@@ -84,7 +84,7 @@ function initSearch() {
 
       lastXhr = _hb.dataApi('v0', 'posts/search', {
         search: e.target.value,
-        keys: "title, url, description"
+        keys: "title, url, description, featured_image_url"
       }, function(response) {
           var posts = response.data;
           var output = '';
@@ -94,11 +94,15 @@ function initSearch() {
               '<a class="search-result-row-link" href="' +
               post.url +
               '">' +
+              (post.featured_image_url ?
+                '<img class="search-result-row-image" src="' + post.featured_image_url + '" alt="" loading="lazy">' :
+                '') +
+              '<div class="search-result-row-text">' +
               '<div class="search-result-row-title">' +
               post.title +
               '</div><div class="search-result-row-excerpt">' +
               post.description +
-              '</div></a>' +
+              '</div></div></a>' +
               '</div>';
           })
 

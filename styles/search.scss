@@ -187,7 +187,9 @@
   .search-result-row {
 
     .search-result-row-link {
-      display: block;
+      display: flex;
+      align-items: center;
+      gap: 16px;
       padding: 24px;
       text-decoration: none;
       outline: 0;
@@ -197,6 +199,18 @@
         .search-result-row-title {
           color: var(--color-accent);
         }
+      }
+
+      .search-result-row-image {
+        flex: 0 0 auto;
+        width: 64px;
+        height: 64px;
+        border-radius: 8px;
+        object-fit: cover;
+      }
+
+      .search-result-row-text {
+        min-width: 0;
       }
 
       .search-result-row-title {
@@ -226,6 +240,11 @@
 
     .search-result-row {
       .search-result-row-link {
+        .search-result-row-image {
+          width: 52px;
+          height: 52px;
+        }
+
         .search-result-row-title {
           font-size: 20px;
         }
