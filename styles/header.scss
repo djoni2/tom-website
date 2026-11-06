@@ -416,3 +416,99 @@
 .hamburger.is-open div:after {
   transform: rotate(-45deg);
 }
+
+/* Black top bar: white icons and links, about 30px high */
+.header {
+  height: 30px;
+  background-color: #000;
+  color: #fff;
+
+  .header__inner {
+    height: 30px;
+    padding: 0 16px;
+    flex-wrap: nowrap;
+  }
+
+  .footer__social {
+    flex-wrap: nowrap;
+
+    .social-link {
+      padding: 0;
+      margin-inline-end: 10px;
+      color: #fff;
+
+      &:hover {
+        color: #ccc;
+      }
+    }
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  .nav__list .nav__item .nav__link,
+  .nav__list .nav__item .nav__link.active-link {
+    padding: 0;
+    font-size: 14px;
+    color: #fff;
+
+    &:hover {
+      color: #ccc;
+    }
+  }
+
+  .nav-button {
+    margin-inline-start: 24px;
+  }
+
+  .nav-search .nav-search-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 0;
+    border-radius: 0;
+    color: #fff;
+    background: transparent;
+    box-shadow: none;
+
+    &:hover {
+      color: #ccc;
+      background: transparent;
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .hamburger {
+    height: 30px;
+  }
+
+  .hamburger div,
+  .hamburger div:after,
+  .hamburger div:before {
+    width: 24px;
+    height: 2px;
+    background-color: #fff;
+  }
+
+  .hamburger.is-open div {
+    background: transparent;
+  }
+
+  @media (max-width: $desktop) {
+    .main-nav {
+      top: 30px;
+      background: #000;
+    }
+
+    .nav__list .nav__item .nav__link,
+    .nav__list .nav__item .nav__link.active-link {
+      padding: 0 0 8px 0;
+      font-size: 1.1em;
+    }
+  }
+}
