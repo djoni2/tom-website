@@ -120,10 +120,8 @@
       : peak.weather_code <= 2 && town.cloud_cover_low >= 60 ? 'Above the clouds'
       : sky(peak.weather_code);
     set('peak', Math.round(peak.temperature_2m) + '°C · ' + peakSky);
-    // Around 25 kt (46 km/h) gusts, landings at FNC start to get diverted.
-    var windy = fnc.wind_gusts_10m >= 46;
-    set('airport', (windy ? 'Strong wind, check your flight' : 'Light wind')
-      + ' · gusts ' + Math.round(fnc.wind_gusts_10m) + ' km/h');
+    // Wind gusts at FNC.
+    set('airport', Math.round(fnc.wind_gusts_10m) + ' km/h');
     set('updated', 'Updated ' + town.time.slice(11, 16));
   }).catch(function () {});
 
