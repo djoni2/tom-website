@@ -108,7 +108,7 @@
   justify-content: center;
   width: 100%;
   padding: 18px 20px 10px;
-  border: 2px solid var(--text-color);
+  border: 1px solid #b2b2b2;
   border-radius: $global-radius;
   background: var(--background-color);
   color: var(--text-color);
@@ -118,9 +118,9 @@
 .strip-label {
   position: absolute;
   top: -12px;
-  left: 20px;
-  padding: 3px 12px;
-  border-radius: 4px;
+  left: 47px;
+  padding: 3px 14px;
+  border-radius: 23px;
   background: var(--text-color);
   color: var(--background-color);
   font-size: 13px;
