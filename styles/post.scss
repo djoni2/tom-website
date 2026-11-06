@@ -594,11 +594,48 @@ ul, ol {
 
       &:hover { color: var(--text-color); }
 
+      .share__icon-check { display: none; }
+
+      // Copied: the button pops, turns green and the link icon becomes a checkmark that draws itself
       &.is-copied {
         color: #fff;
-        background: var(--color-accent);
+        background: #16a34a;
+        filter: none;
+        animation: share-copied-pop .45s cubic-bezier(.34, 1.56, .64, 1);
+
+        .share__icon-link { display: none; }
+
+        .share__icon-check {
+          display: block;
+          stroke-dasharray: 1;
+          stroke-dashoffset: 1;
+          animation: share-check-draw .35s .1s ease-out forwards;
+        }
+
+        .share__label { animation: share-label-in .3s ease-out; }
       }
     }
+  }
+
+  @keyframes share-copied-pop {
+    0% { transform: scale(1); }
+    35% { transform: scale(.9); }
+    100% { transform: scale(1); }
+  }
+
+  @keyframes share-check-draw {
+    to { stroke-dashoffset: 0; }
+  }
+
+  @keyframes share-label-in {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .share__btn--copy.is-copied,
+    .share__btn--copy.is-copied .share__label { animation: none; }
+    .share__btn--copy.is-copied .share__icon-check { animation: none; stroke-dashoffset: 0; }
   }
 
   .share__follow {

@@ -149,6 +149,9 @@ document.addEventListener('click', function (e) {
   var label = btn.querySelector('.share__label');
 
   function done() {
+    // Drop and re-add the class so the animation replays on a second click
+    btn.classList.remove('is-copied');
+    void btn.offsetWidth;
     btn.classList.add('is-copied');
     label.textContent = 'Copied!';
     clearTimeout(btn._shareTimer);
