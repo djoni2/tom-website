@@ -8,6 +8,9 @@
 <div class="footer__social">
             {% include '_social.twig' with { social: _blog.social } %}
           </div>
+        <div class="header__date">
+          {{ "now"|date("l, j F Y") }}
+        </div>
         <div class="logo" aria-label="Times of Madeira">
          </div>
 		 

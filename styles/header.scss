@@ -22,6 +22,24 @@
 }
 
 
+/* Date */
+.header__date {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-color);
+  white-space: nowrap;
+
+  @media (max-width: $desktop) {
+    position: static;
+    transform: none;
+    font-size: 12px;
+    margin: 0 12px;
+  }
+}
+
 /* Logo */
 .logo {
   line-height: 1;
