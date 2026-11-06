@@ -97,8 +97,10 @@
   fetch(weather).then(function (r) { return r.json(); }).then(function (d) {
     var town = d[0].current, fnc = d[1].current;
     set('weather', Math.round(town.temperature_2m) + '°C · ' + sky(town.weather_code));
-    // Wind gusts at FNC.
-    set('airport', Math.round(fnc.wind_gusts_10m) + ' km/h');
+    // Wind gusts at FNC. Around 25 kt (46 km/h), landings start to get diverted.
+    var gusts = fnc.wind_gusts_10m;
+    set('airport', Math.round(gusts) + ' km/h · '
+      + (gusts >= 46 ? 'Strong wind, check your flight' : 'Light wind'));
     set('updated', 'Updated ' + town.time.slice(11, 16));
   }).catch(function () {});
 
