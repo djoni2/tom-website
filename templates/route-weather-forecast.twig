@@ -1,0 +1,178 @@
+{% extends '@base.twig' %}
+
+{# The Weather Forecast page at /weather-forecast, linked from the header's "More" dropdown.
+   Forecasts are fetched client-side from Open-Meteo (no API key, free, CORS-enabled) for
+   all 11 municipalities of the Madeira autonomous region, using the location list below.
+   Add or edit a location: one line { "name": label, "lat": latitude, "lon": longitude }. #}
+
+{% block head %}
+  <title>Madeira Weather Forecast | 7-Day Outlook for Funchal, Calheta & More - Times of Madeira</title>
+  <meta name="description" content="Live 7-day weather forecasts for Funchal, Calheta, Câmara de Lobos, Porto Santo and every municipality in Madeira, updated from Open-Meteo.">
+{% endblock %}
+
+{% block body %}
+<main role="main" class="weather-page">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+        <header class="weather__masthead">
+          <h1 class="weather__title">Madeira Weather Forecast</h1>
+          <p class="weather__dek">The 7-day outlook for Funchal, Calheta and every other municipality on the island, straight from live forecast data. Pick an area below.</p>
+        </header>
+
+        <div class="weather__tabs" role="tablist" aria-label="Choose an area" data-weather-tabs></div>
+
+        <div class="weather__days" data-weather-days aria-live="polite">
+          <p class="weather__status" data-weather-status>Loading forecast&hellip;</p>
+        </div>
+
+        <p class="weather__attribution">Weather data by <strong><a href="https://open-meteo.com/" rel="noopener" target="_blank">Open-Meteo.com</a></strong>. Forecasts can change; always check closer to your plans.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script type="application/json" id="weather-data">
+[
+  {"name":"Funchal","lat":32.6669,"lon":-16.9241},
+  {"name":"Câmara de Lobos","lat":32.6456,"lon":-16.9753},
+  {"name":"Ribeira Brava","lat":32.6578,"lon":-17.0656},
+  {"name":"Ponta do Sol","lat":32.6778,"lon":-17.1011},
+  {"name":"Calheta","lat":32.7167,"lon":-17.1833},
+  {"name":"Porto Moniz","lat":32.8667,"lon":-17.1667},
+  {"name":"São Vicente","lat":32.8,"lon":-17.05},
+  {"name":"Santana","lat":32.8028,"lon":-16.8822},
+  {"name":"Machico","lat":32.7167,"lon":-16.7667},
+  {"name":"Santa Cruz","lat":32.6883,"lon":-16.7883},
+  {"name":"Porto Santo","lat":33.0586,"lon":-16.3378}
+]
+</script>
+
+<script>
+  (function () {
+    var root = document.querySelector('.weather-page');
+    if (!root) return;
+    var locations = JSON.parse(document.getElementById('weather-data').textContent);
+    var tabs = root.querySelector('[data-weather-tabs]');
+    var days = root.querySelector('[data-weather-days]');
+    var status = root.querySelector('[data-weather-status]');
+    var cache = {};
+    var current = 0;
+
+    var weatherText = {
+      0: ['Clear sky', '☀️'],
+      1: ['Mainly clear', '🌤️'],
+      2: ['Partly cloudy', '⛅'],
+      3: ['Overcast', '☁️'],
+      45: ['Fog', '🌫️'],
+      48: ['Fog', '🌫️'],
+      51: ['Light drizzle', '🌦️'],
+      53: ['Drizzle', '🌦️'],
+      55: ['Dense drizzle', '🌦️'],
+      56: ['Freezing drizzle', '🌧️'],
+      57: ['Freezing drizzle', '🌧️'],
+      61: ['Light rain', '🌧️'],
+      63: ['Rain', '🌧️'],
+      65: ['Heavy rain', '🌧️'],
+      66: ['Freezing rain', '🌧️'],
+      67: ['Freezing rain', '🌧️'],
+      71: ['Light snow', '🌨️'],
+      73: ['Snow', '🌨️'],
+      75: ['Heavy snow', '🌨️'],
+      77: ['Snow grains', '🌨️'],
+      80: ['Rain showers', '🌦️'],
+      81: ['Rain showers', '🌦️'],
+      82: ['Violent showers', '⛈️'],
+      85: ['Snow showers', '🌨️'],
+      86: ['Snow showers', '🌨️'],
+      95: ['Thunderstorm', '⛈️'],
+      96: ['Thunderstorm, hail', '⛈️'],
+      99: ['Thunderstorm, hail', '⛈️']
+    };
+
+    function describe(code) {
+      return weatherText[code] || ['Mixed conditions', '🌤️'];
+    }
+
+    function el(tag, cls, text) {
+      var n = document.createElement(tag);
+      if (cls) n.className = cls;
+      if (text != null) n.textContent = text;
+      return n;
+    }
+
+    function dayLabel(dateStr, index) {
+      if (index === 0) return 'Today';
+      var d = new Date(dateStr + 'T12:00:00');
+      return d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
+    }
+
+    function renderLocation(index) {
+      current = index;
+      tabs.querySelectorAll('.weather__tab').forEach(function (btn, i) {
+        var active = i === index;
+        btn.classList.toggle('is-active', active);
+        btn.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+
+      var loc = locations[index];
+      if (cache[loc.name]) {
+        renderDays(cache[loc.name]);
+        return;
+      }
+
+      days.innerHTML = '';
+      status.hidden = false;
+      status.textContent = 'Loading forecast for ' + loc.name + '…';
+
+      var url = 'https://api.open-meteo.com/v1/forecast?latitude=' + loc.lat + '&longitude=' + loc.lon +
+        '&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max' +
+        '&timezone=Atlantic%2FMadeira&forecast_days=7';
+
+      fetch(url)
+        .then(function (res) { if (!res.ok) throw new Error('bad response'); return res.json(); })
+        .then(function (data) {
+          cache[loc.name] = data.daily;
+          if (current === index) renderDays(data.daily);
+        })
+        .catch(function () {
+          if (current === index) {
+            status.hidden = false;
+            status.textContent = 'Could not load the forecast for ' + loc.name + '. Please try again shortly.';
+          }
+        });
+    }
+
+    function renderDays(daily) {
+      status.hidden = true;
+      days.innerHTML = '';
+      daily.time.forEach(function (date, i) {
+        var info = describe(daily.weather_code[i]);
+        var card = el('div', 'weather__day');
+        card.appendChild(el('p', 'weather__day-label', dayLabel(date, i)));
+        card.appendChild(el('p', 'weather__icon', info[1]));
+        card.appendChild(el('p', 'weather__condition', info[0]));
+        var temps = el('p', 'weather__temps');
+        temps.appendChild(el('span', 'weather__high', Math.round(daily.temperature_2m_max[i]) + '°'));
+        temps.appendChild(el('span', 'weather__low', Math.round(daily.temperature_2m_min[i]) + '°'));
+        card.appendChild(temps);
+        var rain = daily.precipitation_probability_max[i];
+        card.appendChild(el('p', 'weather__rain', '💧 ' + (rain == null ? '–' : rain + '%')));
+        days.appendChild(card);
+      });
+    }
+
+    locations.forEach(function (loc, i) {
+      var btn = el('button', 'weather__tab', loc.name);
+      btn.type = 'button';
+      btn.setAttribute('role', 'tab');
+      btn.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+      btn.addEventListener('click', function () { renderLocation(i); });
+      tabs.appendChild(btn);
+    });
+    tabs.querySelector('.weather__tab').classList.add('is-active');
+
+    renderLocation(0);
+  })();
+</script>
+{% endblock %}

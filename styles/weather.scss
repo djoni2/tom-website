@@ -1,0 +1,188 @@
+/* The Madeira Weather Forecast (/weather-forecast): the site's own fonts, colours and buttons */
+
+.weather-page {
+  padding: 48px 0 80px;
+}
+
+.weather__masthead {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.weather__title {
+  margin-bottom: 12px;
+  font-size: 48px;
+}
+
+.weather__dek {
+  max-width: 640px;
+  margin: 0 auto;
+  font-size: 21px;
+}
+
+.weather__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+/* Same look as the quiz's option letters: outline by default, filled when active */
+.weather__tab {
+  padding: 8px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-color);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  transition: $global-transition;
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    outline: none;
+  }
+
+  &.is-active {
+    border-color: var(--color-accent);
+    background: var(--color-accent);
+    color: var(--text-alt-color);
+  }
+}
+
+.weather__status {
+  padding: 40px 0;
+  text-align: center;
+  font-size: 18px;
+  opacity: .7;
+}
+
+.weather__days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 12px;
+}
+
+.weather__day {
+  padding: 20px 8px;
+  border: 1px solid var(--border-color);
+  border-radius: $global-radius;
+  text-align: center;
+  animation: weather-fade .3s ease both;
+}
+
+.weather__day-label {
+  margin-bottom: 8px;
+  font-family: var(--heading-font-family);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+
+.weather__icon {
+  margin-bottom: 4px;
+  font-size: 32px;
+  line-height: 1;
+}
+
+.weather__condition {
+  min-height: 2.4em;
+  margin-bottom: 12px;
+  font-size: 12px;
+  opacity: .75;
+}
+
+.weather__temps {
+  margin-bottom: 8px;
+  font-family: var(--heading-font-family);
+}
+
+.weather__high {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.weather__low {
+  margin-left: 6px;
+  font-size: 16px;
+  opacity: .55;
+}
+
+.weather__rain {
+  font-size: 13px;
+  opacity: .7;
+}
+
+.weather__attribution {
+  margin-top: 32px;
+  text-align: center;
+  font-size: 13px;
+  opacity: .6;
+}
+
+@keyframes weather-fade {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .weather__day {
+    animation: none !important;
+  }
+}
+
+@media (max-width: $tablet) {
+  .weather-page {
+    padding: 28px 0 56px;
+  }
+
+  .weather__title {
+    font-size: 32px;
+  }
+
+  .weather__dek {
+    font-size: 18px;
+  }
+
+  .weather__days {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 420px) {
+  .weather__days {
+    grid-template-columns: 1fr;
+  }
+
+  .weather__day {
+    display: grid;
+    grid-template-columns: auto auto 1fr auto auto;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    text-align: start;
+  }
+
+  .weather__day-label {
+    margin-bottom: 0;
+    min-width: 72px;
+  }
+
+  .weather__icon {
+    margin-bottom: 0;
+  }
+
+  .weather__condition {
+    display: none;
+  }
+
+  .weather__temps {
+    margin-bottom: 0;
+    white-space: nowrap;
+  }
+}
