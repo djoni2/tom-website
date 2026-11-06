@@ -142,7 +142,8 @@
   }
 }
 
-/* Backdrop behind the mobile drawer */
+/* Invisible tap-catcher behind the mobile drawer: closes it on an outside
+   tap without darkening the page (no scrim, by design) */
 .nav-overlay {
   display: none;
 
@@ -151,15 +152,9 @@
     position: fixed;
     inset: 0;
     z-index: 100;
-    background: rgba(0, 0, 0, .5);
-    opacity: 0;
-    visibility: hidden;
     pointer-events: none;
-    transition: opacity .3s;
 
     &.is-visible {
-      opacity: 1;
-      visibility: visible;
       pointer-events: auto;
     }
   }
@@ -558,6 +553,7 @@ body.nav-open {
   height: 38px;
   display: none;
   cursor: pointer;
+  transition: opacity .2s;
 
   @media (max-width: $desktop) {
     display: flex;
@@ -606,4 +602,13 @@ body.nav-open {
 
 .hamburger.is-open div:after {
   transform: rotate(-45deg);
+}
+
+/* The drawer has its own close button in its header; once it's open, hide
+   the trigger instead of morphing it into a second, disconnected X */
+@media (max-width: $desktop) {
+  body.nav-open .hamburger {
+    opacity: 0;
+    pointer-events: none;
+  }
 }
