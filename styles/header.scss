@@ -168,8 +168,8 @@ body.nav-open {
   overflow: hidden;
 }
 
-/* Drawer header: brand + date + close button, so the close control always
-   lives on the panel it closes instead of floating off on its own */
+/* Drawer header: brand + date. Closing happens by tapping outside the
+   drawer or pressing Escape -- no dedicated close button. */
 .nav-drawer__head {
   display: none;
 
@@ -177,7 +177,6 @@ body.nav-open {
     display: flex;
     flex: 0 0 auto;
     align-items: center;
-    justify-content: space-between;
     padding: 16px 24px 14px;
     border-bottom: 1px solid var(--border-color);
   }
@@ -203,36 +202,23 @@ body.nav-open {
   opacity: .6;
 }
 
-.nav-drawer__close {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 34px;
-  padding: 0;
-  border: none;
-  border-radius: 50%;
-  background: var(--background-alt-color);
-  color: var(--text-color);
-  cursor: pointer;
-}
-
-/* Search box pinned under the drawer header */
+/* Search box pinned under the drawer header, full-bleed to the drawer's
+   own edges rather than matching the content gutter */
 .nav-drawer__search {
   display: none;
 
   @media (max-width: $desktop) {
     display: block;
     flex: 0 0 auto;
-    padding: 10px 24px 2px;
+    padding: 10px 0 2px;
 
     .nav-search .nav-search-button {
       display: flex;
       align-items: center;
       gap: 8px;
       width: 100%;
-      padding: 10px 14px;
-      border-radius: 10px;
+      padding: 10px 24px;
+      border-radius: 0;
       background: var(--background-alt-color);
       color: var(--text-color);
       opacity: .6;
