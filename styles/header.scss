@@ -199,7 +199,8 @@ body.nav-open {
   display: block;
   margin-top: 2px;
   font-size: 11px;
-  color: var(--text-alt-color);
+  color: var(--text-color);
+  opacity: .6;
 }
 
 .nav-drawer__close {
@@ -233,7 +234,8 @@ body.nav-open {
       padding: 10px 14px;
       border-radius: 10px;
       background: var(--background-alt-color);
-      color: var(--text-alt-color);
+      color: var(--text-color);
+      opacity: .6;
       font-size: 13px;
       font-weight: 500;
       box-shadow: none;
@@ -265,7 +267,8 @@ body.nav-open {
   font-weight: 700;
   letter-spacing: .08em;
   text-transform: uppercase;
-  color: var(--text-alt-color);
+  color: var(--text-color);
+  opacity: .55;
 }
 
 .nav-group__grid {
@@ -299,7 +302,8 @@ body.nav-open {
   padding: 10px 0;
   font-size: 14px;
   font-weight: 500;
-  color: var(--text-alt-color);
+  color: var(--text-color);
+  opacity: .75;
   border-bottom: 1px solid var(--border-color);
 
   &:last-child {
