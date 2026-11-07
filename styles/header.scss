@@ -168,8 +168,9 @@ body.nav-open {
   overflow: hidden;
 }
 
-/* Drawer header: brand + date. Closing happens by tapping outside the
-   drawer or pressing Escape -- no dedicated close button. */
+/* Drawer header: brand + date, with a search icon in the corner where the
+   close button used to sit. Closing happens by tapping outside the drawer
+   or pressing Escape -- no dedicated close button. */
 .nav-drawer__head {
   display: none;
 
@@ -177,8 +178,13 @@ body.nav-open {
     display: flex;
     flex: 0 0 auto;
     align-items: center;
+    justify-content: space-between;
     padding: 16px 24px 14px;
     border-bottom: 1px solid var(--border-color);
+
+    .nav-search .nav-search-button {
+      padding: 9px;
+    }
   }
 }
 
@@ -200,37 +206,6 @@ body.nav-open {
   font-size: 11px;
   color: var(--text-color);
   opacity: .6;
-}
-
-/* Search box pinned under the drawer header, full-bleed to the drawer's
-   own edges rather than matching the content gutter */
-.nav-drawer__search {
-  display: none;
-
-  @media (max-width: $desktop) {
-    display: block;
-    flex: 0 0 auto;
-    padding: 10px 0 2px;
-
-    .nav-search .nav-search-button {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      width: 100%;
-      padding: 10px 24px;
-      border-radius: 0;
-      background: var(--background-alt-color);
-      color: var(--text-color);
-      opacity: .6;
-      font-size: 13px;
-      font-weight: 500;
-      box-shadow: none;
-
-      &:hover {
-        background: var(--background-alt-color);
-      }
-    }
-  }
 }
 
 /* Flat, always-visible Sections / More groups inside the drawer. Sections
@@ -448,7 +423,7 @@ body.nav-open {
   }
 }
 
-/* Replaced on mobile by .nav-drawer__search, pinned under the drawer header */
+/* Replaced on mobile by the search icon in .nav-drawer__head */
 .nav-button .nav-search {
   @media (max-width: $desktop) {
     display: none;
