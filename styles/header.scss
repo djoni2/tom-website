@@ -39,6 +39,18 @@
   color: var(--text-color);
   white-space: nowrap;
 
+  /* Centering it absolutely only works once the nav bar is short enough to
+     leave real clearance either side. From just above the mobile
+     breakpoint up through most laptop widths (1280/1366/1440 included),
+     the centered date lands right on top of the "Times of Madeira" nav
+     link -- so in that range it flows left instead, same as on mobile. */
+  @media (min-width: $desktop + 1px) and (max-width: 1600px) {
+    position: static;
+    left: auto;
+    transform: none;
+    margin-inline-end: auto;
+  }
+
   @media (max-width: $desktop) {
     position: static;
     transform: none;
