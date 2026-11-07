@@ -52,11 +52,17 @@
               <span class="today__name">Sea</span>
               <span class="today__value" data-today="sea">&mdash;</span>
             </li>
+            <li class="today__item today__alert" data-today="alert-row" style="display:none">
+              <i aria-hidden="true">{{ icon('ionicons', 'warning-outline', 18) }}</i>
+              <span class="today__name">Alerts</span>
+              <span class="today__value today__chips" data-today-chips></span>
+            </li>
           </ul>
           <div class="today__foot">
             <a href="https://www.aeroportomadeira.pt/en/fnc/flights-destinations/find-flights/real-time-arrivals" target="_blank" rel="noopener">Live arrivals</a>
             <span data-today="updated"></span>
             <a href="https://open-meteo.com/" target="_blank" rel="noopener">Data: Open-Meteo</a>
+            <a href="https://www.ipma.pt/en/" target="_blank" rel="noopener">Alerts: IPMA</a>
           </div>
         </div>
       </div>
@@ -107,6 +113,66 @@
   fetch(marine).then(function (r) { return r.json(); }).then(function (d) {
     var c = d.current;
     set('sea', 'Waves ' + c.wave_height.toFixed(1) + ' m · Water ' + Math.round(c.sea_surface_temperature) + '°C');
+  }).catch(function () {});
+
+  // Weather alerts: IPMA open-data warnings for Madeira's four forecast areas.
+  // Free, keyless, CORS-open. The row and chips stay hidden while every area is green.
+  var ALERT_AREAS = { MCN: 'North Coast', MCS: 'South Coast', MRM: 'Mountains', MPS: 'Porto Santo' };
+  var ALERT_RANK = { green: 0, yellow: 1, orange: 2, red: 3 };
+  var ALERT_TYPE = {
+    'Precipitação': 'Rain', 'Vento': 'Wind', 'Agitação Marítima': 'Sea swell',
+    'Trovoada': 'Thunderstorms', 'Nevoeiro': 'Fog', 'Neve': 'Snow',
+    'Tempo Quente': 'Heat', 'Tempo Frio': 'Cold'
+  };
+
+  fetch('https://api.ipma.pt/open-data/forecast/warnings/warnings_www.json').then(function (r) {
+    return r.json();
+  }).then(function (data) {
+    var now = new Date();
+    var byArea = {};
+    Object.keys(ALERT_AREAS).forEach(function (code) { byArea[code] = { level: 'green', types: [] }; });
+
+    data.forEach(function (w) {
+      var area = byArea[w.idAreaAviso];
+      if (!area) return;
+      if (new Date(w.startTime) > now || new Date(w.endTime) < now) return;
+      if (ALERT_RANK[w.awarenessLevelID] > ALERT_RANK[area.level]) {
+        area.level = w.awarenessLevelID;
+        area.types = [w.awarenessTypeName];
+      } else if (w.awarenessLevelID === area.level && area.types.indexOf(w.awarenessTypeName) === -1) {
+        area.types.push(w.awarenessTypeName);
+      }
+    });
+
+    var maxLevel = 'green';
+    Object.keys(byArea).forEach(function (code) {
+      if (ALERT_RANK[byArea[code].level] > ALERT_RANK[maxLevel]) maxLevel = byArea[code].level;
+    });
+
+    if (maxLevel === 'green') return; // nothing above green anywhere on the island
+
+    var row = box.querySelector('[data-today="alert-row"]');
+    var chips = box.querySelector('[data-today-chips]');
+
+    row.classList.add('today__alert--' + maxLevel);
+    row.style.display = 'flex';
+
+    chips.innerHTML = '';
+    Object.keys(ALERT_AREAS).forEach(function (code) {
+      var a = byArea[code];
+      var levelLabel = a.level.charAt(0).toUpperCase() + a.level.slice(1);
+      var types = a.types.map(function (t) { return ALERT_TYPE[t] || t; });
+
+      var chip = document.createElement('a');
+      chip.className = 'today__chip today__chip--' + a.level;
+      chip.title = levelLabel + (types.length ? ' · ' + types.join(', ') : ' · No warnings');
+      chip.href = 'https://www.ipma.pt/en/otempo/prev-sam/?p=' + code;
+      chip.target = '_blank';
+      chip.rel = 'noopener';
+      chip.textContent = ALERT_AREAS[code];
+
+      chips.appendChild(chip);
+    });
   }).catch(function () {});
 })();
 </script>
