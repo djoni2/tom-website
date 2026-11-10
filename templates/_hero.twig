@@ -175,7 +175,7 @@
         : '';
 
       var chip = document.createElement('a');
-      chip.className = 'today__chip today__chip--' + a.level + (a.upcoming ? ' today__chip--upcoming' : '');
+      chip.className = 'today__chip today__chip--' + a.level;
       chip.title = levelLabel + (types.length ? ' · ' + types.join(', ') : ' · No warnings') + when;
       chip.href = 'https://www.ipma.pt/en/otempo/prev-sam/?p=' + code;
       chip.target = '_blank';
