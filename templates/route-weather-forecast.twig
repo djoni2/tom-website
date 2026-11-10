@@ -34,6 +34,32 @@
           <p class="weather__dek">The 7-day outlook for Funchal, Calheta and every other municipality on the island, straight from live forecast data. Pick an area below.</p>
         </header>
 
+        <section class="weather__alerts" aria-live="polite">
+          <h2 class="weather__alerts-title">IPMA Weather Alerts</h2>
+          <div class="weather__alerts-grid" data-weather-alerts>
+            <p class="weather__alerts-status" data-weather-alerts-status>Checking IPMA warnings&hellip;</p>
+          </div>
+
+          <div class="weather__alerts-legend">
+            <h3 class="weather__alerts-legend-title">What yellow, orange and red mean</h3>
+            <dl class="weather__alerts-legend-list">
+              <div class="weather__alerts-legend-item weather__alerts-legend-item--yellow">
+                <dt>Yellow</dt>
+                <dd>Be aware. Weather could pose a risk for specific activities, such as hiking, boating or driving on exposed roads.</dd>
+              </div>
+              <div class="weather__alerts-legend-item weather__alerts-legend-item--orange">
+                <dt>Orange</dt>
+                <dd>Be prepared. Weather is dangerous. Expect damage, travel disruption and some risk to people and property.</dd>
+              </div>
+              <div class="weather__alerts-legend-item weather__alerts-legend-item--red">
+                <dt>Red</dt>
+                <dd>Take action. Extreme weather is expected, with a serious risk to life and property. Follow Civil Protection guidance.</dd>
+              </div>
+            </dl>
+            <p class="weather__alerts-source">Alerts are issued by <strong><a href="https://www.ipma.pt/en/" rel="noopener" target="_blank">IPMA</a></strong>, Portugal&rsquo;s state sea and weather institute (Instituto Português do Mar e Atmosfera). IPMA tracks conditions across Madeira&rsquo;s four forecast areas &mdash; the north coast, the south coast, the mountains and Porto Santo &mdash; and raises a yellow, orange or red warning whenever rain, wind, sea swell or another hazard is expected to cross that area&rsquo;s threshold.</p>
+          </div>
+        </section>
+
         <div class="weather__tabs" role="tablist" aria-label="Choose an area" data-weather-tabs></div>
 
         <div class="weather__days" data-weather-days aria-live="polite">
@@ -188,5 +214,87 @@
 
     renderLocation(0);
   })();
+</script>
+
+<script>
+// IPMA open-data warnings for Madeira's four forecast areas. Free, keyless, CORS-open.
+// Shows every active or upcoming (non-green) warning per area, with its own time window.
+(function () {
+  var grid = document.querySelector('[data-weather-alerts]');
+  if (!grid) return;
+  var status = grid.querySelector('[data-weather-alerts-status]');
+
+  var AREAS = [
+    { code: 'MCN', name: 'North Coast' },
+    { code: 'MCS', name: 'South Coast' },
+    { code: 'MRM', name: 'Mountains' },
+    { code: 'MPS', name: 'Porto Santo' }
+  ];
+  var TYPE_NAME = {
+    'Precipitação': 'Rain', 'Vento': 'Wind', 'Agitação Marítima': 'Sea swell',
+    'Trovoada': 'Thunderstorms', 'Nevoeiro': 'Fog', 'Neve': 'Snow',
+    'Tempo Quente': 'Heat', 'Tempo Frio': 'Cold'
+  };
+  var LEVEL_NAME = { yellow: 'Yellow', orange: 'Orange', red: 'Red' };
+
+  function fmt(date) {
+    var day = date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+    var time = date.toTimeString().slice(0, 5);
+    return day + ', ' + time;
+  }
+
+  function timeRange(start, end) {
+    var sameDay = start.toDateString() === end.toDateString();
+    if (sameDay) {
+      return start.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) + ', '
+        + start.toTimeString().slice(0, 5) + '–' + end.toTimeString().slice(0, 5);
+    }
+    return fmt(start) + ' – ' + fmt(end);
+  }
+
+  fetch('https://api.ipma.pt/open-data/forecast/warnings/warnings_www.json').then(function (r) {
+    return r.json();
+  }).then(function (data) {
+    var now = new Date();
+    grid.innerHTML = '';
+
+    AREAS.forEach(function (area) {
+      var warnings = data
+        .filter(function (w) { return w.idAreaAviso === area.code && w.awarenessLevelID !== 'green' && new Date(w.endTime) > now; })
+        .sort(function (a, b) { return new Date(a.startTime) - new Date(b.startTime); });
+
+      var card = el('div', 'weather__alert-card');
+      var topLevel = warnings.length ? warnings.reduce(function (max, w) {
+        var rank = { yellow: 1, orange: 2, red: 3 };
+        return rank[w.awarenessLevelID] > rank[max] ? w.awarenessLevelID : max;
+      }, 'yellow') : 'green';
+      card.classList.add('weather__alert-card--' + topLevel);
+
+      var head = el('div', 'weather__alert-card-head');
+      head.appendChild(el('span', 'weather__alert-dot weather__alert-dot--' + topLevel));
+      head.appendChild(el('h3', 'weather__alert-card-name', area.name));
+      card.appendChild(head);
+
+      if (!warnings.length) {
+        card.appendChild(el('p', 'weather__alert-none', 'No warnings in place.'));
+      } else {
+        var list = el('ul', 'weather__alert-items');
+        warnings.forEach(function (w) {
+          var item = el('li', 'weather__alert-item weather__alert-item--' + w.awarenessLevelID);
+          item.appendChild(el('span', 'weather__alert-item-level', LEVEL_NAME[w.awarenessLevelID] || w.awarenessLevelID));
+          item.appendChild(el('span', 'weather__alert-item-type', TYPE_NAME[w.awarenessTypeName] || w.awarenessTypeName));
+          item.appendChild(el('span', 'weather__alert-item-time', timeRange(new Date(w.startTime), new Date(w.endTime))));
+          list.appendChild(item);
+        });
+        card.appendChild(list);
+      }
+
+      grid.appendChild(card);
+    });
+  }).catch(function () {
+    status.hidden = false;
+    status.textContent = 'Could not load IPMA warnings right now.';
+  });
+})();
 </script>
 {% endblock %}
