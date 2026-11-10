@@ -193,3 +193,35 @@ document.addEventListener('click', function (e) {
     fallback();
   }
 });
+
+/* ================
+// Stale ad-consent overlay guard
+================ */
+// Google's Funding Choices CMP (loaded by adsbygoogle.js) occasionally leaves an
+// invisible .fc-consent-root overlay behind after consent is resolved, especially
+// under Firefox's tracking/fingerprinting protections -- and that leftover overlay
+// still intercepts clicks on the whole page (share buttons included). We only ever
+// touch an overlay that is already invisible/zero-size; a dialog the visitor can
+// actually see and answer is left completely alone.
+(function () {
+  function neutralizeStaleConsentOverlays() {
+    document.querySelectorAll('.fc-consent-root, .fc-dialog-overlay, .fc-dialog-container').forEach(function (el) {
+      var rect = el.getBoundingClientRect();
+      var cs = getComputedStyle(el);
+      var invisible = (rect.width === 0 && rect.height === 0) || cs.display === 'none' || cs.visibility === 'hidden' || cs.opacity === '0';
+      if (invisible && cs.pointerEvents !== 'none') {
+        el.style.pointerEvents = 'none';
+      }
+    });
+  }
+
+  var consentGuardTimer;
+  function runConsentGuard() {
+    clearInterval(consentGuardTimer);
+    consentGuardTimer = setInterval(neutralizeStaleConsentOverlays, 1000);
+    setTimeout(function () { clearInterval(consentGuardTimer); }, 20000);
+  }
+
+  runConsentGuard();
+  document.addEventListener('flashload:navigationEnded', runConsentGuard);
+})();
