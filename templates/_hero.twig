@@ -130,17 +130,25 @@
   }).then(function (data) {
     var now = new Date();
     var byArea = {};
-    Object.keys(ALERT_AREAS).forEach(function (code) { byArea[code] = { level: 'green', types: [] }; });
+    Object.keys(ALERT_AREAS).forEach(function (code) { byArea[code] = { level: 'green', types: [], upcoming: false, startTime: null }; });
+
+    var LEAD_TIME = 8 * 60 * 60 * 1000; // show alerts starting within the next 8 hours, not just active ones
 
     data.forEach(function (w) {
       var area = byArea[w.idAreaAviso];
       if (!area) return;
-      if (new Date(w.startTime) > now || new Date(w.endTime) < now) return;
+      var starts = new Date(w.startTime);
+      if (starts - now > LEAD_TIME || new Date(w.endTime) < now) return;
+      var upcoming = starts > now;
       if (ALERT_RANK[w.awarenessLevelID] > ALERT_RANK[area.level]) {
         area.level = w.awarenessLevelID;
         area.types = [w.awarenessTypeName];
-      } else if (w.awarenessLevelID === area.level && area.types.indexOf(w.awarenessTypeName) === -1) {
-        area.types.push(w.awarenessTypeName);
+        area.upcoming = upcoming;
+        area.startTime = starts;
+      } else if (w.awarenessLevelID === area.level) {
+        if (area.types.indexOf(w.awarenessTypeName) === -1) area.types.push(w.awarenessTypeName);
+        if (upcoming && starts < area.startTime) { area.upcoming = true; area.startTime = starts; }
+        if (!upcoming) area.upcoming = false;
       }
     });
 
@@ -162,10 +170,13 @@
       var a = byArea[code];
       var levelLabel = a.level.charAt(0).toUpperCase() + a.level.slice(1);
       var types = a.types.map(function (t) { return ALERT_TYPE[t] || t; });
+      var when = a.upcoming && a.startTime
+        ? ' · from ' + a.startTime.toTimeString().slice(0, 5)
+        : '';
 
       var chip = document.createElement('a');
-      chip.className = 'today__chip today__chip--' + a.level;
-      chip.title = levelLabel + (types.length ? ' · ' + types.join(', ') : ' · No warnings');
+      chip.className = 'today__chip today__chip--' + a.level + (a.upcoming ? ' today__chip--upcoming' : '');
+      chip.title = levelLabel + (types.length ? ' · ' + types.join(', ') : ' · No warnings') + when;
       chip.href = 'https://www.ipma.pt/en/otempo/prev-sam/?p=' + code;
       chip.target = '_blank';
       chip.rel = 'noopener';
