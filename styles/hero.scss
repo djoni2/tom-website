@@ -130,6 +130,31 @@
   text-transform: uppercase;
 }
 
+.newsletter__perks {
+  margin: 0 0 14px;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--text-color);
+  }
+
+  i {
+    display: flex;
+  }
+
+  svg {
+    color: var(--text-color);
+  }
+}
+
 .today__list {
   margin: 0;
   padding: 0;
