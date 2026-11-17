@@ -106,6 +106,14 @@
   }
 }
 
+/* Inside the mobile drawer, Sections/More appear as the flat .nav-group
+   blocks from _sections-nav.twig's "drawer" mode instead of these dropdowns */
+@media (max-width: $desktop) {
+  .main-nav .nav__list .nav__item--dropdown {
+    display: none;
+  }
+}
+
 
 .related,
 .start-here {

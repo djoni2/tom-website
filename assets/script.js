@@ -2,9 +2,19 @@
 // Menu
 ================ */
 function menuToggle() {
-  document.getElementById('hamburger').classList.toggle("is-open");
-  document.getElementById('menuList').classList.toggle("is-visible");
+  var hamburger = document.getElementById('hamburger');
+  var isOpen = hamburger.classList.toggle("is-open");
+  document.getElementById('menuList').classList.toggle("is-visible", isOpen);
+  document.getElementById('navOverlay').classList.toggle("is-visible", isOpen);
+  document.body.classList.toggle("nav-open", isOpen);
+  hamburger.setAttribute('aria-expanded', String(isOpen));
 };
+
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape' && document.body.classList.contains('nav-open')) {
+    menuToggle();
+  }
+});
 
 
 /* ================
@@ -84,7 +94,7 @@ function initSearch() {
 
       lastXhr = _hb.dataApi('v0', 'posts/search', {
         search: e.target.value,
-        keys: "title, url, description"
+        keys: "title, url, description, featured_image_url"
       }, function(response) {
           var posts = response.data;
           var output = '';
@@ -94,11 +104,15 @@ function initSearch() {
               '<a class="search-result-row-link" href="' +
               post.url +
               '">' +
+              (post.featured_image_url ?
+                '<img class="search-result-row-image" src="' + post.featured_image_url + '" alt="" loading="lazy">' :
+                '') +
+              '<div class="search-result-row-text">' +
               '<div class="search-result-row-title">' +
               post.title +
               '</div><div class="search-result-row-excerpt">' +
               post.description +
-              '</div></a>' +
+              '</div></div></a>' +
               '</div>';
           })
 
@@ -179,3 +193,35 @@ document.addEventListener('click', function (e) {
     fallback();
   }
 });
+
+/* ================
+// Stale ad-consent overlay guard
+================ */
+// Google's Funding Choices CMP (loaded by adsbygoogle.js) occasionally leaves an
+// invisible .fc-consent-root overlay behind after consent is resolved, especially
+// under Firefox's tracking/fingerprinting protections -- and that leftover overlay
+// still intercepts clicks on the whole page (share buttons included). We only ever
+// touch an overlay that is already invisible/zero-size; a dialog the visitor can
+// actually see and answer is left completely alone.
+(function () {
+  function neutralizeStaleConsentOverlays() {
+    document.querySelectorAll('.fc-consent-root, .fc-dialog-overlay, .fc-dialog-container').forEach(function (el) {
+      var rect = el.getBoundingClientRect();
+      var cs = getComputedStyle(el);
+      var invisible = (rect.width === 0 && rect.height === 0) || cs.display === 'none' || cs.visibility === 'hidden' || cs.opacity === '0';
+      if (invisible && cs.pointerEvents !== 'none') {
+        el.style.pointerEvents = 'none';
+      }
+    });
+  }
+
+  var consentGuardTimer;
+  function runConsentGuard() {
+    clearInterval(consentGuardTimer);
+    consentGuardTimer = setInterval(neutralizeStaleConsentOverlays, 1000);
+    setTimeout(function () { clearInterval(consentGuardTimer); }, 20000);
+  }
+
+  runConsentGuard();
+  document.addEventListener('flashload:navigationEnded', runConsentGuard);
+})();

@@ -11,9 +11,36 @@
 {% block head %}
   <title>Madeira Quiz | How Well Do You Know the Island? - Times of Madeira</title>
   <meta name="description" content="Test your knowledge of Madeira's history, nature, food and traditions with the Times of Madeira quiz.">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.timesofmadeira.com/madeira-quiz">
+  <meta property="og:site_name" content="Times of Madeira">
+  <meta property="og:title" content="Madeira Quiz | How Well Do You Know the Island?">
+  <meta property="og:description" content="Test your knowledge of Madeira's history, nature, food and traditions with the Times of Madeira quiz.">
+  <meta property="og:image" content="https://www.timesofmadeira.com/media/madeira-flag.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Madeira Quiz | How Well Do You Know the Island?">
+  <meta name="twitter:description" content="Test your knowledge of Madeira's history, nature, food and traditions with the Times of Madeira quiz.">
+  <meta name="twitter:image" content="https://www.timesofmadeira.com/media/madeira-flag.webp">
 {% endblock %}
 
 {% block body %}
+<!-- begin hero: same Times of Madeira logo as on / -->
+<section class="hero">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+        <div class="hero__inner">
+          <div><a href="https://www.timesofmadeira.com" title="Madeira News | Times of Madeira">
+              <img src="https://www.timesofmadeira.com/media/times-of-madeira.svg" alt="Madeira News | Times of Madeira">
+          </a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- end hero -->
+
 <main role="main" class="quiz-page">
   <div class="container">
     <div class="row">
@@ -50,7 +77,7 @@
   {"q":"What Madeiran beverage originating in Câmara de Lobos is made with dark beer, stout, wine, and chocolate powder?","o":["Pé de Cabra","Nikita","Poncha"]},
   {"q":"What is the prominent volcanic peninsula on the eastern tip of Madeira called?","o":["Ponta de São Lourenço","Cabo Girão","Ponta do Pargo"]},
   {"q":"Which high sea cliff on Madeira features a skywalk with a glass floor?","o":["Cabo Girão","Ponta do Rosto","Pico dos Barcelos"]},
-  {"q":"What town on the north coast of Madeira is famous for its natural volcanic lava pools?","o":["Porto Moniz","São Vicente","Santana"]},
+  {"q":"How many concrete pillars support the stilted extension of Madeira Airport's runway over the sea?","o":["180","50","400"]},
   {"q":"What is the second highest peak on Madeira island?","o":["Pico das Torres","Pico do Arieiro","Pico Ruivo"]},
   {"q":"In which year did Zarco and Tristão Vaz Teixeira reach Madeira island?","o":["1419","1452","1385"]},
   {"q":"Who was one of the primary Portuguese explorers credited with discovering Madeira?","o":["João Gonçalves Zarco","Gil Eanes","Diogo Cão"]},
@@ -80,18 +107,18 @@
   {"q":"Which town in Madeira imported golden sand from Morocco to build an artificial beach?","o":["Calheta","Santana","São Vicente"]},
   {"q":"Besides Calheta, which other Madeira municipality has an artificial golden sand beach?","o":["Machico","Funchal","Porto Moniz"]},
   {"q":"What coastal village in Madeira is known as a premier surf spot alongside Paul do Mar?","o":["Jardim do Mar","Caniço","Caniçal"]},
-  {"q":"Where on Madeira is the main fishing port and Whale Museum located?","o":["Caniçal","Machico","Porto Moniz"]},
+  {"q":"What pest, arriving in the 1870s, forced Madeira's winegrowers to replant vineyards using resistant American rootstock?","o":["Phylloxera","Powdery mildew","Downy mildew"]},
   {"q":"Which northern village on Madeira is set against an imposing basalt rock called Penha d'Águia?","o":["Porto da Cruz","Santana","São Vicente"]},
   {"q":"Which of these rivers runs through the centre of Funchal into the ocean?","o":["Ribeira de Santa Luzia","Ribeira Brava","Ribeira Seca"]},
-  {"q":"Which public park in Funchal overlooks the harbour and features a lake and statue of Columbus?","o":["Santa Catarina Park","Jardim Municipal","Monte Palace"]},
+  {"q":"Which Madeiran village is the historic centre of the island's wicker-weaving (vimeiro) craft?","o":["Camacha","Santana","Curral das Freiras"]},
   {"q":"What village on Madeira's north side is famous for its natural ocean pool and black sand beach?","o":["Seixal","Ponta Delgada","São Jorge"]},
   {"q":"What waterfall in Seixal falls near the sea along the old road?","o":["Véu da Noiva","25 Fontes","Cascata do Sol"]},
   {"q":"What road in Madeira was famous for waterfalls hitting cars, notably Cascata dos Anjos?","o":["Ponta do Sol Old Road","VE3 Expressway","ER101 North Coast"]},
-  {"q":"What high plateau is home to Madeira's wind farm turbines and grazing cows?","o":["Paul da Serra","Achada do Teixeira","Chão dos Louros"]},
+  {"q":"Near Rabaçal, which waterfall is considered one of the tallest on Madeira at around 100 metres?","o":["Risco Waterfall","Véu da Noiva","Cascata dos Anjos"]},
   {"q":"What ancient forest site on Paul da Serra is famous for centuries-old crooked Laurel trees?","o":["Fanal Forest","Queimadas","Ribeiro Frio"]},
   {"q":"What tree species forms the ancient stands in Fanal?","o":["Til","Loureiro","Eucalyptus"]},
   {"q":"Where does the Levada do Caldeirão Verde trail start?","o":["Parque Florestal das Queimadas","Ribeiro Frio","Rabaçal"]},
-  {"q":"What main location serves as the hub for several levada walks including 25 Fontes and Risco?","o":["Rabaçal","Ribeiro Frio","Encumeada"]},
+  {"q":"In which year did Winston Churchill visit Câmara de Lobos to paint its fishing boats?","o":["1950","1936","1962"]},
   {"q":"Which mountain pass connects the north and south coasts between Ribeira Brava and São Vicente?","o":["Encumeada Pass","Pico do Arieiro Pass","Ponta do Pargo Pass"]},
   {"q":"Which cable car on the northwest coast has one of the steepest gradient drops in Europe?","o":["Achadas da Cruz Cable Car","Monte Cable Car","Botanical Garden Cable Car"]},
   {"q":"What is the largest public beach in Funchal composed of black pebbles and volcanic sand?","o":["Praia Formosa","Gorgulho","Barreirinha"]},
@@ -198,7 +225,52 @@
   {"q":"What are the \"Missas do Parto\" held before Christmas?","o":["Nine masses at dawn","Midnight masses at sea","Harvest masses in Santana"]},
   {"q":"During the Flower Festival, what do children build in Praça do Município?","o":["The Wall of Hope","A flower clock","A floral ship"]},
   {"q":"In 2006, Guinness World Records named Funchal's New Year's Eve show the world's largest what?","o":["Fireworks display","Street party","Flower carpet"]},
-  {"q":"Whose feast on 15 August is Madeira's biggest religious festival?","o":["Our Lady of Monte","Saint Peter","Saint John"]}
+  {"q":"Whose feast on 15 August is Madeira's biggest religious festival?","o":["Our Lady of Monte","Saint Peter","Saint John"]},
+  {"q":"What is the name of the 1913-founded trade association that today controls historic Madeira wine brands such as Blandy's, Cossart Gordon and Leacock's?","o":["Madeira Wine Company","Instituto do Vinho da Madeira","Adega de Câmara de Lobos"]},
+  {"q":"In which year were the Desertas Islands made a nature reserve to protect the Mediterranean monk seal?","o":["1990","1970","2005"]},
+  {"q":"Which golf course on Madeira's eastern plateau regularly hosts the Madeira Islands Open on the European Tour?","o":["Santo da Serra Golf Club","Palheiro Golf","Porto Moniz Golf Club"]},
+  {"q":"What is the name of C.S. Marítimo's home football stadium in Funchal, known as Os Barreiros before its 2016 redevelopment?","o":["Estádio do Marítimo","Estádio do Choupal","Estádio da Luz"]},
+  {"q":"What name is given to the artificially heated aging method used for everyday Madeira wine?","o":["Estufagem","Canteiro","Soleragem"]},
+  {"q":"Of the three Desertas Islands, which one is the largest?","o":["Deserta Grande","Bugio","Ilhéu Chão"]},
+  {"q":"Roughly how long is Madeira's levada (irrigation channel) network in total?","o":["About 2,500 km","About 500 km","About 10,000 km"]},
+  {"q":"What is the traditional title of the worker who walks and maintains a levada, clearing blockages along its length?","o":["Levadeiro","Carreiro","Borracheiro"]},
+  {"q":"What is the common name of the historic Protestant cemetery in Funchal, dating to the 18th century?","o":["The English Cemetery","The Dutch Cemetery","The Sailors' Cemetery"]},
+  {"q":"Which 19th-century Englishwoman is credited with turning Madeira's hand embroidery into a major export industry?","o":["Elizabeth Phelps","Florence Nightingale","Isabella Blandy"]},
+  {"q":"How long is the Funchal–Monte cable car, which climbs 560 metres to the hillside suburb?","o":["About 3.2 km","About 1 km","About 6 km"]},
+  {"q":"What is the official name of Funchal's cruise and ferry terminal, opened in 2010?","o":["Gare Marítima da Madeira","Portas do Mar","Marina do Funchal"]},
+  {"q":"Roughly how long, one way, is the PR1 trail between Pico do Arieiro and Pico Ruivo?","o":["About 7 km","About 2 km","About 15 km"]},
+  {"q":"Which iconic deep-sea fish, often served with fried banana, is a Madeiran specialty?","o":["Black scabbardfish","Swordfish","Mackerel"]},
+  {"q":"Besides Porto Santo, into which two captaincies (capitanias) was 15th-century Madeira divided among its donatary captains?","o":["Funchal and Machico","Calheta and Santana","Funchal and Porto Moniz"]},
+  {"q":"In which months is Madeira's Flower Festival (Festa da Flor) usually held?","o":["April or May","October","December"]},
+  {"q":"In which Funchal convent is navigator João Gonçalves Zarco traditionally said to be buried?","o":["Convento de Santa Clara","Convento de São Francisco","Convento da Encarnação"]},
+  {"q":"Roughly how old is Madeira Island, dated from its first volcanic eruptions above sea level?","o":["About 5 to 6 million years","About 500,000 years","About 50 million years"]},
+  {"q":"Which 1703 treaty lowered tariffs and boosted exports of Portuguese wines, including Madeira, to England?","o":["Methuen Treaty","Treaty of Tordesillas","Treaty of Windsor"]},
+  {"q":"Quinta do Palheiro, a renowned garden near Funchal, has belonged to which family since 1885?","o":["The Blandy family","The Reid family","The Rothschild family"]},
+  {"q":"What name did Madeirans give to the deadly 1930 tsunami at Câmara de Lobos?","o":["A Vaga da Morte","A Onda Negra","A Maré Brava"]},
+  {"q":"Which religious order farmed Fajã dos Padres beneath the cliffs of Quinta Grande for over 150 years?","o":["The Jesuits","The Franciscans","The Dominicans"]},
+  {"q":"What is a 'fajã' in Madeira?","o":["Flat land formed by a cliff collapse or lava flow","A terraced vineyard cut into a hillside","A natural rock pool filled by the tide"]},
+  {"q":"What event on 18 February 1983, known as 'Black Friday', pushed many Madeirans to leave Venezuela and return home?","o":["The collapse of the Venezuelan currency","A military coup in Caracas","The nationalisation of Venezuela's oil fields"]},
+  {"q":"In which year was Madeira's long-shuttered Hotel Atlantis demolished by controlled implosion, a first for Portugal?","o":["2000","1995","2010"]},
+  {"q":"The failed left-wing military coup of 25 November 1975 came just over a year after which revolution ended Portugal's dictatorship?","o":["The Carnation Revolution","The Flour Revolt","The Island Revolt"]},
+  {"q":"Which Madeiran butterfly became the first in Europe declared extinct by the IUCN?","o":["The Madeiran Large White","The Madeiran Speckled Wood","The Monarch butterfly"]},
+  {"q":"Who led the 1931 Madeira Uprising after being exiled to the island the year before?","o":["General Sousa Dias","General Óscar Carmona","Alberto João Jardim"]},
+  {"q":"Which German submarine shelled Funchal harbour on 3 December 1916, sinking three ships?","o":["U-38","U-156","U-20"]},
+  {"q":"In which Funchal clinic did Madeira's first gender-affirming surgery take place in 1995?","o":["Clínica de Santa Catarina","Hospital Dr. Nélio Mendonça","Cruz de Carvalho Hospital"]},
+  {"q":"What was the name of Portugal's first cash machine network, launched in 1985?","o":["Multibanco","Caixa Automática","BancoDireto"]},
+  {"q":"What colours is the traditional Madeiran 'carapuça' pigtail cap usually woven in?","o":["Deep red and blue","Black and gold","Green and white"]},
+  {"q":"Who designed Madeira's Monte Train railway, built between 1893 and 1912?","o":["Raoul Mesnier du Ponsard","Gustave Eiffel","Alexandre Herculano"]},
+  {"q":"Who conceived the 'Santa Maria de Colombo' replica caravel built at Câmara de Lobos?","o":["Dutch entrepreneur Robert Wijntje","Shipwright Jorge Nunes Oliveira","Navigator João Gonçalves Zarco"]},
+  {"q":"In which year did the first seaplane land at Madeira, flown by Carlos Viegas Gago Coutinho?","o":["1921","1949","1964"]},
+  {"q":"Whose 1566 raid on Funchal sent nuns fleeing into the mountains, giving Curral das Freiras its name?","o":["French pirate Bertrand de Montluc","English privateer Francis Drake","Barbary corsair Jean Fleury"]},
+  {"q":"From which year to which year did Alberto João Jardim lead Madeira's regional government?","o":["1978 to 2015","1976 to 1995","1985 to 2010"]},
+  {"q":"How many tunnels does Madeira's Via Rápida (VR1) highway contain along its roughly 44-kilometre length?","o":["30","10","50"]},
+  {"q":"How many craftsmen were still practising traditional Madeiran stone pavement in Funchal, by one recent count?","o":["Four","Twenty","One"]},
+  {"q":"Whose oil refinery in Curaçao drew thousands of Madeiran migrants from the 1940s onward?","o":["Royal Dutch Shell","Standard Oil","British Petroleum"]},
+  {"q":"What was the original name of the Funchal hospital now called Hospital Dr. Nélio Mendonça?","o":["Cruz de Carvalho Hospital","Santa Catarina Clinic","Hospital Central do Funchal"]},
+  {"q":"Roughly how many shipwrecks has researcher Alexandre Monteiro mapped across Portuguese waters, including around Madeira?","o":["Over 8,600","About 500","Around 50"]},
+  {"q":"What does 'caco' refer to in the name of Madeira's traditional bread, Bolo do Caco?","o":["A flat basalt stone it's baked on","A type of sweet potato used in the dough","A wooden paddle used to shape it"]},
+  {"q":"What song, broadcast on the radio, signalled the start of Portugal's 1974 Carnation Revolution?","o":["Grândola, Vila Morena","A Portuguesa","Parabéns a Você"]},
+  {"q":"Roughly how many passengers did Madeira Airport serve in 2024?","o":["About 5.1 million","About 2 million","About 10 million"]}
 ]
 </script>
 
@@ -244,8 +316,14 @@
       card.hidden = true;
       card.setAttribute('aria-labelledby', 'quiz-q' + index);
 
-      var count = el('p', 'quiz__count', 'Question ' + (index + 1) + ' ');
-      count.appendChild(el('span', null, 'of ' + perRound));
+      var count = el('div', 'quiz__count');
+      count.appendChild(el('span', 'quiz__count-num', String(index + 1).padStart(2, '0')));
+      count.appendChild(el('span', 'quiz__count-total', '/' + perRound));
+      var track = el('div', 'quiz__progress');
+      var fill = el('div', 'quiz__progress-fill');
+      fill.style.width = (((index + 1) / perRound) * 100) + '%';
+      track.appendChild(fill);
+      count.appendChild(track);
       var question = el('h2', 'quiz__question', item.q);
       question.id = 'quiz-q' + index;
       var list = el('ol', 'quiz__options list-reset');
