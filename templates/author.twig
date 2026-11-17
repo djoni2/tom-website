@@ -2,7 +2,27 @@
 
 {% import "_macro.twig" as macro %}
 
+{% block head %}
+  <meta name="robots" content="noindex, follow">
+{% endblock %}
+
 {% block body %}
+
+<!-- begin hero: same Times of Madeira logo as on / -->
+<section class="hero">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+        <div class="hero__inner">
+          <div><a href="https://www.timesofmadeira.com" title="Madeira News | Times of Madeira">
+              <img src="https://www.timesofmadeira.com/media/times-of-madeira.svg" alt="Madeira News | Times of Madeira">
+          </a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- end hero -->
 
 <main role="main" class="author-page">
   <div class="container">
