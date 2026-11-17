@@ -1,0 +1,36 @@
+URL: https://www.cmjornal.pt/portugal/detalhe/worten-alvo-de-ciberataque-que-acedeu-a-dados-de-clientes-e-prestadores-de-servicos
+TITLE: Worten alvo de ciberataque que acedeu a dados de clientes e prestadores de serviços
+SITE: www.cmjornal.pt
+AUTHOR: Lusa
+PUBLISHED: 2026-11-11T22:56:00+00:00
+OG IMAGE: https://cdn.cmjornal.pt/images/2021-03/img_1280x721uu2021-03-01-20-19-00-1016903.jpg
+
+--- TEXT ---
+
+Worten alvo de ciberataque que acedeu a dados de clientes e prestadores de serviços
+
+Empresa sublinhou ainda que tomou "um conjunto de medidas adicionais para garantir a proteção e segurança de todos".
+
+Lusa
+
+11 de novembro de 2026 às 22:56
+
+A Worten foi alvo de um ataque informático que permitiu o acesso a dados de clientes e prestadores de serviços, confirmou à Lusa fonte oficial da empresa, acrescentando que já procedeu à correção da "vulnerabilidade explorada".
+
+Numa nota enviada à agência Lusa, a empresa explicou que foi alvo de "um ato criminoso de acesso não autorizado a alguns dados de clientes e prestadores de serviços".
+
+"Da extensa investigação e análise forense levada a cabo pelas equipas especializadas, e embora a investigação ainda esteja a decorrer, salienta-se que nenhuma informação foi alterada ou apagada, não foram acedidos dados de crédito ou financeiros, ou credenciais de acesso, nem o normal funcionamento dos sistemas foi afetado", pode ler-se.
+
+A Worten sublinhou ainda que tomou "um conjunto de medidas adicionais para garantir a proteção e segurança de todos", como "a correção da vulnerabilidade explorada e reforço do controlo de acessos".
+
+"Estamos em plena articulação com o Centro Nacional de Cibersegurança, a Comissão Nacional de Proteção de Dados e a Polícia Judiciária", detalhou ainda.
+
+A empresa realçou também que já "informou diretamente todos os clientes afetados", garantindo que vai continuar a prestar "todo o apoio e esclarecimentos necessários".
+
+"Encontra-se igualmente em curso o processo de informação aos prestadores de serviços afetados", acrescentou.
+
+"Na Worten a prioridade é a segurança dos dados pessoais e dos sistemas sob nossa responsabilidade, digam estes dados respeito a clientes, colaboradores ou fornecedores", pode ler-se ainda na mesma nota.
+
+RELATED HEADLINES (context only, not used as sources):
+Cibertaques por resgate subiram 180% em Portugal no primeiro semestre deste ano
+Eletrodomésticos podem ser os próximos alvos de ciberataques

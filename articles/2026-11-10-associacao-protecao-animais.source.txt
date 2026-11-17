@@ -1,0 +1,35 @@
+SOURCE: https://www.jm-madeira.pt/noticias/regi-o/30009018/associacao-apela-a-protecao-dos-animais-perante-o-mau-tempo.html
+RETRIEVED: 2026-11-10 (direct curl fetch, IPv4 forced, server-rendered HTML)
+
+Author (byline): Catarina Gouveia
+Published: 2026-11-10T17:38:16+01:00
+
+HEADLINE:
+Associação apela à proteção dos animais perante o mau tempo
+
+SUBHEADLINE/DESCRIPTION:
+Ajuda a Alimentar Cães alerta para os riscos da chuva, do frio e do vento e pede que os animais não permaneçam acorrentados ou expostos às intempéries
+
+BODY (full, Portuguese, verbatim):
+
+A associação Ajuda a Alimentar Cães lançou um apelo à população para que proteja os animais de companhia perante o agravamento das condições meteorológicas previstas para a Madeira, alertando para a situação de cães e gatos que permanecem no exterior, expostos à chuva, ao frio e ao vento.
+
+Numa publicação divulgada esta terça-feira, a associação chama a atenção para os animais acorrentados sem proteção adequada, bem como para os que permanecem em varandas ou quintais, muitas vezes sem abrigo suficiente para enfrentar as intempéries.
+
+"Não são apenas os humanos que serão afetados", recorda a organização, que considera que as casotas não oferecem proteção suficiente perante condições meteorológicas adversas, sobretudo quando os animais continuam expostos ao vento e à chuva.
+
+O apelo passa pela recolha dos animais para espaços interiores seguros, evitando deixá-los em varandas, quintais, terrenos ou presos por correntes. "Os animais não se conseguem proteger sozinhos e dependem inteiramente de nós", sublinha.
+
+A associação pede ainda que a população não fique indiferente perante situações de possível negligência. Em vez de se limitar a fotografar os animais, incentiva a abordagem aos respetivos responsáveis e a oferta de ajuda, sempre que possível.
+
+"Se cada pessoa que vir animais negligenciados não ficar indiferente e tentar ajudar de alguma maneira, conseguimos melhorar as condições de muitos animais", defende a Ajuda a Alimentar Cães, que termina com um apelo à proteção dos animais e das próprias pessoas perante o mau tempo.
+
+TAGS (site's own, not ours): mau tempo, ajuda a alimentar cães
+
+og:image (source's own illustrative stock photo, not for our use):
+https://jm-madeira.cdn.m33cloud.com/resizer/600/315/true/2026_11_10/closeup-shot-homeless-dog-hiding-rock-1794328486232.jpg--associa__o_apela_a_prote__o_dos_animais_perante_o_mau_tempo.webp
+
+NOTES:
+- Short appeal-type article, no embeds, no additional figures/tables possible (no statistics given).
+- "Esta terça-feira" = Tuesday, i.e. 2026-11-10 (today), since article published same day.
+- Context: Madeira is under a storm (storm "Charles" mentioned in a related headline on the same page: "Veja as primeiras imagens da passagem da tempestade Charles pela Madeira") - this is the bad-weather context driving the appeal. Not detailed further in this source; only mentioned as a related headline, not part of this article's body, so do not treat as this article's content unless separately verified.
