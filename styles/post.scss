@@ -532,6 +532,33 @@ ul, ol {
   }
 }
 
+/* Newsletter CTA at end of post (templates/post.twig), between related posts and comments */
+.newsletter-box {
+  max-width: 620px;
+  margin: 40px auto 0;
+  padding: 32px 28px;
+  border: 1px solid var(--border-color);
+  border-radius: $global-radius;
+  background: var(--background-alt-color);
+  text-align: center;
+
+  h3 {
+    margin: 0 0 8px;
+    font-family: var(--heading-font-family);
+    font-size: 22px;
+  }
+
+  p {
+    margin: 0 0 20px;
+    font-size: 15px;
+    color: var(--text-alt-color);
+  }
+
+  @media (max-width: $mobile) {
+    padding: 24px 20px;
+  }
+}
+
 /* Share buttons (templates/_share.twig) */
 .share {
   margin: 24px 0 0;
