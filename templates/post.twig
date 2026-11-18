@@ -118,6 +118,13 @@
           {{ _post.content | raw }}
         </section>
 
+        {% if _route.name != 'page' and _comments %}
+          <section class="comments-box">
+            <h3>{{ 'comments' | lang }}</h3>
+            <div>{{ _comments | template }}</div>
+          </section>
+        {% endif %}
+
         {% if not _post.is_page %}
           {% include '_share.twig' with { position: 'end' } %}
           {% include '_related.twig' %}
@@ -174,16 +181,6 @@
               <div>
                 {{ _newsletter | template }}
               </div>
-            </section>
-          {% endif %}
-
-          {% if _comments %}
-            <section class="comments-box">
-              <h3>{{ 'comments' | lang }}</h3>
-                
-
-                
-              <div>{{ _comments | template }}</div>
             </section>
           {% endif %}
 
