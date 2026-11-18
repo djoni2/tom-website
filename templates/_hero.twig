@@ -93,6 +93,22 @@
     if (code <= 82) return 'Showers';
     return 'Thunderstorms';
   }
+  // Cache each API response in sessionStorage for 10 minutes so repeat page
+  // views/navigations in the same tab don't refetch the live APIs every time.
+  var CACHE_TTL = 10 * 60 * 1000;
+  function cachedJSON(key, url) {
+    try {
+      var raw = sessionStorage.getItem(key);
+      if (raw) {
+        var cached = JSON.parse(raw);
+        if (Date.now() - cached.t < CACHE_TTL) return Promise.resolve(cached.d);
+      }
+    } catch (e) {}
+    return fetch(url).then(function (r) { return r.json(); }).then(function (d) {
+      try { sessionStorage.setItem(key, JSON.stringify({ t: Date.now(), d: d })); } catch (e) {}
+      return d;
+    });
+  }
   var tz = '&timezone=Atlantic%2FMadeira';
   // Two locations in one call: Funchal, then Madeira Airport (FNC).
   var weather = 'https://api.open-meteo.com/v1/forecast?latitude=32.65,32.6979&longitude=-16.91,-16.7745'
@@ -100,7 +116,7 @@
   var marine = 'https://marine-api.open-meteo.com/v1/marine?latitude=32.62&longitude=-16.92'
     + '&current=wave_height,sea_surface_temperature' + tz;
 
-  fetch(weather).then(function (r) { return r.json(); }).then(function (d) {
+  cachedJSON('today-weather', weather).then(function (d) {
     var town = d[0].current, fnc = d[1].current;
     set('weather', Math.round(town.temperature_2m) + '°C · ' + sky(town.weather_code));
     // Wind gusts at FNC. Around 25 kt (46 km/h), landings start to get diverted.
@@ -110,7 +126,7 @@
     set('updated', 'Updated ' + town.time.slice(11, 16));
   }).catch(function () {});
 
-  fetch(marine).then(function (r) { return r.json(); }).then(function (d) {
+  cachedJSON('today-marine', marine).then(function (d) {
     var c = d.current;
     set('sea', 'Waves ' + c.wave_height.toFixed(1) + ' m · Water ' + Math.round(c.sea_surface_temperature) + '°C');
   }).catch(function () {});
@@ -125,9 +141,7 @@
     'Tempo Quente': 'Heat', 'Tempo Frio': 'Cold'
   };
 
-  fetch('https://api.ipma.pt/open-data/forecast/warnings/warnings_www.json').then(function (r) {
-    return r.json();
-  }).then(function (data) {
+  cachedJSON('today-alerts', 'https://api.ipma.pt/open-data/forecast/warnings/warnings_www.json').then(function (data) {
     var now = new Date();
     var byArea = {};
     Object.keys(ALERT_AREAS).forEach(function (code) { byArea[code] = { level: 'green', types: [], upcoming: false, startTime: null }; });
