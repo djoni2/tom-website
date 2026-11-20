@@ -167,22 +167,6 @@
 
   <script src="{{ 'script.js' | asset_url }}" defer></script>
 
-  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-  <script>
-    window.OneSignalDeferred = window.OneSignalDeferred || [];
-    OneSignalDeferred.push(function (OneSignal) {
-      OneSignal.init({
-        appId: "caaaa8c2-b9ed-47bd-ad35-b4924192e6e8",
-        serviceWorkerParam: { scope: "/assets/" },
-        serviceWorkerPath: "assets/OneSignalSDKWorker.js",
-      }).then(function () {
-        setTimeout(function () {
-          OneSignal.Slidedown.promptPush();
-        }, 8000);
-      });
-    });
-  </script>
-
 
 </head>
 

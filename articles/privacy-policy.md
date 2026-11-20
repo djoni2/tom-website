@@ -48,19 +48,15 @@ We use Google AdSense to display advertising on this website. Google and its adv
 
 When you visit this website, a cookie banner may let you accept or manage non-essential cookies. You can change your preference at any time by clearing your browser's cookies for this site and reloading the page.
 
-## 5. Push Notifications
-
-With your consent, this website uses **OneSignal** ([https://onesignal.com/](https://onesignal.com/)) to send you browser push notifications about new articles. If you allow notifications, OneSignal assigns your browser a subscription identifier and processes your IP address (used to derive your approximate location and timezone), browser and device type, and your interactions with the notifications we send (for example, whether you clicked one). You can withdraw this consent at any time through your browser's site settings, which immediately stops any further notifications. You can review OneSignal's privacy policy **[here](https://onesignal.com/privacy_policy)**.
-
-## 6. Disclosing of Information to Outside Parties
+## 5. Disclosing of Information to Outside Parties
 
 We do not sell, trade, or otherwise transfer your personally identifiable information to outside parties.
 
-## 7. Changes to Our Privacy Policy
+## 6. Changes to Our Privacy Policy
 
 If we decide to change our privacy policy, we will post those changes on this page.
 
-## 8. Contact Us
+## 7. Contact Us
 
 If there are any questions regarding this privacy policy, you may contact us using the information below. Please scan the QR-Code.
 
