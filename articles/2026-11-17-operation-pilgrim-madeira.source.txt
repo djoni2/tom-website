@@ -1,0 +1,113 @@
+URL:        https://en.wikipedia.org/wiki/Operation_Pilgrim
+TITLE:      British plan to occupy the Canary Islands during World War II
+SITE:       en.wikipedia.org
+AUTHOR:     Contributors to Wikimedia projects
+PUBLISHED:  2021-06-04T18:50:28Z
+LANGUAGE:   en
+WORDS:      2306
+OG IMAGE:   https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/Macaronesia_location.svg/960px-Macaronesia_location.svg.png?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail
+
+QUOTED PASSAGES IN SOURCE (10):
+  [1] Map showing location of Canary, Azores and Cape Verde islands relative to Spanish mainland
+  [2] Location of Canary, Azores and Cape Verde islands relative to Spanish mainland
+  [3] Eventual cancellation and re-assignment of Allied forces
+  [4] on Great Britain with the objective of the occupation of the British Isles and the second; and the
+  [5] Spain held the key to all British enterprises in the Mediterranean.
+  [6] If we are forced from Gibraltar, we must take the Canaries immediately, allowing us to control the western entry to the Mediterranean.
+  [7] J. P. (41) 202 (E) CAPTURE OF THE CANARY ISLANDS
+  [8] capture and hold, for our own use, the Island of Gran Canary with the Harbour at La Luz and aerodrome at Gando.
+  [9] Operation Pilgrim, el plan militar Británico para capturer Gran Canaria, 1941
+  [10] Spanish-German Military Collaboration during the Spanish Non-Belligerency
+
+--- TEXT ---
+From Wikipedia, the free encyclopedia
+British plan to occupy the Canary Islands during World War II
+during the [[Second World War]]"},"subtitle":{"wt":""},"image":{"wt":"Macaronesia location.svg"},"image_upright":{"wt":""},"alt":{"wt":"Map showing location of Canary, Azores and Cape Verde islands relative to Spanish mainland"},"caption":{"wt":"Location of Canary, Azores and Cape Verde islands relative to Spanish mainland"},"scope":{"wt":"[[Atlantic Ocean]], Spanish and Portuguese island territories"},"type":{"wt":"Planned invasion"},"location":{"wt":"Canary Islands"},"location2":{"wt":"<!-- 2 through 10 for more locations -->"},"coordinates":{"wt":""},"coordinates2":{"wt":"<!-- 2 through 10 for more locations -->"},"pushpin_map":{"wt":""},"pushpin_map_size":{"wt":""},"pushpin_caption":{"wt":""},"pushpin_label":{"wt":""},"pushpin_label2":{"wt":"<!-- 2 through 10 for more locations -->"},"planned":{"wt":""},"planned_by":{"wt":"Lt. Gen. [[Harold Alexander, 1st Earl Alexander of Tunis\n |Harold Alexander]] and Rear Admiral [[Louis Keppel Hamilton]]"},"commanded_by":{"wt":"General [[Victor Odlum]]"},"objective":{"wt":"Contingency plan to invade and occupy [[Canary Islands]]"},"target":{"wt":""},"date":{"wt":"{{start date|1941|04| |df=y}} – {{end date|1942|02| |df=y}}<ref>{{cite web|url=https://discovery.nationalarchives.gov.uk/details/r/C378803|title=Operation \"Pilgrim\" (plans for the capture of the Canary Islands|website=The National Archives, Kew|access-date=4 June 2021}}</ref><!-- {{start date|YYYY|MM|DD|df=y}} -->"},"time":{"wt":""},"time_begin":{"wt":""},"time_end":{"wt":""},"timezone":{"wt":""},"executed_by":{"wt":""},"outcome":{"wt":"Eventual cancellation and re-assignment of Allied forces"},"casualties":{"wt":""},"fatalities":{"wt":""},"injuries":{"wt":""}},"i":0}}]}'> Operation Pilgrim
+Part of the Battle of the Atlantic
+during the Second World War
+Location of Canary, Azores and Cape Verde islands relative to Spanish mainland
+Operational scope
+Atlantic Ocean , Spanish and Portuguese island territories
+Type Planned invasion
+Location Canary Islands
+Planned by Lt. Gen. Harold Alexander and Rear Admiral Louis Keppel Hamilton
+Commanded by General Victor Odlum
+Objective Contingency plan to invade and occupy Canary Islands
+Date April 1941 ( 1941-04 ) – February 1942 ( 1942-02 ) [ 1 ]
+Outcome Eventual cancellation and re-assignment of Allied forces
+Operation Pilgrim was a planned British operation to invade and occupy the Canary Islands during World War II . [ 2 ] The invasion was a contingency plan to be executed in the event of a known plan whereby Germany would support Spain in occupying Gibraltar , the Azores , the Canary Islands as well as the Cape Verde Islands (the German plan was known as Operation Felix ). The British feared that such occupation would materially affect Allied access to the Mediterranean and endanger Britain’s shipping-lanes to its Dominions . Operation Pilgrim was a preemptive invasion and occupation to prevent German control of the islands. The German invasion never materialised and consequently, Operation Pilgrim was never put into action.
+Background
+[ edit ]
+German fears and ambitions
+[ edit ]
+After France's capitulation, General Alfred Jodl presented Hitler with the OKW's strategic plans for continuing the war, consisting of two options: The "direct attack" on Great Britain with the objective of the occupation of the British Isles and the second; and the "indirect strategy" advocating an attack on the British Empire, especially on the choke-points that made it possible to maintain the sea lanes to its Dominions and allies. An Anglo-American agreement, by which the United States would obtain a number of British bases in the Atlantic in exchange for 50 used destroyers, concerned Hitler, as he expected that either the US or Britain could invade and occupy one or more of the Spanish or Portuguese islands in the Atlantic. To counter any such actions, the OKW studied and started planning for the occupation of the Canary Islands. The study provided two alternatives: (a.) the peaceful transfer and access to the islands to Britain by Spain and (b.) resistance to the invasion by the local Spanish garrison. [ 3 ] The first alternative was eliminated by the Spanish-German negotiations of September 1940 concerning the entry of Spain into the war, where a German offer of forces to reinforce the island defence was rejected by Spain, insisting that the Spanish garrison had the necessary resources to counter a British attack. [ 3 ]
+Having been assured that the islands would be defended by Spain, Führer directive no. 18 of 12 November 1940 defining Operation Felix , recommended the need to first occupy the Portuguese archipelagos of the Azores before conducting any attack on Gibraltar. Gibraltar remained the prime objective of Operation Felix. This directive recommended the reinforcement of the Canaries by the Luftwaffe and the Kriegsmarine . In December 1941 the German high command sent Commander Fritz Krauss , authorised by the Spanish government, to investigate the reinforcement and defensive needs of the islands. [ 4 ]
+The Cape Verde Islands were poorly protected and had been used as a provisional port for sheltering British survivors from ships sank in the Atlantic. [ 5 ] Only two military ships were stationed on the islands, many of the islands’ artillery pieces dated from the Cuban War of 1898, air defences consisted of 25 obsolete Fiat biplane fighters and supplies were frequently moved by camel. [ 6 ] Krauss made numerous recommendations related to reinforcement, but in February 1941 the Oberkommando der Marine (OKM) ordered the cancellation of all reinforcements because of the indefinite postponement of Spanish belligerency . After a few months, Germany reviewed its position regarding reinforcements and by 22 May, Hitler agreed to the delivery of four artillery batteries to Spain to reinforce the Islands’ defences. The four batteries of 12 guns were distributed between Gran Canaria and Tenerife . [ 4 ]
+German reinforcements continued until the summer of 1942 but had not solved the problem of a lack of personnel and materiel in the island garrison. A matter of concern to the Germans was that in May and August 1942 Britain conducted two amphibious operations : Operation Ironclad to secure the naval base of Diego Suarez in Madagascar which was taken on 7 May by forces that had been trained to assault the Port of La Luz (Las Palmas) of Gran Canaria. Operation Jubilee against Dieppe, had also drawn the attention of the Spanish high command and alerted the Spanish and German authorities to the capabilities of the British in landing and taking the Canary Islands. [ 7 ] By the end of September 1942, there were 34,000 troops on the islands, of which one third were of North African descent. [ 8 ]
+Initiation of Allied planning
+[ edit ]
+On 18 April 1941 the United States Government announced a line of demarcation between the Eastern and Western hemispheres, drawn along the 26° West meridian. This became a virtual sea frontier of the United States in the Atlantic and included Greenland and the Azores. Although not a belligerent, United States warships would patrol this area and keep Britain informed about any Axis activity, but would not provide any direct protection for British convoys. This remained a British responsibility. [ 9 ] Both British and US Naval chiefs were concerned about the Azores and suspected that Germany was planning to seize the islands in order to establish a U-boat and air base. Holding such bases in the central north Atlantic posed a major threat to Britain. Consequently, Britain and the United States started planning an operation to occupy the Azores as well as the Canary and Cape Verde Islands should Hitler move into Spain in support of the Fascists and threaten Gibraltar and these Atlantic islands. [ 10 ]
+Gibraltar was essential to Britain’s war effort and Churchill reiterated this by writing “Spain held the key to all British enterprises in the Mediterranean.” The very real possibility of losing Gibraltar forced the British government to make contingency plans addressing this risk. Churchill further wrote: “If we are forced from Gibraltar, we must take the Canaries immediately, allowing us to control the western entry to the Mediterranean.” [ 6 ]
+Occupation plan
+[ edit ]
+The operation to occupy the Canaries was initially known as "Operation Puma" but it evolved into "Operation Pilgrim" as time and threats progressed and planning evolved with the amalgamation of three independent invasion plans: [ 11 ]
+Operation Thruster: Initial plan for the occupation of the Portuguese Azores islands [ 11 ]
+Operation Springboard: Initial plan for the occupation of the Portuguese Madeira [ 11 ]
+Operation Puma: Initial plan for the occupation of the Spanish Canary Islands and Portuguese Cape Verde islands [ 11 ]
+On 12 March 1941, the Joint Planning Staff signed the document titled "J. P. (41) 202 (E) CAPTURE OF THE CANARY ISLANDS", which consisted of a strategic study on the defence of maritime communications and the review of existing plans should Spain either resist or cooperate with the Axis, as well as the advantages of capturing the islands.
+Operation Pilgrim operational order was signed on 20 September 1941. [ 12 ]
+Port of La Luz in 1912. This was to be primary landing site for the invading Canadian forces
+The object of Operation Pilgrim was: "capture and hold, for our own use, the Island of Gran Canary with the Harbour at La Luz and aerodrome at Gando." The invasion was to be led by Major General Victor Odlum ’s Canadian 2nd Division "}},"i":0}}]}'> [ a ] who were in Britain undergoing training, plus a detachment of SOE special forces. The total force amounted to about 24,000 men and was to be escorted by Rear Admiral Louis Keppel Hamilton ’s naval force of one battleship, four fleet carriers, three cruisers and 27 destroyers, plus five Royal Fleet Auxiliary vessels "}},"i":0}}]}'> [ b ] . The initial troops assigned for the landings would be transported on HMS Queen Emma . The entire force was to be supported by two squadrons of RAF fighters. [ 11 ]
+The operation would commence with a night approach and first light landings at Puerto de la Luz , the main port on Gran Canaria with a landing by two Canadian infantry battalions from landing-craft with air support provided by Royal Navy aircraft from an aircraft carrier and naval gunfire support from the ships. Once the coastal batteries had been silenced, Canadian forces would enter the Bay of Gando to capture Canaria’s airport at Gando with the help of further troops via second landings in the Bay of Arinaga and the airport would then be used as the base for a further attack on Tenerife. [ 6 ] The 30-strong squadron of commandos from SOE were trained to parachute onto Tenerife and conduct sabotage operations to facilitate the British invasion of the island. [ 6 ] [ 12 ]
+A submarine would be stationed close to Gando prior to the start of the operation to carry out reconnaissance and to act as a navigation aid to the ships if the navigation lights on the coast had been turned off or damaged. [ 12 ]
+Dissipation of threat
+[ edit ]
+The men and landing craft for the operation were kept under orders for the last six months of 1941. The operational plan was simplified after the Allies received news that in the event of any German invasion of the Iberian peninsula, the Portuguese Government would evacuate itself to the Azores island and would then call on British or US forces to protect the islands. [ 11 ]
+In 1942, Franco declared Spain's status as Neutral (a change from the previous status of non-belligerent ) and the Allies agreed to respect this status. This meant that Germany was denied any access to Gibraltar and the Kriegsmarine were denied U-Boat (or other) berthing rights in the Canaries. The Operation Pilgrim plan was cancelled in February 1942. This allowed assignment of more useful commitments for the landing craft and re-prioritising the naval forces. [ 11 ]
+Notes
+[ edit ]
+↑ As time passed, the assigned Canadian forces completed their training and were deployed elsewhere. The task was then to be conducted by a Royal Marines division supported by the 29th Infantry Brigade. [ 12 ]
+↑ During the planning period and until the cancellation of the operation in February 1942, five different RFA’s were placed on alert to participate in the operation. These included RFA Abbeydale , RFA Denbydale , RFA Dewdale , RFA Ennerdale and RFA Olwen [ 5 ]
+↑ "Operation "Pilgrim" (plans for the capture of the Canary Islands" . The National Archives, Kew . Retrieved 4 June 2021 .
+↑ Churchill 1950 , pp. 718.
+1 2 Díaz Benítez 2016 , pp. 366.
+1 2 Díaz Benítez 2016 , pp. 367.
+1 2 "RFA Operations since 1905" . Royal Fleet Auxiliary (RFA) History . Retrieved 4 June 2021 .
+1 2 3 4 "Churchill's Canaries" . Gazettelife . 28 Nov 2019. Archived from the original on 4 June 2021 . Retrieved 4 June 2021 .
+↑ Díaz Benítez 2016 , pp. 372.
+↑ Díaz Benítez 2016 , pp. 377.
+↑ Churchill 1950 , pp. 142.
+↑ Churchill 1950 , pp. 143.
+1 2 3 4 5 6 7 "Operation Pilgrim" . Codenames: Operations of WWII . Retrieved 4 June 2021 .
+1 2 3 4 Barro Ordovás, Antonio (June 2015). "Operation Pilgrim, el plan militar Británico para capturer Gran Canaria, 1941" (PDF) . Revista de General Marina (in Spanish). Armada Defensa. pp. 787– 797 . Retrieved 4 June 2021 .
+References
+[ edit ]
+Díaz Benítez, Juan José (2016). "Spanish-German Military Collaboration during the Spanish Non-Belligerency" . War in History . 23 (3). Sage Publications, Ltd: 362– 381. doi : 10.1177/0968344515588143 . JSTOR 26059786 . S2CID 220677135 .
+Churchill, Winston S. (1950). The Second World War Vol 3: The Grand Alliance . Boston: Houghton Mifflin Co.
+Further reading
+[ edit ]
+Copy of general outline of Operation Pilgrim: http://ww2talk.com/index.php?threads/operation-pilgrim.19110/
+Retrieved from " https://en.wikipedia.org/w/index.php?title=Operation_Pilgrim&oldid=1383890320 "
+Categories : Amphibious operations of World War II
+Military history of the Canary Islands
+World War II occupied territories
+Spain in World War II
+Battles and operations of World War II involving the United Kingdom
+20th century in the Canary Islands
+1941 in Africa
+1941 in Spain
+1941 establishments in the United Kingdom
+1941 conflicts
+1942 in Africa
+1942 in Spain
+1942 disestablishments in the United Kingdom
+1942 conflicts
+African theatres of World War II
+Cancelled or proposed invasions of the Azores
+Cancelled or proposed invasions of the Canary Islands
+Cancelled military operations involving the United Kingdom
+Cancelled military operations involving Spain
+Cancelled military operations of World War II
+Hidden categories: Articles with short description
+Short description matches Wikidata
+CS1 Spanish-language sources (es)

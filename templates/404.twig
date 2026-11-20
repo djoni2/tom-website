@@ -1,14 +1,61 @@
 {% extends '@base.twig' %}
 
+{% block head %}
+  <meta name="robots" content="noindex, follow">
+{% endblock %}
+
 {% block body %}
+
+<!-- begin hero: same Times of Madeira logo as on / -->
+<section class="hero">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+        <div class="hero__inner">
+          <div><a href="https://www.timesofmadeira.com" title="Madeira News | Times of Madeira">
+              <img src="https://www.timesofmadeira.com/media/times-of-madeira.svg" alt="Madeira News | Times of Madeira">
+          </a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- end hero -->
 
   <main role="main">
     <div class="container">
       <div class="error">
         <h1 class="error__title">404</h1>
         <p class="error__text">The requested page could not be found.</p>
-        <a href="{{ _blog.url }}" class="error__button">Back to homepage</a>
+        <div class="error__actions">
+          <a href="{{ _blog.url }}" class="error__button">Back to homepage</a>
+          <button type="button" class="error__button error__button--ghost" onclick="document.querySelector('.nav-search-button').click()">
+            Search the site
+          </button>
+        </div>
       </div>
+
+      {% set recent_posts = data(endpoint="posts", sort="published_at DESC", limit="6").data %}
+      {% if recent_posts|length %}
+        <section class="related" aria-label="Recent articles">
+          <h3 class="related__title">Recent articles</h3>
+          <div class="related__grid related__grid--4">
+            {% for post in recent_posts %}
+              <a class="related__card" href="{{ post.url }}">
+                {% if post.featured_image_url %}
+                  <img class="related__image" src="{{ post.featured_image_url }}" alt="{{ post.title }}" loading="lazy">
+                {% else %}
+                  <span class="related__image related__image--empty"></span>
+                {% endif %}
+                <time class="related__date" datetime="{{ post.published_at|date('c') }}">
+                  {{ post.published_at|format_date('medium', locale=_lang.code) }}
+                </time>
+                <span class="related__name">{{ post.title }}</span>
+              </a>
+            {% endfor %}
+          </div>
+        </section>
+      {% endif %}
     </div>
   </main>
 

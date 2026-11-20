@@ -1,0 +1,50 @@
+Source: RTP Madeira (audio transcript), published 18 Nov 2026, 20:34
+URL: https://madeira.rtp.pt/sociedade/taxistas-querem-limitar-tvde-a-uma-viatura-por-licenca-audio/
+Headline: Taxistas querem limitar TVDE a uma viatura por licença
+
+Transcript (translated working notes in brackets):
+
+(0:00) A Associação Taxis-RAM quer limitar a operação de TVDE a apenas uma viatura por cada licença
+[Taxis-RAM Association wants to limit TVDE operation to just one vehicle per licence]
+(0:07) e quer que a medida seja aplicada às cerca de 500 licenças existentes.
+[wants the measure applied to the roughly 500 existing licences]
+(0:12) Paulo Pereira, o Presidente da Taxis-RAM, diz que o mercado está saturado,
+[Paulo Pereira, the President of Taxis-RAM, says the market is saturated]
+(0:16) pede por isso que o Governo tenha em atenção estas reivindicações
+[asks that the Government take these demands into account]
+(0:19) durante a elaboração do decreto regional para o sector TVDE.
+[during the drafting of the regional decree for the TVDE sector]
+(0:23) Sabendo de nós que existe à volta de 500 licenças de TVDE,
+[Knowing that there are around 500 TVDE licences]
+(0:29) a ser uma viatura por cada licença, estamos aqui a falar em questão de 500 viaturas.
+[if it's one vehicle per licence, we are talking about a matter of 500 vehicles]
+
+QUOTE (Paulo Pereira, direct, 0:38-1:11):
+"Esta chamada de atenção para a tutela dos transportes é que haja um serviço prestado entre estes dois setores, o sector TVDE e o sector do táxi, e que não seja, como já foi apresentado no próprio estudo regional feito da questão do TVDE, que o mercado está completamente saturado. Portanto, sabendo de nós que o mercado está saturado, não faz sentido haver mais que uma viatura por cada licença já existente."
+[This call for attention to the transport authorities is that there be a service provided between these two sectors, the TVDE sector and the taxi sector, and that it not be, as already presented in the regional study done on the TVDE question, that the market is completely saturated. So, knowing that the market is saturated, it doesn't make sense to have more than one vehicle per already-existing licence.]
+
+(1:12) Enquanto pede a limitação do sector TVDE,
+[While asking for the limitation of the TVDE sector]
+(1:14) a Taxis-RAM revela que tem 273 viaturas, táxis,
+[Taxis-RAM reveals it has 273 vehicles, taxis]
+(1:19) preparadas para entrar também no serviço do transporte de veículos descaracterizados.
+[prepared to also enter the service of transport in unmarked vehicles [i.e. TVDE]]
+
+QUOTE (Paulo Pereira, direct, 1:24-1:48):
+"Nós já temos preparados escritos prontos para entrar 273 táxis. Atualmente temos 30 viaturas já na categoria premium a funcionar, que são os táxis letra A e letra T. Fora esses 20 ou 30, temos 273 viaturas escritas e prontas para entrar, assim como a lei o permitir aqui na região autónoma de Amadar."
+[We already have written applications ready for 273 taxis to enter. Currently we have 30 vehicles already operating in the premium category, which are the letter-A and letter-T taxis. Apart from those 20 or 30, we have 273 vehicles registered and ready to enter, as soon as the law allows it here in the autonomous region of Madeira.]
+NOTE: transcript says "Amadar" - clearly an auto-transcription error for "Madeira". Treat as Madeira.
+NOTE: numbers given inconsistently in source: "30" then "esses 20 ou 30" (those 20 or 30) - source itself is inconsistent/vague here. Report as a gap / quote as-is, don't resolve the discrepancy.
+
+(1:49) Estarão prontos para começar a trabalhar e a efetuar o serviço TVDE
+[They will be ready to start working and carrying out the TVDE service]
+(1:53) na própria plataforma com o sector dos caixas caracterizados, TVDE,
+[on the platform itself with the TVDE sector]
+(1:59) e os valores que estão decretados na própria Lei nº 59 de 2026.
+[and the values/rates decreed in Law No. 59 of 2026]
+
+(2:04) Paulo Pereira, o Presidente da Taxis-RAM,
+(2:07) na semana passada o Governo prolongou a suspensão de novas licenças TVDE
+[last week the Government extended the suspension of new TVDE licences]
+(2:12) por mais quatro meses.
+[by a further four months]
