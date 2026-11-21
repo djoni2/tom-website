@@ -25,8 +25,15 @@
   <main role="main">
     <div class="container">
       <div class="error">
-        <h1 class="error__title">404</h1>
-        <p class="error__text">The requested page could not be found.</p>
+        <svg class="error__pin" aria-hidden="true" viewBox="0 0 160 120">
+          <path d="M10 108 C 45 100, 70 112, 108 96" fill="none" stroke="var(--border-color)" stroke-width="2" stroke-dasharray="5 7"></path>
+          <circle cx="108" cy="96" r="3" fill="var(--border-color)"></circle>
+          <path d="M80 8 C 58 8, 42 24, 42 46 C 42 66, 62 84, 80 100 C 98 84, 118 66, 118 46 C 118 24, 102 8, 80 8 Z" fill="var(--color-accent)"></path>
+          <circle cx="80" cy="44" r="14" fill="var(--background-color)"></circle>
+        </svg>
+        <p class="error__eyebrow">Error 404</p>
+        <h1 class="error__title">This pin dropped somewhere else.</h1>
+        <p class="error__text">The page you're looking for isn't at this address anymore. Here's how to get back on track.</p>
         <div class="error__actions">
           <a href="{{ _blog.url }}" class="error__button">Back to homepage</a>
           <button type="button" class="error__button error__button--ghost" onclick="document.querySelector('.nav-search-button').click()">
@@ -35,22 +42,25 @@
         </div>
       </div>
 
-      {% set recent_posts = data(endpoint="posts", sort="published_at DESC", limit="6").data %}
+      {% set recent_posts = data(endpoint="posts", sort="published_at DESC", limit="4").data %}
       {% if recent_posts|length %}
         <section class="related" aria-label="Recent articles">
           <h3 class="related__title">Recent articles</h3>
-          <div class="related__grid related__grid--4">
+          <div class="related__list">
             {% for post in recent_posts %}
-              <a class="related__card" href="{{ post.url }}">
+              <a class="related__row" href="{{ post.url }}">
+                <span class="related__rank">{{ "%02d"|format(loop.index) }}</span>
                 {% if post.featured_image_url %}
-                  <img class="related__image" src="{{ post.featured_image_url }}" alt="{{ post.title }}" loading="lazy">
+                  <img class="related__thumb" src="{{ post.featured_image_url }}" alt="{{ post.title }}" loading="lazy">
                 {% else %}
-                  <span class="related__image related__image--empty"></span>
+                  <span class="related__thumb related__image--empty"></span>
                 {% endif %}
-                <time class="related__date" datetime="{{ post.published_at|date('c') }}">
-                  {{ post.published_at|format_date('medium', locale=_lang.code) }}
-                </time>
-                <span class="related__name">{{ post.title }}</span>
+                <span class="related__row-meta">
+                  <span class="related__name">{{ post.title }}</span>
+                  <time class="related__date" datetime="{{ post.published_at|date('c') }}">
+                    {{ post.published_at|format_date('medium', locale=_lang.code) }}
+                  </time>
+                </span>
               </a>
             {% endfor %}
           </div>
