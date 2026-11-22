@@ -17,15 +17,16 @@ jobs:
             key_secret: HYVOR_CONSOLE_KEY
           - subdomain: "times-of-madeira"
             key_secret: HYVOR_CONSOLE_KEY_PROD
-    # A push to main deploys to both dev and prod. A push to any other
-    # branch (e.g. main-1) deploys to dev only, so changes can be verified
-    # live before they ever reach prod.
-    if: matrix.subdomain != 'times-of-madeira' || github.ref == 'refs/heads/main'
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
       - name: Sync Theme Files via Hyvor Console API
+        # A push to main deploys to both dev and prod. A push to any other
+        # branch (e.g. main-1) deploys to dev only, so changes can be
+        # verified live before they ever reach prod. (Job-level `if` can't
+        # see the matrix context, so this has to live on the step.)
+        if: matrix.subdomain != 'times-of-madeira' || github.ref == 'refs/heads/main'
         env:
           HYVOR_KEY: ${{ secrets[matrix.key_secret] }}
           SUBDOMAIN: ${{ matrix.subdomain }}
