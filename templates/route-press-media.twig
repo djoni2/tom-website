@@ -1,0 +1,194 @@
+{% extends '@base.twig' %}
+
+{# The Press & Media Kit at /press-media, linked from the header's main nav.
+   Replaces the old Hyvor page (post id 36045) with a self-contained kit: logo
+   and icon downloads, boilerplate text, brand colors and quick facts, each
+   with a one-click "Copy" button. All copy happens client-side; nothing here
+   needs a server round trip. #}
+
+{% block head %}
+  <title>Press & Media Kit | Logos, Brand Assets & Contact - Times of Madeira</title>
+  <meta name="description" content="Download the Times of Madeira logo and icon, copy our boilerplate text and brand colors, and find out how to get in touch for press and media use.">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.timesofmadeira.com/press-media">
+  <meta property="og:site_name" content="Times of Madeira">
+  <meta property="og:title" content="Press & Media Kit | Times of Madeira">
+  <meta property="og:description" content="Download the Times of Madeira logo and icon, copy our boilerplate text and brand colors, and find out how to get in touch for press and media use.">
+  <meta property="og:image" content="https://www.timesofmadeira.com/media/press-media-kit.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Press & Media Kit | Times of Madeira">
+  <meta name="twitter:description" content="Download the Times of Madeira logo and icon, copy our boilerplate text and brand colors, and find out how to get in touch for press and media use.">
+  <meta name="twitter:image" content="https://www.timesofmadeira.com/media/press-media-kit.jpg">
+{% endblock %}
+
+{% block body %}
+<main role="main" class="press-page">
+  <div class="container">
+    <div class="row">
+      <div class="col col-12">
+
+        <header class="press__masthead">
+          <a href="https://www.timesofmadeira.com" title="Madeira News | Times of Madeira" class="press__logo">
+            <img src="https://www.timesofmadeira.com/media/times-of-madeira.svg" alt="Madeira News | Times of Madeira">
+          </a>
+          <h1 class="press__title">Press & Media Kit</h1>
+          <p class="press__dek">Logos, brand assets, boilerplate text and brand colors for journalists, bloggers and partners writing about Times of Madeira. Tap any field below to copy it.</p>
+        </header>
+
+        <section class="press__section">
+          <h2 class="press__section-title">About Times of Madeira</h2>
+          <div class="press__copy-card">
+            <p class="press__copy-text">Times of Madeira is an independent English-language news site covering politics, the economy, culture and daily life across the Madeira archipelago, Portugal.</p>
+            <button type="button" class="press__copy-btn" data-copy-btn data-copy-value="Times of Madeira is an independent English-language news site covering politics, the economy, culture and daily life across the Madeira archipelago, Portugal.">Copy</button>
+          </div>
+        </section>
+
+        <section class="press__section">
+          <h2 class="press__section-title">Quick Facts</h2>
+          <dl class="press__facts">
+            <div class="press__fact"><dt>Founded</dt><dd>November 2023</dd></div>
+            <div class="press__fact"><dt>Coverage</dt><dd>Madeira archipelago</dd></div>
+            <div class="press__fact"><dt>Language</dt><dd>English</dd></div>
+            <div class="press__fact"><dt>Based in</dt><dd>Câmara de Lobos, Madeira</dd></div>
+          </dl>
+        </section>
+
+        <section class="press__section">
+          <h2 class="press__section-title">Logo & Icon</h2>
+          <p class="press__section-note">Free to use in articles, posts or features about Times of Madeira &mdash; no need to ask first. See usage guidelines below.</p>
+          <div class="press__assets">
+
+            <div class="press__asset">
+              <div class="press__asset-preview press__asset-preview--wide">
+                <img src="https://www.timesofmadeira.com/media/times-madeira-logo.svg" alt="Times of Madeira logo, SVG" loading="lazy">
+              </div>
+              <div class="press__asset-meta">
+                <span class="press__asset-name">Logo &middot; SVG</span>
+                <span class="press__asset-dim">Vector, scales to any size</span>
+              </div>
+              <div class="press__asset-actions">
+                <button type="button" class="press__copy-btn" data-copy-btn data-copy-value="https://www.timesofmadeira.com/media/times-madeira-logo.svg">Copy link</button>
+                <a class="press__download-btn" href="https://www.timesofmadeira.com/media/times-madeira-logo.svg" download>Download</a>
+              </div>
+            </div>
+
+            <div class="press__asset">
+              <div class="press__asset-preview press__asset-preview--wide">
+                <img src="https://www.timesofmadeira.com/media/times-madeira-logo.png" alt="Times of Madeira logo, PNG" loading="lazy">
+              </div>
+              <div class="press__asset-meta">
+                <span class="press__asset-name">Logo &middot; PNG</span>
+                <span class="press__asset-dim">4000 &times; 1487px</span>
+              </div>
+              <div class="press__asset-actions">
+                <button type="button" class="press__copy-btn" data-copy-btn data-copy-value="https://www.timesofmadeira.com/media/times-madeira-logo.png">Copy link</button>
+                <a class="press__download-btn" href="https://www.timesofmadeira.com/media/times-madeira-logo.png" download>Download</a>
+              </div>
+            </div>
+
+            <div class="press__asset">
+              <div class="press__asset-preview">
+                <img src="https://www.timesofmadeira.com/media/times-of-madeira-icon.png" alt="Times of Madeira icon" loading="lazy">
+              </div>
+              <div class="press__asset-meta">
+                <span class="press__asset-name">Icon &middot; PNG</span>
+                <span class="press__asset-dim">1920 &times; 1920px</span>
+              </div>
+              <div class="press__asset-actions">
+                <button type="button" class="press__copy-btn" data-copy-btn data-copy-value="https://www.timesofmadeira.com/media/times-of-madeira-icon.png">Copy link</button>
+                <a class="press__download-btn" href="https://www.timesofmadeira.com/media/times-of-madeira-icon.png" download>Download</a>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <section class="press__section">
+          <h2 class="press__section-title">Brand Colors</h2>
+          <div class="press__colors">
+            <button type="button" class="press__color" data-copy-btn data-copy-value="#c91400" style="--swatch:#c91400">
+              <span class="press__color-swatch"></span>
+              <span class="press__color-label">Accent<br><code>#c91400</code></span>
+            </button>
+            <button type="button" class="press__color" data-copy-btn data-copy-value="#05051c" style="--swatch:#05051c">
+              <span class="press__color-swatch"></span>
+              <span class="press__color-label">Text<br><code>#05051c</code></span>
+            </button>
+            <button type="button" class="press__color" data-copy-btn data-copy-value="#ffffff" style="--swatch:#ffffff; --swatch-border:1px solid #e6e6e6">
+              <span class="press__color-swatch"></span>
+              <span class="press__color-label">Background<br><code>#ffffff</code></span>
+            </button>
+          </div>
+        </section>
+
+        <section class="press__section">
+          <h2 class="press__section-title">Usage Guidelines</h2>
+          <ul class="press__list">
+            <li>Use these files freely in press coverage, blog posts or features about Times of Madeira.</li>
+            <li>No need to ask first, as long as they're used in a context that references Times of Madeira.</li>
+            <li>A link back to <a href="https://timesofmadeira.com">timesofmadeira.com</a> is appreciated, not required.</li>
+          </ul>
+        </section>
+
+        <section class="press__section press__section--cta">
+          <h2 class="press__section-title">Need Something Else?</h2>
+          <p class="press__section-note">For interviews, custom materials, or anything not covered here, get in touch via <a href="https://www.timesofmadeira.com/contact">the contact page</a>. Thanks for your interest in Times of Madeira!</p>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  (function () {
+    function fallbackCopy(text) {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+
+    function copy(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).catch(function () { fallbackCopy(text); });
+      } else {
+        fallbackCopy(text);
+      }
+    }
+
+    document.querySelectorAll('[data-copy-btn]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var value = btn.getAttribute('data-copy-value');
+        if (!value) return;
+        copy(value);
+
+        var label = btn.querySelector('.press__color-label');
+        if (label) {
+          var original = label.innerHTML;
+          label.innerHTML = 'Copied!';
+          btn.classList.add('is-copied');
+          setTimeout(function () {
+            label.innerHTML = original;
+            btn.classList.remove('is-copied');
+          }, 1400);
+        } else {
+          var original2 = btn.textContent;
+          btn.textContent = 'Copied!';
+          btn.classList.add('is-copied');
+          setTimeout(function () {
+            btn.textContent = original2;
+            btn.classList.remove('is-copied');
+          }, 1400);
+        }
+      });
+    });
+  })();
+</script>
+{% endblock %}
