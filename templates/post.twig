@@ -121,9 +121,14 @@
         {# Article polls: only loaded when the content above actually embeds a
            .tom-poll[data-poll-id] div, so pages/articles without one pay nothing.
            data-api-base points at the Cloudflare Worker backing the polls (see
-           worker/) -- update it once after that Worker is deployed. #}
+           worker/) -- update it once after that Worker is deployed.
+           poll.js is served with a 7-day Cache-Control and no content hash in
+           its URL (unlike styles.css, which Hyvor auto-versions), so readers
+           and CDN edges can keep an old copy for up to a week after a deploy.
+           Bump ?v= here every time assets/poll.js changes, so the URL itself
+           changes and forces a fresh fetch instead of waiting out the cache. #}
         {% if 'tom-poll' in _post.content %}
-          <script src="{{ 'poll.js' | asset_url }}" data-api-base="https://tom-polls.timesofmadeira.workers.dev" defer></script>
+          <script src="{{ 'poll.js' | asset_url }}?v=2" data-api-base="https://tom-polls.timesofmadeira.workers.dev" defer></script>
         {% endif %}
 
         {% if _route.name != 'page' and _comments %}
