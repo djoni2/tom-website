@@ -97,9 +97,6 @@
 }
 
 .tom-poll__row-top {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
   margin-bottom: 5px;
   font-size: 14px;
 }
@@ -108,9 +105,18 @@
   font-weight: 500;
 }
 
+.tom-poll__barwrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .tom-poll__pct {
+  flex: 0 0 auto;
+  font-size: 1.4em;
+  font-weight: 800;
   font-variant-numeric: tabular-nums;
-  opacity: .6;
+  color: var(--text-color);
 }
 
 .tom-poll__row.is-you {
@@ -131,15 +137,22 @@
     }
   }
 
+  .tom-poll__pct {
+    color: var(--color-accent);
+  }
+
   .tom-poll__fill {
     background: var(--color-accent);
   }
 }
 
 .tom-poll__track {
+  flex: 1 1 auto;
+  max-width: 78%;
   height: 8px;
   border-radius: 999px;
-  background: var(--border-color);
+  background: #fff;
+  border: 1px solid var(--border-color);
   overflow: hidden;
 }
 

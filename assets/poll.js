@@ -46,17 +46,19 @@
       var top = el('div', 'tom-poll__row-top');
       var label = el('span', 'tom-poll__label');
       label.textContent = opt.label;
-      var pctEl = el('span', 'tom-poll__pct');
-      pctEl.textContent = pct + '%';
       top.appendChild(label);
-      top.appendChild(pctEl);
 
+      var barWrap = el('div', 'tom-poll__barwrap');
       var track = el('div', 'tom-poll__track');
       var fill = el('div', 'tom-poll__fill');
       track.appendChild(fill);
+      var pctEl = el('span', 'tom-poll__pct');
+      pctEl.textContent = pct + '%';
+      barWrap.appendChild(track);
+      barWrap.appendChild(pctEl);
 
       row.appendChild(top);
-      row.appendChild(track);
+      row.appendChild(barWrap);
       list.appendChild(row);
     });
     root.appendChild(list);
