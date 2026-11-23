@@ -114,7 +114,7 @@
       <!-- begin post -->
       <article class="post">
 
-        <section class="post-content">
+        <section class="post-content"{% if _post.featured_image_url %} style="--poll-bg-image: url('{{ _post.featured_image_url }}');"{% endif %}>
           {{ _post.content | raw }}
         </section>
 

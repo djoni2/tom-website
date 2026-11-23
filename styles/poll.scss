@@ -5,6 +5,8 @@
    like the rest of the theme -- no separate .mode-dark block needed here. */
 
 .tom-poll {
+  position: relative;
+  overflow: hidden;
   width: 100%;
   margin: 32px 0;
   padding: 22px;
@@ -14,6 +16,27 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
+
+  /* The article's own cover image, faint, behind the poll content --
+     --poll-bg-image is set inline on .post-content in templates/post.twig
+     from _post.featured_image_url, so every poll on every article picks up
+     its own article's cover automatically. Falls back to plain
+     background-alt-color when there is no cover. */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: var(--poll-bg-image, none);
+    background-size: cover;
+    background-position: center;
+    opacity: .2;
+    z-index: 0;
+  }
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
 }
 
 .tom-poll__q {
