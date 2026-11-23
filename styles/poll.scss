@@ -113,9 +113,11 @@
 
 .tom-poll__pct {
   flex: 0 0 auto;
+  width: 62px;
   font-size: 1.4em;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
+  text-align: right;
   color: var(--text-color);
 }
 
@@ -148,7 +150,6 @@
 
 .tom-poll__track {
   flex: 1 1 auto;
-  max-width: 78%;
   height: 8px;
   border-radius: 999px;
   background: #fff;
