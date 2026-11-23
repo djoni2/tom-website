@@ -1,0 +1,10 @@
+{
+  "pico-barcelos-fee": {
+    "question": "Should there be a tourist fee to visit Pico dos Barcelos?",
+    "options": [
+      { "key": "no", "label": "No, it should stay free" },
+      { "key": "yes2", "label": "Yes — €2" },
+      { "key": "yes5", "label": "Yes — €5" }
+    ]
+  }
+}

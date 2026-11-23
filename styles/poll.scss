@@ -1,0 +1,157 @@
+/* Article polls (.tom-poll): vote once, see results. Markup is injected by
+   assets/poll.js into a <div class="tom-poll" data-poll-id="..."></div>
+   embedded directly in article content. Colors/fonts come from the theme's
+   own CSS variables (config.yaml), so this follows light/dark automatically
+   like the rest of the theme -- no separate .mode-dark block needed here. */
+
+.tom-poll {
+  max-width: 560px;
+  margin: 32px auto;
+  padding: 22px;
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  background: var(--background-alt-color);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.tom-poll__q {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: $font-size-h5;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--heading-font-color);
+}
+
+.tom-poll__options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tom-poll__opt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 9px;
+  background: transparent;
+  color: var(--text-color);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  text-align: start;
+  cursor: pointer;
+  transition: $global-transition;
+
+  &:hover:not(:disabled),
+  &:focus-visible {
+    border-color: var(--color-accent);
+    outline: none;
+  }
+
+  &:disabled {
+    cursor: default;
+    opacity: .6;
+  }
+}
+
+.tom-poll__dot {
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 50%;
+}
+
+.tom-poll__results {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tom-poll__row-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.tom-poll__label {
+  font-weight: 500;
+}
+
+.tom-poll__pct {
+  font-variant-numeric: tabular-nums;
+  opacity: .6;
+}
+
+.tom-poll__row.is-you {
+  .tom-poll__label {
+    color: var(--color-accent);
+
+    &::after {
+      content: 'Your vote';
+      margin-left: 8px;
+      padding: 2px 8px;
+      border: 1px solid var(--color-accent);
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .03em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+    }
+  }
+
+  .tom-poll__fill {
+    background: var(--color-accent);
+  }
+}
+
+.tom-poll__track {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--border-color);
+  overflow: hidden;
+}
+
+.tom-poll__fill {
+  height: 100%;
+  width: 0;
+  border-radius: 999px;
+  background: var(--text-color);
+  opacity: .5;
+  transition: width .6s cubic-bezier(.2, .8, .2, 1);
+}
+
+.tom-poll__row.is-you .tom-poll__fill {
+  opacity: 1;
+}
+
+.tom-poll__foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border-color);
+  font-size: 13px;
+  opacity: .6;
+}
+
+.tom-poll__error {
+  margin: 0;
+  font-size: 13px;
+  color: var(--color-accent);
+}
+
+@media (max-width: $mobile) {
+  .tom-poll {
+    padding: 18px;
+  }
+}

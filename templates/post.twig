@@ -118,6 +118,14 @@
           {{ _post.content | raw }}
         </section>
 
+        {# Article polls: only loaded when the content above actually embeds a
+           .tom-poll[data-poll-id] div, so pages/articles without one pay nothing.
+           data-api-base points at the Cloudflare Worker backing the polls (see
+           worker/) -- update it once after that Worker is deployed. #}
+        {% if 'tom-poll' in _post.content %}
+          <script src="{{ 'poll.js' | asset_url }}" data-api-base="https://tom-polls.timesofmadeira.workers.dev" defer></script>
+        {% endif %}
+
         {% if _route.name != 'page' and _comments %}
           <section class="comments-box">
             <h3>{{ 'comments' | lang }}</h3>
