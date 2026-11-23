@@ -6,5 +6,13 @@
       { "key": "yes2", "label": "Yes — €2" },
       { "key": "yes5", "label": "Yes — €5" }
     ]
+  },
+  "single-tourist-entry-fee": {
+    "question": "Should Madeira replace its separate tourist, trail and diving fees with one single entry fee?",
+    "options": [
+      { "key": "yes", "label": "Yes, one fee collected once" },
+      { "key": "no", "label": "No, keep them separate" },
+      { "key": "unsure", "label": "Not sure" }
+    ]
   }
 }
