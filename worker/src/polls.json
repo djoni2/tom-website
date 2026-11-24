@@ -22,5 +22,13 @@
       { "key": "maybe", "label": "Maybe, depends on the cost" },
       { "key": "no", "label": "No, I prefer the clinic" }
     ]
+  },
+  "tourist-fees-evolution": {
+    "question": "How should tourist fees in Madeira evolve?",
+    "options": [
+      { "key": "more", "label": "Charge more, Madeira has to attract rich tourists" },
+      { "key": "less", "label": "We need less fees that take money out of the market" },
+      { "key": "same", "label": "It should stay as it is in 2026" }
+    ]
   }
 }
