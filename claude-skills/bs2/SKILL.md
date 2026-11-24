@@ -118,12 +118,14 @@ node C:/Users/samad/.claude/skills/bs2/scripts/add-poll.mjs trail-fee-level \
   --commit --wait
 ```
 
-It validates the poll, writes `worker/src/polls.json`, commits and pushes
-(the Worker deploys from `main` and `main-1`; on another branch merge to
-`main`), waits until the Worker serves the id, and prints the `tom-poll`
-fence. Paste it right after the lead, before the first H2. The widget shows
-nothing until the Worker knows the id, so **the live publish waits for
-"live"**; `add-poll.mjs <id> --check` asks again.
+It validates the poll, writes `worker/src/polls.json`, commits and pushes,
+deploys the Worker with the local Wrangler login (the GitHub deploy action
+has a broken Cloudflare token and fails every run), waits until the Worker
+serves the id, and prints the `tom-poll` fence. Paste it right after the
+lead, before the first H2. The widget shows nothing until the Worker knows
+the id, so **the live publish waits for "live"**; `add-poll.mjs <id> --check`
+asks again. The poll cannot load on the dev blog (its hyvorblogs.io origin is
+not on the Worker's allowlist), so check it on the live page.
 
 ## Related article card
 

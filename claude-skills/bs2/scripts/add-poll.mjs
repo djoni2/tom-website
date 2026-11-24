@@ -12,10 +12,13 @@
 // worker/src/polls.json. If the id already exists with the same question it
 // is reused and nothing is written.
 //
-// --commit commits and pushes polls.json on the current branch. The "Deploy
-// Polls Worker" action runs on main and main-1; on any other branch it prints
-// a reminder to merge. --wait then polls the Worker until it serves the id
-// (about a minute) or gives up after three minutes.
+// --commit commits and pushes polls.json on the current branch, then deploys
+// the Worker from <repo>/worker with `npx wrangler deploy` (the local Wrangler
+// login). The "Deploy Polls Worker" GitHub action exists too, but its
+// CLOUDFLARE_API_TOKEN secret has failed on every run so far (authentication
+// error 10000), so the local deploy is what actually puts the poll live.
+// --wait then polls the Worker until it serves the id or gives up after three
+// minutes.
 import fs from 'fs';
 import path from 'path';
 import { execSync } from 'child_process';
@@ -127,7 +130,17 @@ async function main() {
     git(`commit -m "Add ${id} poll" -m "Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"`);
     git(`push origin ${branch}`);
     console.log(`\ncommitted and pushed on ${branch}`);
-    if (!['main', 'main-1'].includes(branch)) console.log(`NOTE: the Worker deploys only from main or main-1 - merge ${branch} into main and push`);
+    process.stdout.write('deploying the Worker with wrangler...');
+    try {
+      const out = execSync('npx wrangler deploy', { cwd: path.join(repo, 'worker'), stdio: 'pipe' }).toString();
+      const m = out.match(/Current Version ID: (\S+)/);
+      console.log(` done${m ? ` (version ${m[1]})` : ''}`);
+    } catch (e) {
+      console.log(' FAILED');
+      console.error(String(e.stderr || e.stdout || e.message).trim().split('\n').slice(-6).join('\n'));
+      console.error('run `npx wrangler deploy` in worker/ by hand (needs `npx wrangler login` once), then `add-poll.mjs <id> --check`');
+      process.exitCode = 1;
+    }
   }
 
   if (has('--wait')) {
