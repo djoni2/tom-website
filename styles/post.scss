@@ -717,6 +717,13 @@ ul, ol {
     }
   }
 
+  // Google "preferred source" button, rendered by Google's script into the inner div
+  .share__google {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
   // On phones only WhatsApp keeps its label; the rest become round icons
   // so all four fit on one row. The copy label comes back to say "Copied".
   @media (max-width: $mobile) {

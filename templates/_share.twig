@@ -48,5 +48,19 @@
     <p class="share__follow">
       <a href="{{ _blog.social.facebook ?: 'https://www.facebook.com/timesofmadeira' }}" target="_blank" rel="noopener">Follow Times of Madeira on Facebook</a>
     </p>
+
+    {# Google "Add as preferred source" button. Google's script renders the button itself;
+       a click marks timesofmadeira.com as a preferred source for the reader's Top Stories
+       and AI Overviews, then returns them to this page. data-lang pins the label to English
+       (the default would follow the reader's browser language). The script is loaded only
+       here, so pages without the end share block pay nothing.
+       Docs: https://developers.google.com/search/docs/appearance/preferred-sources #}
+    <div class="share__google">
+      <div google-add-preferred-source-btn data-lang="en"></div>
+      <noscript>
+        <a href="https://www.google.com/preferences/source?q=timesofmadeira.com" target="_blank" rel="noopener">Add Times of Madeira as a preferred source on Google</a>
+      </noscript>
+    </div>
+    <script async src="https://news.google.com/swg/js/v1/publisher.js"></script>
   {% endif %}
 </div>
