@@ -2,33 +2,86 @@
   "pico-barcelos-fee": {
     "question": "Should there be a tourist fee to visit Pico dos Barcelos?",
     "options": [
-      { "key": "no", "label": "No, it should stay free" },
-      { "key": "yes2", "label": "Yes — €2" },
-      { "key": "yes5", "label": "Yes — €5" }
+      {
+        "key": "no",
+        "label": "No, it should stay free"
+      },
+      {
+        "key": "yes2",
+        "label": "Yes — €2"
+      },
+      {
+        "key": "yes5",
+        "label": "Yes — €5"
+      }
     ]
   },
   "single-tourist-entry-fee": {
     "question": "Should Madeira replace its separate tourist, trail and diving fees with one single entry fee?",
     "options": [
-      { "key": "yes", "label": "Yes, one fee collected once" },
-      { "key": "no", "label": "No, keep them separate" },
-      { "key": "unsure", "label": "Not sure" }
+      {
+        "key": "yes",
+        "label": "Yes, one fee collected once"
+      },
+      {
+        "key": "no",
+        "label": "No, keep them separate"
+      },
+      {
+        "key": "unsure",
+        "label": "Not sure"
+      }
     ]
   },
   "home-vet-visits": {
     "question": "Would you consider home vet visits for your animal?",
     "options": [
-      { "key": "yes", "label": "Yes, it sounds ideal" },
-      { "key": "maybe", "label": "Maybe, depends on the cost" },
-      { "key": "no", "label": "No, I prefer the clinic" }
+      {
+        "key": "yes",
+        "label": "Yes, it sounds ideal"
+      },
+      {
+        "key": "maybe",
+        "label": "Maybe, depends on the cost"
+      },
+      {
+        "key": "no",
+        "label": "No, I prefer the clinic"
+      }
     ]
   },
   "tourist-fees-evolution": {
     "question": "How should tourist fees in Madeira evolve?",
     "options": [
-      { "key": "more", "label": "Charge more, Madeira has to attract rich tourists" },
-      { "key": "less", "label": "We need less fees that take money out of the market" },
-      { "key": "same", "label": "It should stay as it is in 2026" }
+      {
+        "key": "more",
+        "label": "Charge more, Madeira has to attract rich tourists"
+      },
+      {
+        "key": "less",
+        "label": "We need less fees that take money out of the market"
+      },
+      {
+        "key": "same",
+        "label": "It should stay as it is in 2026"
+      }
+    ]
+  },
+  "official-stats-app": {
+    "question": "Would you use a free app to check Madeira's official statistics?",
+    "options": [
+      {
+        "key": "yes",
+        "label": "Yes, I like to check the numbers myself"
+      },
+      {
+        "key": "sometimes",
+        "label": "Maybe, when I have a specific question"
+      },
+      {
+        "key": "no",
+        "label": "No, I get the numbers from the news"
+      }
     ]
   }
 }
