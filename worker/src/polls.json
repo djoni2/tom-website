@@ -14,5 +14,13 @@
       { "key": "no", "label": "No, keep them separate" },
       { "key": "unsure", "label": "Not sure" }
     ]
+  },
+  "home-vet-visits": {
+    "question": "Would you consider home vet visits for your animal?",
+    "options": [
+      { "key": "yes", "label": "Yes, it sounds ideal" },
+      { "key": "maybe", "label": "Maybe, depends on the cost" },
+      { "key": "no", "label": "No, I prefer the clinic" }
+    ]
   }
 }
