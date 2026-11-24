@@ -378,20 +378,12 @@ fails.
 The two blogs hold two separate posts with two different ids. An edit after
 publishing has to be applied to both, each with its own `--post-id`.
 
-**Before any edit to a published post, pull it first.** The user changes
-covers and text in the Hyvor editor, and `publish.mjs --post-id` writes the
-whole document from the local file, which would undo those edits:
-
-```bash
-HYVOR_CONSOLE_KEY=$(cat ~/.hyvor/console-key-prod) \
-node C:/Users/samad/.claude/skills/blog-writer/scripts/pull-post.mjs articles/<slug>.summary.md --blog times-of-madeira
-```
-
-It rewrites the draft from the live post (body, title, description, tags,
-`cover_url`) and records `pulled_hash` in the front matter. The live publish
-refuses a draft that was not pulled from that post or a post that changed
-since. `--id-only` prints the post id for the slug (use it with the dev key
-for the dev id). Full procedure: `bs2` skill, "Editing a published post".
+**Before any edit to a published post, pull it first** with `pull-post.mjs`.
+The user changes covers and text in the Hyvor editor, and `publish.mjs
+--post-id` writes the whole document from the local file, which would undo
+those edits. The full procedure is in
+`C:/Users/samad/.claude/skills/blog-writer/references/editing-published-post.md`;
+read it before touching a live post.
 
 Then open **both** live URLs and look at the rendered pages: the panorama band,
 the quote block, the callout, the Wikipedia link, the bold runs, the source

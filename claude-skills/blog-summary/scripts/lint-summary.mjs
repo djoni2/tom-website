@@ -1,6 +1,11 @@
 #!/usr/bin/env node
 // Mechanical style gate for a Times of Madeira summary post.
-//   node lint-summary.mjs <draft.summary.md> [--allow word] [--json]
+//   node lint-summary.mjs <draft.summary.md> [--allow word] [--json] [--long]
+//
+// --long lints a full /bs2 article instead of a summary: no length cap, H2s of
+// 6-15 words that each carry a figure not repeated in another heading, several
+// quotes allowed, no callout required, every link bold, and exactly one
+// tom-poll div before the first H2 plus one related-article card.
 //
 // Errors must be fixed before publishing. Warnings need a judgement call.
 // It cannot check facts or a translation - only reading the sources beside the
@@ -19,12 +24,14 @@ for (let i = 0; i < args.length; i++) {
   break;
 }
 const asJson = args.includes('--json');
+const long = args.includes('--long');
+const form = long ? 'an article' : 'a summary';
 const allow = new Set(
   args.flatMap((a, i) => (a === '--allow' ? [String(args[i + 1] || '').toLowerCase()] : []))
 );
 
 if (!file) {
-  console.error('usage: node lint-summary.mjs <draft.summary.md> [--allow word] [--json]');
+  console.error('usage: node lint-summary.mjs <draft.summary.md> [--allow word] [--json] [--long]');
   process.exit(2);
 }
 
@@ -119,28 +126,45 @@ if (new Set(tagList.map((t) => t.toLowerCase())).size !== tagList.length) {
 }
 
 // --- banned words, dashes, times, emoji -------------------------------------
+// `:::html` and `:::node` fences hold tables, embeds, the poll and the related
+// card. They are not prose, so the word rules scan a copy with those lines
+// blanked out (same line count, so reported line numbers still match).
+const masked = (() => {
+  let inFence = false;
+  return lines.map((l) => {
+    const t = l.trim();
+    if (/^:::\s*(html|node)\b/i.test(t)) { inFence = true; return ''; }
+    if (inFence) { if (t === ':::') inFence = false; return ''; }
+    return l;
+  }).join('\n');
+})();
+
 for (const [re, better] of BANNED) {
-  for (const m of body.matchAll(re)) {
+  for (const m of masked.matchAll(re)) {
     if (allow.has(m[0].toLowerCase())) continue;
     errors.push({ line: lineOf(m.index), rule: 'banned-word', msg: `"${m[0]}" is on the banned list - use ${better}` });
   }
 }
-for (const m of body.matchAll(/[—–]/g)) {
+for (const m of masked.matchAll(/[—–]/g)) {
   errors.push({ line: lineOf(m.index), rule: 'dash', msg: 'em/en dash found - write a plain hyphen "-" instead' });
 }
-for (const m of body.matchAll(/\b\d{1,2}(?::\d{2})?\s?(?:a\.?m\.?|p\.?m\.?)\b/gi)) {
+for (const m of masked.matchAll(/\b\d{1,2}(?::\d{2})?\s?(?:a\.?m\.?|p\.?m\.?)\b/gi)) {
   errors.push({ line: lineOf(m.index), rule: 'time-format', msg: `"${m[0].trim()}" - use 24-hour European time (08:00, 20:00)` });
 }
-// A summary carries no emoji at all, the callout fence included.
-for (const m of body.matchAll(/\p{Extended_Pictographic}/gu)) {
-  errors.push({ line: lineOf(m.index), rule: 'emoji', msg: `emoji "${m[0]}" - summaries carry none, not even in a callout` });
+// No emoji at all, the callout fence included.
+for (const m of masked.matchAll(/\p{Extended_Pictographic}/gu)) {
+  errors.push({ line: lineOf(m.index), rule: 'emoji', msg: `emoji "${m[0]}" - the post carries none, not even in a callout` });
 }
-for (const m of body.matchAll(/[“”‘’]/g)) {
+for (const m of masked.matchAll(/[“”‘’]/g)) {
   warnings.push({ line: lineOf(m.index), rule: 'quote-mark', msg: 'curly quote - use straight quotes so the editor does not double-convert' });
 }
 // `![` opens a Markdown image, which is not an exclamation.
-for (const m of body.matchAll(/!(?!\[)/g)) {
-  warnings.push({ line: lineOf(m.index), rule: 'exclamation', msg: 'exclamation mark - a summary states the fact instead' });
+for (const m of masked.matchAll(/!(?!\[)/g)) {
+  warnings.push({ line: lineOf(m.index), rule: 'exclamation', msg: `exclamation mark - ${form} states the fact instead` });
+}
+// The author is set in the front matter; Hyvor shows the byline itself.
+for (const m of masked.matchAll(/\bBy Mat\b/g)) {
+  errors.push({ line: lineOf(m.index), rule: 'byline', msg: '"By Mat" in the body - the author is set only through author: Mat in the front matter' });
 }
 
 // --- walk the body ----------------------------------------------------------
@@ -149,11 +173,25 @@ for (const m of body.matchAll(/!(?!\[)/g)) {
 // quote, source and length rules each look at the right lines.
 const kinds = [];       // one entry per body line
 const callouts = [];    // { line, fence, text[] }
+const htmlBlocks = [];  // { line, text[] } - :::html / :::node fences
 let inCallout = false;
+let inHtml = false;
 let calloutCount = 0;
 
 lines.forEach((l, i) => {
   const t = l.trim();
+  if (/^:::\s*(html|node)\b/i.test(t)) {
+    inHtml = true;
+    kinds[i] = 'html';
+    htmlBlocks.push({ line: i + 1 + offset, text: [] });
+    return;
+  }
+  if (inHtml) {
+    kinds[i] = 'html';
+    if (t === ':::') inHtml = false;
+    else if (t) htmlBlocks[htmlBlocks.length - 1].text.push(t);
+    return;
+  }
   if (/^:::\s*callout/i.test(t)) {
     inCallout = true;
     calloutCount++;
@@ -180,6 +218,7 @@ lines.forEach((l, i) => {
   kinds[i] = 'prose';
 });
 if (inCallout) errors.push({ line: 1, rule: 'callout', msg: 'a ::: callout fence was never closed' });
+if (inHtml) errors.push({ line: 1, rule: 'html', msg: 'a :::html fence was never closed' });
 
 const lineNoAt = (i) => i + 1 + offset;
 const quoteBlocks = [];  // { start, end, text[], attribution }
@@ -229,15 +268,37 @@ for (let i = 0; i < lines.length; i++) {
   else if (kinds[i] === 'h2') h2.push({ text: t.replace(/^##\s+/, ''), line: lineNo });
   else if (kinds[i] === 'image') imageLines++;
   else if (kinds[i] === 'image-credit') {
-    errors.push({ line: lineNo, rule: 'image-credit', msg: 'no "Image:" credit on a summary - the cover is the fixed house panorama' });
+    errors.push({ line: lineNo, rule: 'image-credit', msg: 'no "Image:" credit - the cover comes from the blog library' });
   }
+}
+
+// --- poll and related card (articles) ---------------------------------------
+// Every /bs2 article carries one tom-poll div, right after the lead and before
+// the first H2, and one related-article preview card.
+const polls = htmlBlocks.filter((b) => b.text.some((t) => /class="tom-poll"/.test(t)));
+const cards = htmlBlocks.filter((b) => b.text.some((t) => />Related<\/span>/.test(t)));
+if (long) {
+  if (polls.length === 0) {
+    errors.push({ line: 1, rule: 'poll', msg: 'no poll - every article carries one tom-poll div after the lead (add-poll.mjs prints it)' });
+  } else if (polls.length > 1) {
+    errors.push({ line: polls[1].line, rule: 'poll', msg: `${polls.length} polls - one per article` });
+  } else if (h2.length && polls[0].line > h2[0].line) {
+    errors.push({ line: polls[0].line, rule: 'poll', msg: 'the poll sits after the first H2 - move it right after the lead paragraph(s)' });
+  }
+  if (cards.length === 0) {
+    warnings.push({ line: 1, rule: 'related', msg: 'no related-article card - add one (make-related.mjs) unless nothing on the blog relates, and say so in the report' });
+  } else if (cards.length > 1 && polls.length) {
+    errors.push({ line: cards[1].line, rule: 'related', msg: 'two related cards on an article with a poll - one is the limit' });
+  }
+} else if (polls.length || cards.length) {
+  notes.push({ line: (polls[0] || cards[0]).line, rule: 'poll', msg: 'poll or related card found - lint with --long if this is a full article' });
 }
 
 // --- quotes -----------------------------------------------------------------
 if (quoteBlocks.length === 0) {
   notes.push({ line: 1, rule: 'quote', msg: 'no quote block - correct only if no source carries a usable quote' });
 }
-if (quoteBlocks.length > 1) {
+if (quoteBlocks.length > 1 && !long) {
   warnings.push({ line: quoteBlocks[1].start, rule: 'quote', msg: `${quoteBlocks.length} quote blocks; a summary runs the single most important one` });
 }
 for (const q of quoteBlocks) {
@@ -259,8 +320,9 @@ for (const q of quoteBlocks) {
   if (/\[[^\]]+\]\(/.test(text)) {
     errors.push({ line: q.start, rule: 'quote-link', msg: 'link inside a quote - keep the quote plain' });
   }
-  if (!/^["']/.test(text) || !/["']\.?$/.test(text)) {
-    warnings.push({ line: q.start, rule: 'quote-marks', msg: 'the quote should sit inside straight quotation marks' });
+  // The theme draws its own quote sign, so marks around the block show twice.
+  if (/^["'“‘]/.test(text) || /["'”’]\.?$/.test(text)) {
+    warnings.push({ line: q.start, rule: 'quote-marks', msg: 'quotation marks around a quote block - write > Text. without them, the theme adds its own' });
   }
   notes.push({ line: q.start, rule: 'verify-quote', msg: `check this matches the source exactly, in meaning and in English: "${text.slice(0, 90)}${text.length > 90 ? '...' : ''}"` });
 }
@@ -270,9 +332,9 @@ for (const q of quoteBlocks) {
 // only check its shape; whether the context is true is a judgement call, and
 // an unverified fact in here is worse than no callout at all.
 if (calloutCount > 1) {
-  errors.push({ line: callouts[1].line, rule: 'callout', msg: `${calloutCount} callouts - a summary carries exactly one` });
+  (long ? warnings : errors).push({ line: callouts[1].line, rule: 'callout', msg: `${calloutCount} callouts - ${long ? 'an article carries at most one did-you-know callout' : 'a summary carries exactly one'}` });
 }
-if (calloutCount === 0) {
+if (calloutCount === 0 && !long) {
   warnings.push({ line: 1, rule: 'callout', msg: 'no context callout - add one unless there is genuinely no context you can stand behind, and say so when reporting back' });
 }
 for (const c of callouts) {
@@ -345,8 +407,21 @@ if (wikiLinks.length) {
 }
 
 // --- bold keywords ----------------------------------------------------------
+// An article may close with one plain comment prompt: a single short question
+// (or a "tell us in the comments" line) as the last paragraph before the
+// Source lines. It reads as a closing line, not a banner, so no bold.
+const firstSource = sourceLines.length ? sourceLines[0].line : Infinity;
+const closing = long ? [...paragraphs].reverse().find((p) => p.line < firstSource) : null;
+const isCommentPrompt = (p) => p === closing
+  && p.text.split(/(?<=[.!?])\s+/).filter((s) => s.trim()).length === 1
+  && p.text.split(/\s+/).length <= 30
+  && (/\?\s*$/.test(p.text) || /\bcomments?\b/i.test(p.text));
 for (const p of paragraphs) {
   const bolds = [...p.text.matchAll(/\*\*([^*]+)\*\*/g)].map((m) => m[1].trim());
+  if (bolds.length === 0 && isCommentPrompt(p)) {
+    notes.push({ line: p.line, rule: 'comment-prompt', msg: `closing comment prompt - make sure it asks something other than the poll: "${p.text.slice(0, 80)}"` });
+    continue;
+  }
   if (bolds.length === 0) {
     errors.push({ line: p.line, rule: 'bold', msg: 'paragraph has no bold keywords - mark the 1-4 most important consecutive words' });
     continue;
@@ -360,6 +435,16 @@ for (const p of paragraphs) {
   if (bolds.length > 2) {
     warnings.push({ line: p.line, rule: 'bold', msg: `${bolds.length} bold runs in one paragraph - one is the norm, two at most` });
   }
+  // In an article every hyperlink is bold: **[text](url)**.
+  if (long) {
+    for (const m of p.text.matchAll(/\[[^\]]+\]\((https?:\/\/[^)\s]+)\)/g)) {
+      const before = p.text.slice(Math.max(0, m.index - 2), m.index);
+      const after = p.text.slice(m.index + m[0].length, m.index + m[0].length + 2);
+      if (before !== '**' || after !== '**') {
+        warnings.push({ line: p.line, rule: 'link-bold', msg: `link is not bold - write **[text](url)**: ${m[0].slice(0, 60)}` });
+      }
+    }
+  }
 }
 
 // --- headings ---------------------------------------------------------------
@@ -367,33 +452,60 @@ const h1 = lines.filter((l) => /^#\s+\S/.test(l.trim()));
 if (h1.length !== 1) {
   errors.push({ line: 1, rule: 'h1', msg: `found ${h1.length} H1 headlines, the summary needs exactly 1` });
 }
-if (h2.length === 0) {
-  errors.push({ line: 1, rule: 'h2-count', msg: 'summary needs at least 1 H2 section' });
+if (h2.length < (long ? 2 : 1)) {
+  errors.push({ line: 1, rule: 'h2-count', msg: `${form} needs at least ${long ? 2 : 1} H2 section${long ? 's' : ''}` });
 }
-if (h2.length > 3) {
+if (h2.length > 3 && !long) {
   warnings.push({ line: h2[3].line, rule: 'h2-count', msg: `${h2.length} H2 sections; a summary carries 1-3` });
 }
+const maxH2 = long ? 15 : 8;
 for (const h of h2) {
   const words = h.text.split(/\s+/).filter(Boolean).length;
-  if (words > 8) {
-    errors.push({ line: h.line, rule: 'h2-length', msg: `H2 is ${words} words, the limit is 8: "${h.text}"` });
+  if (words > maxH2) {
+    errors.push({ line: h.line, rule: 'h2-length', msg: `H2 is ${words} words, the limit is ${maxH2}: "${h.text}"` });
+  }
+  if (long && words < 6) {
+    warnings.push({ line: h.line, rule: 'h2-length', msg: `H2 is ${words} words; an article H2 runs 6-15 and carries a data point: "${h.text}"` });
   }
   if (/[.!?]$/.test(h.text)) {
     warnings.push({ line: h.line, rule: 'h2-punctuation', msg: `H2 ends with punctuation: "${h.text}"` });
   }
 }
+// Article H2s each carry a concrete data point, and no figure appears in two
+// headings (the H1 included). Numbers are mechanical to check; a place or
+// date in words is not, so a heading without a digit only gets a note.
+if (long) {
+  const figures = (s) => [...s.replace(/\*\*/g, '').matchAll(/\d[\d.,]*%?/g)].map((m) => m[0].replace(/[.,]$/, ''));
+  const seen = new Map(); // figure -> heading text
+  if (h1[0]) for (const f of figures(h1[0].replace(/^#\s+/, ''))) seen.set(f, 'the H1');
+  const NUMBER_WORDS = /\b(one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety|hundred|thousand|million|billion|half|dozen|first|second|third|january|february|march|april|may|june|july|august|september|october|november|december|monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b/i;
+  for (const h of h2) {
+    const fs = figures(h.text);
+    if (!fs.length && !NUMBER_WORDS.test(h.text)) {
+      notes.push({ line: h.line, rule: 'h2-data', msg: `no figure in this H2 - make sure it carries a date, amount, count or place: "${h.text}"` });
+    }
+    for (const f of fs) {
+      if (seen.has(f)) {
+        errors.push({ line: h.line, rule: 'h2-repeat', msg: `"${f}" already appears in ${seen.get(f)} - no figure repeats across headings` });
+      } else {
+        seen.set(f, `the H2 "${h.text.slice(0, 40)}"`);
+      }
+    }
+  }
+}
 
 // --- images -----------------------------------------------------------------
 if (imageLines) {
-  errors.push({ line: 1, rule: 'image', msg: `${imageLines} image(s) in the body - the fixed panorama cover is the only image` });
+  errors.push({ line: 1, rule: 'image', msg: `${imageLines} image(s) in the body - the library cover is the only image` });
 }
 
 // --- the source block -------------------------------------------------------
 // Every source gets its own paragraph, with the bare domain as the link text.
-const SOURCE_RE = /^Source:\s*\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)\s*$/;
+// The link may be bold (**[...](...)**); in an article it must be.
+const SOURCE_RE = /^Source:\s*(\*\*)?\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)(\*\*)?\s*$/;
 const domainOf = (host) => host.replace(/^www\./i, '').toLowerCase();
 if (!sourceLines.length) {
-  errors.push({ line: 1, rule: 'source', msg: 'no "Source: [domain](url)" line at the end of the summary' });
+  errors.push({ line: 1, rule: 'source', msg: `no "Source: [domain](url)" line at the end of ${form}` });
 }
 sourceLines.forEach((s, i) => {
   const m = s.text.match(SOURCE_RE);
@@ -401,7 +513,12 @@ sourceLines.forEach((s, i) => {
     errors.push({ line: s.line, rule: 'source', msg: 'source line must read: Source: [domain](https://...)' });
     return;
   }
-  const [, label, href] = m;
+  const [, openBold, label, href, closeBold] = m;
+  if (!!openBold !== !!closeBold) {
+    errors.push({ line: s.line, rule: 'source', msg: 'unbalanced ** around the source link' });
+  } else if (long && !openBold) {
+    warnings.push({ line: s.line, rule: 'link-bold', msg: 'source link is not bold - write Source: **[domain](url)**' });
+  }
   let host = '';
   try { host = new URL(href).hostname; } catch { /* reported below */ }
   if (!host) {
@@ -418,21 +535,25 @@ sourceLines.forEach((s, i) => {
 const declared = []
   .concat(meta.source_urls || [], meta.source_url ? [meta.source_url] : [])
   .filter(Boolean);
-const linked = sourceLines.map((s) => (s.text.match(SOURCE_RE) || [])[2]).filter(Boolean);
+const linked = sourceLines.map((s) => (s.text.match(SOURCE_RE) || [])[3]).filter(Boolean);
 for (const u of declared) {
   if (!linked.includes(u)) {
     warnings.push({ line: 1, rule: 'source', msg: `front matter names ${u}, which has no Source line` });
   }
 }
-const lastContent = [...lines].reverse().find((l) => l.trim());
-if (sourceLines.length && lastContent && lastContent.trim() !== sourceLines[sourceLines.length - 1].text) {
-  errors.push({ line: sourceLines[sourceLines.length - 1].line, rule: 'source', msg: 'the source block closes the summary - nothing comes after it' });
+// The source block closes the post. In an article the related card may still
+// follow it (its own :::html fence), nothing else.
+const lastIdx = [...lines.keys()].reverse().find((i) => lines[i].trim() && (!long || kinds[i] !== 'html'));
+if (sourceLines.length && lastIdx != null && lines[lastIdx].trim() !== sourceLines[sourceLines.length - 1].text) {
+  errors.push({ line: sourceLines[sourceLines.length - 1].line, rule: 'source', msg: `the source block closes ${form} - nothing comes after it${long ? ' except the related card' : ''}` });
 }
 
 // --- length and readability (B2, short phrases) -----------------------------
 const prose = paragraphs.map((p) => p.text).join(' ');
 const bodyWords = prose.replace(/\*\*/g, '').split(/\s+/).filter(Boolean).length;
-if (bodyWords > 400) {
+if (long) {
+  if (bodyWords < 300) warnings.push({ line: 1, rule: 'length', msg: `${bodyWords} words of prose - an article uses everything relevant in the source; under 300 reads as a summary` });
+} else if (bodyWords > 400) {
   errors.push({ line: 1, rule: 'length', msg: `${bodyWords} words of prose - over 400 is an article, not a summary (target 150-300)` });
 } else if (bodyWords > 300 || bodyWords < 150) {
   warnings.push({ line: 1, rule: 'length', msg: `${bodyWords} words of prose; the target is 150-300` });
@@ -451,24 +572,25 @@ for (const { text, line } of sentences) {
   total += n;
   longest = Math.max(longest, n);
   if (n > 25) {
-    warnings.push({ line, rule: 'sentence-length', msg: `${n}-word sentence - split it, a summary runs on short phrases` });
+    warnings.push({ line, rule: 'sentence-length', msg: `${n}-word sentence - split it, B2 means nothing over about 25 words` });
   }
 }
 const avg = sentences.length ? total / sentences.length : 0;
 if (avg > 20) {
-  warnings.push({ line: 1, rule: 'readability', msg: `average sentence is ${avg.toFixed(1)} words; aim under 18 for a B2 summary` });
+  warnings.push({ line: 1, rule: 'readability', msg: `average sentence is ${avg.toFixed(1)} words; aim under 18 for B2` });
 }
+const maxSentences = long ? 4 : 3;
 for (const p of paragraphs) {
   const n = p.text.split(/(?<=[.!?])\s+/).filter((s) => s.trim().length > 1).length;
-  if (n > 3) {
-    warnings.push({ line: p.line, rule: 'paragraph-length', msg: `${n} sentences in one paragraph - a summary paragraph runs 1-3` });
+  if (n > maxSentences) {
+    warnings.push({ line: p.line, rule: 'paragraph-length', msg: `${n} sentences in one paragraph - ${long ? 'an article paragraph runs 2-4 short sentences' : 'a summary paragraph runs 1-3'}` });
   }
 }
 notes.push({ line: 1, rule: 'stats', msg: `${bodyWords} words, ${sentences.length} sentences, avg ${avg.toFixed(1)}, longest ${longest}, ${paragraphs.length} paragraphs, ${sourceLines.length} source(s)` });
 
 // --- AI tells ---------------------------------------------------------------
 for (const re of AI_TELLS) {
-  for (const m of body.matchAll(re)) {
+  for (const m of masked.matchAll(re)) {
     warnings.push({ line: lineOf(m.index), rule: 'ai-tell', msg: `"${m[0]}" reads as machine-written - rephrase` });
   }
 }
@@ -477,7 +599,7 @@ for (const re of AI_TELLS) {
 // A summary translated from Portuguese sometimes keeps a word or a whole quote
 // in the original. These are the giveaways worth a second look.
 const LEFTOVERS = /\b(?:disse|afirmou|segundo|governo regional|câmara municipal|não|também|sobre o|que a|dos|das|sagte|laut|der Regierung)\b/gi;
-for (const m of body.matchAll(LEFTOVERS)) {
+for (const m of masked.matchAll(LEFTOVERS)) {
   warnings.push({ line: lineOf(m.index), rule: 'language', msg: `"${m[0]}" is not English - the whole post, quotes included, runs in English` });
 }
 
