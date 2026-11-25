@@ -134,5 +134,22 @@
         "label": "No, the port has other priorities"
       }
     ]
+  },
+  "funchal-homeless-housing-or-treatment": {
+    "question": "What should come first to get people off the streets of Funchal?",
+    "options": [
+      {
+        "key": "housing",
+        "label": "A home first, support comes after"
+      },
+      {
+        "key": "treatment",
+        "label": "Treatment for alcohol or mental health first"
+      },
+      {
+        "key": "both",
+        "label": "Both at the same time"
+      }
+    ]
   }
 }
