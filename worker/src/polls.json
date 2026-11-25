@@ -117,5 +117,22 @@
         "label": "On arrival, at the counter"
       }
     ]
+  },
+  "funchal-mega-yacht-dock": {
+    "question": "Should Funchal port build a new dock for large yachts?",
+    "options": [
+      {
+        "key": "yes",
+        "label": "Yes, big yachts bring money to the island"
+      },
+      {
+        "key": "conditions",
+        "label": "Only if local boats keep their berths"
+      },
+      {
+        "key": "no",
+        "label": "No, the port has other priorities"
+      }
+    ]
   }
 }
