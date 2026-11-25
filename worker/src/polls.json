@@ -168,5 +168,22 @@
         "label": "Cut regional taxes"
       }
     ]
+  },
+  "domestic-violence-priority-madeira": {
+    "question": "What would help most against domestic violence in Madeira?",
+    "options": [
+      {
+        "key": "prevention",
+        "label": "More prevention and education"
+      },
+      {
+        "key": "housing",
+        "label": "Housing and money so victims can leave"
+      },
+      {
+        "key": "justice",
+        "label": "Faster police and court action"
+      }
+    ]
   }
 }
