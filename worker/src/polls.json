@@ -83,5 +83,22 @@
         "label": "No, I get the numbers from the news"
       }
     ]
+  },
+  "buying-home-madeira-salary": {
+    "question": "Can someone on a Madeira salary still afford to buy a home?",
+    "options": [
+      {
+        "key": "yes",
+        "label": "Yes, outside Funchal it is still possible"
+      },
+      {
+        "key": "help",
+        "label": "Only with family help or two incomes"
+      },
+      {
+        "key": "no",
+        "label": "No, prices are out of reach now"
+      }
+    ]
   }
 }
