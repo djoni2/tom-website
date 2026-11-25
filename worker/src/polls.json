@@ -151,5 +151,22 @@
         "label": "Both at the same time"
       }
     ]
+  },
+  "madeira-rating-upgrade-next-step": {
+    "question": "Madeira's credit rating went up. What should the region do next?",
+    "options": [
+      {
+        "key": "debt",
+        "label": "Pay down the debt faster"
+      },
+      {
+        "key": "spend",
+        "label": "Spend more on health and social services"
+      },
+      {
+        "key": "tax",
+        "label": "Cut regional taxes"
+      }
+    ]
   }
 }
