@@ -128,7 +128,7 @@
            Bump ?v= here every time assets/poll.js changes, so the URL itself
            changes and forces a fresh fetch instead of waiting out the cache. #}
         {% if 'tom-poll' in _post.content %}
-          <script src="{{ 'poll.js' | asset_url }}?v=2" data-api-base="https://tom-polls.timesofmadeira.workers.dev" defer></script>
+          <script src="{{ 'poll.js' | asset_url }}?v=3" data-api-base="https://tom-polls.timesofmadeira.workers.dev" defer></script>
         {% endif %}
 
         {% if _route.name != 'page' and _comments %}

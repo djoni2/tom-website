@@ -2,179 +2,217 @@
    assets/poll.js into a <div class="tom-poll" data-poll-id="..."></div>
    embedded directly in article content. Colors/fonts come from the theme's
    own CSS variables (config.yaml), so this follows light/dark automatically
-   like the rest of the theme -- no separate .mode-dark block needed here. */
+   like the rest of the theme -- no separate .mode-dark block needed here.
+
+   Look: a card with the article's cover photo as a header carrying the
+   "Reader poll" eyebrow and the question, then the answers as the Madeira
+   Quiz's lettered rows (A, B, C circles, hairline dividers, accent text on
+   hover). After voting the chosen letter fills with the accent colour and
+   every row gets a thin bar with its percentage. */
 
 .tom-poll {
-  position: relative;
-  overflow: hidden;
   width: 100%;
   margin: 32px 0;
-  padding: 22px;
   border: 1px solid var(--border-color);
   border-radius: 14px;
+  overflow: hidden;
+  background: var(--background-color);
+}
+
+/* Header over the cover image. --poll-bg-image is set inline on
+   .post-content in templates/post.twig from _post.featured_image_url, so
+   every poll picks up its own article's cover automatically. Without a
+   cover the header is a plain dark navy band; the text stays white either
+   way because of the gradient. */
+.tom-poll__hero {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  justify-content: flex-end;
+  gap: 8px;
+  min-height: 190px;
+  padding: 22px;
+  background-color: #05051c;
+  background-image: var(--poll-bg-image, none);
+  background-size: cover;
+  background-position: center;
+  color: #fff;
 
-  /* The article's own cover image, faint, behind the poll content --
-     --poll-bg-image is set inline on .post-content in templates/post.twig
-     from _post.featured_image_url, so every poll on every article picks up
-     its own article's cover automatically. No solid fallback color: with
-     no cover, the poll just shows the page background through. */
   &::before {
     content: '';
     position: absolute;
     inset: 0;
-    background-image: var(--poll-bg-image, none);
-    background-size: cover;
-    background-position: center;
-    opacity: .1;
-    z-index: 0;
+    background: linear-gradient(180deg, rgba(5, 5, 28, .1) 0%, rgba(5, 5, 28, .78) 100%);
   }
 
   > * {
     position: relative;
-    z-index: 1;
   }
+}
+
+.tom-poll__eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #fff;
+  opacity: .9;
 }
 
 .tom-poll__q {
   margin: 0;
   font-family: var(--heading-font-family);
-  font-size: $font-size-h5;
-  font-weight: 700;
-  line-height: 1.4;
-  color: var(--heading-font-color);
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.3;
+  color: #fff;
+  text-wrap: balance;
 }
 
-.tom-poll__options {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.tom-poll__body {
+  padding: 4px 22px 18px;
 }
 
+.tom-poll__options,
+.tom-poll__results {
+  display: grid;
+}
+
+/* Hover: accent text only, no background, as in the quiz and header menus */
 .tom-poll__opt {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 16px;
   width: 100%;
-  padding: 11px 14px;
-  border: 1px solid var(--border-color);
-  border-radius: 9px;
+  padding: 15px 0;
+  border: 0;
+  border-bottom: 1px solid var(--border-color);
   background: transparent;
   color: var(--text-color);
   font: inherit;
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 17px;
+  line-height: 1.35;
   text-align: start;
   cursor: pointer;
-  transition: $global-transition;
+  transition: color .2s;
+
+  &:last-child {
+    border-bottom: 0;
+  }
 
   &:hover:not(:disabled),
   &:focus-visible {
-    border-color: var(--color-accent);
+    color: var(--color-accent);
     outline: none;
+
+    .tom-poll__letter {
+      border-color: currentColor;
+    }
   }
 
   &:disabled {
     cursor: default;
-    opacity: .6;
   }
 }
 
-.tom-poll__dot {
+.tom-poll__letter {
+  display: inline-flex;
   flex: 0 0 auto;
-  width: 8px;
-  height: 8px;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
   border: 1.5px solid var(--border-color);
   border-radius: 50%;
-}
-
-.tom-poll__results {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.tom-poll__row-top {
-  margin-bottom: 5px;
   font-size: 14px;
+  font-weight: 500;
+  transition: background-color .2s, border-color .2s, color .2s;
+}
+
+.tom-poll__row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 8px 16px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--border-color);
+
+  &:last-child {
+    border-bottom: 0;
+  }
 }
 
 .tom-poll__label {
-  font-weight: 500;
-}
-
-.tom-poll__barwrap {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  font-size: 17px;
+  line-height: 1.35;
 }
 
 .tom-poll__pct {
-  flex: 0 0 auto;
-  width: 62px;
-  font-size: 1.4em;
+  min-width: 56px;
+  font-size: 22px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
   text-align: right;
-  color: var(--text-color);
-}
-
-.tom-poll__row.is-you {
-  .tom-poll__label {
-    color: var(--color-accent);
-
-    &::after {
-      content: 'Your vote';
-      margin-left: 8px;
-      padding: 2px 8px;
-      border: 1px solid var(--color-accent);
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: .03em;
-      text-transform: uppercase;
-      color: var(--color-accent);
-    }
-  }
-
-  .tom-poll__pct {
-    color: var(--color-accent);
-  }
-
-  .tom-poll__fill {
-    background: var(--color-accent);
-  }
+  color: var(--heading-font-color);
 }
 
 .tom-poll__track {
-  flex: 1 1 auto;
-  height: 8px;
-  border-radius: 999px;
-  background: #fff;
-  border: 1px solid var(--border-color);
+  grid-column: 2 / 4;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border-color);
   overflow: hidden;
 }
 
 .tom-poll__fill {
   height: 100%;
   width: 0;
-  border-radius: 999px;
   background: var(--text-color);
-  opacity: .5;
+  opacity: .35;
   transition: width .6s cubic-bezier(.2, .8, .2, 1);
 }
 
-.tom-poll__row.is-you .tom-poll__fill {
-  opacity: 1;
+.tom-poll__row.is-you {
+  color: var(--color-accent);
+  font-weight: 500;
+
+  .tom-poll__label::after {
+    content: 'Your vote';
+    display: inline-block;
+    margin-left: 8px;
+    padding: 1px 8px;
+    border: 1px solid var(--color-accent);
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+    vertical-align: middle;
+    color: var(--color-accent);
+  }
+
+  .tom-poll__pct {
+    color: var(--color-accent);
+  }
+
+  .tom-poll__letter {
+    border-color: var(--color-accent);
+    background: var(--color-accent);
+    color: #fff;
+  }
+
+  .tom-poll__fill {
+    background: var(--color-accent);
+    opacity: 1;
+  }
 }
 
 .tom-poll__foot {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 8px;
+  margin-top: 12px;
+  padding-top: 10px;
   border-top: 1px dashed var(--border-color);
   font-size: 13px;
   opacity: .6;
@@ -182,12 +220,28 @@
 
 .tom-poll__error {
   margin: 0;
+  padding: 18px 22px;
   font-size: 13px;
   color: var(--color-accent);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .tom-poll__fill {
+    transition: none;
+  }
+}
+
 @media (max-width: $mobile) {
-  .tom-poll {
+  .tom-poll__hero {
+    min-height: 160px;
     padding: 18px;
+  }
+
+  .tom-poll__q {
+    font-size: 21px;
+  }
+
+  .tom-poll__body {
+    padding: 2px 18px 16px;
   }
 }

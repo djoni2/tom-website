@@ -1,13 +1,16 @@
 /* Article polls. Finds every <div class="tom-poll" data-poll-id="..."></div>
    in the page, fills it from the polls API, and lets the reader vote once.
    The API base comes from this script tag's own data-api-base attribute
-   (set in templates/post.twig), so it never needs hardcoding here. */
+   (set in templates/post.twig), so it never needs hardcoding here.
+   Layout (see styles/poll.scss): a cover-photo header with the question,
+   then the answers as lettered rows A, B, C like the Madeira Quiz. */
 (function () {
   'use strict';
 
   var scriptEl = document.currentScript;
   var API_BASE = scriptEl ? (scriptEl.dataset.apiBase || '').replace(/\/$/, '') : '';
   var VOTER_KEY = 'tom_voter_id';
+  var LETTERS = 'ABCDEFGH';
 
   function getVoterId() {
     try {
@@ -25,87 +28,82 @@
     }
   }
 
-  function el(tag, cls) {
+  function el(tag, cls, text) {
     var n = document.createElement(tag);
     if (cls) n.className = cls;
+    if (text !== undefined) n.textContent = text;
     return n;
+  }
+
+  function renderHero(root, question) {
+    var hero = el('div', 'tom-poll__hero');
+    hero.appendChild(el('span', 'tom-poll__eyebrow', 'Reader poll'));
+    hero.appendChild(el('p', 'tom-poll__q', question));
+    root.appendChild(hero);
   }
 
   function renderResults(root, question, options, total, yourKey) {
     root.textContent = '';
+    renderHero(root, question);
 
-    var q = el('p', 'tom-poll__q');
-    q.textContent = question;
-    root.appendChild(q);
-
+    var body = el('div', 'tom-poll__body');
     var list = el('div', 'tom-poll__results');
-    options.forEach(function (opt) {
+    var fills = [];
+
+    options.forEach(function (opt, i) {
       var pct = total > 0 ? Math.round((opt.votes / total) * 100) : 0;
       var row = el('div', 'tom-poll__row' + (opt.key === yourKey ? ' is-you' : ''));
 
-      var top = el('div', 'tom-poll__row-top');
-      var label = el('span', 'tom-poll__label');
-      label.textContent = opt.label;
-      top.appendChild(label);
+      var letter = el('span', 'tom-poll__letter', LETTERS.charAt(i));
+      letter.setAttribute('aria-hidden', 'true');
+      row.appendChild(letter);
+      row.appendChild(el('span', 'tom-poll__label', opt.label));
+      row.appendChild(el('span', 'tom-poll__pct', pct + '%'));
 
-      var barWrap = el('div', 'tom-poll__barwrap');
       var track = el('div', 'tom-poll__track');
       var fill = el('div', 'tom-poll__fill');
       track.appendChild(fill);
-      var pctEl = el('span', 'tom-poll__pct');
-      pctEl.textContent = pct + '%';
-      barWrap.appendChild(track);
-      barWrap.appendChild(pctEl);
+      row.appendChild(track);
 
-      row.appendChild(top);
-      row.appendChild(barWrap);
       list.appendChild(row);
+      fills.push([fill, pct]);
     });
-    root.appendChild(list);
+    body.appendChild(list);
 
     var foot = el('div', 'tom-poll__foot');
-    var count = el('span');
-    count.textContent = total + (total === 1 ? ' vote' : ' votes');
-    var thanks = el('span');
-    thanks.textContent = 'Thanks for voting';
-    foot.appendChild(count);
-    foot.appendChild(thanks);
-    root.appendChild(foot);
+    foot.appendChild(el('span', '', total + (total === 1 ? ' vote' : ' votes')));
+    foot.appendChild(el('span', '', 'Thanks for voting'));
+    body.appendChild(foot);
+
+    root.appendChild(body);
 
     requestAnimationFrame(function () {
       requestAnimationFrame(function () {
-        list.querySelectorAll('.tom-poll__row').forEach(function (row, i) {
-          var total2 = total > 0 ? Math.round((options[i].votes / total) * 100) : 0;
-          row.querySelector('.tom-poll__fill').style.width = total2 + '%';
-        });
+        fills.forEach(function (f) { f[0].style.width = f[1] + '%'; });
       });
     });
   }
 
   function renderError(root) {
     root.textContent = '';
-    var p = el('p', 'tom-poll__error');
-    p.textContent = 'This poll could not be loaded right now.';
-    root.appendChild(p);
+    root.appendChild(el('p', 'tom-poll__error', 'This poll could not be loaded right now.'));
   }
 
   function renderVoting(root, pollId, question, options, voterId) {
     root.textContent = '';
+    renderHero(root, question);
 
-    var q = el('p', 'tom-poll__q');
-    q.textContent = question;
-    root.appendChild(q);
-
+    var body = el('div', 'tom-poll__body');
     var list = el('div', 'tom-poll__options');
     var buttons = [];
 
-    options.forEach(function (opt) {
+    options.forEach(function (opt, i) {
       var btn = el('button', 'tom-poll__opt');
       btn.type = 'button';
-      var dot = el('span', 'tom-poll__dot');
-      var label = document.createTextNode(opt.label);
-      btn.appendChild(dot);
-      btn.appendChild(label);
+      var letter = el('span', 'tom-poll__letter', LETTERS.charAt(i));
+      letter.setAttribute('aria-hidden', 'true');
+      btn.appendChild(letter);
+      btn.appendChild(el('span', 'tom-poll__label', opt.label));
 
       btn.addEventListener('click', function () {
         buttons.forEach(function (b) { b.disabled = true; });
@@ -123,7 +121,8 @@
       list.appendChild(btn);
     });
 
-    root.appendChild(list);
+    body.appendChild(list);
+    root.appendChild(body);
   }
 
   function getPoll(pollId, voterId) {
