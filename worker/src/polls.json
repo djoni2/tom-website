@@ -100,5 +100,22 @@
         "label": "No, prices are out of reach now"
       }
     ]
+  },
+  "rental-car-booking-method": {
+    "question": "How do you prefer to book a rental car in Madeira?",
+    "options": [
+      {
+        "key": "online",
+        "label": "Online, with instant confirmation"
+      },
+      {
+        "key": "contact",
+        "label": "By email or WhatsApp, with a real person"
+      },
+      {
+        "key": "counter",
+        "label": "On arrival, at the counter"
+      }
+    ]
   }
 }
