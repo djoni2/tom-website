@@ -185,5 +185,22 @@
         "label": "Faster police and court action"
       }
     ]
+  },
+  "sesaram-waiting-list-fix": {
+    "question": "What would cut Madeira's hospital waiting lists the most?",
+    "options": [
+      {
+        "key": "incentives",
+        "label": "More pay for doctors per extra consultation"
+      },
+      {
+        "key": "private",
+        "label": "Sending patients to private clinics"
+      },
+      {
+        "key": "staff",
+        "label": "Hiring more specialists for SESARAM"
+      }
+    ]
   }
 }
