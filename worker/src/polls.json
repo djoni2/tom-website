@@ -202,5 +202,22 @@
         "label": "Hiring more specialists for SESARAM"
       }
     ]
+  },
+  "cow-photo-distance": {
+    "question": "How close would you get to a cow on Madeira's plateau for a photo?",
+    "options": [
+      {
+        "key": "close",
+        "label": "Close enough for a selfie"
+      },
+      {
+        "key": "zoom",
+        "label": "Only with a zoom from a distance"
+      },
+      {
+        "key": "away",
+        "label": "I keep well away from cattle"
+      }
+    ]
   }
 }
