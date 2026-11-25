@@ -273,13 +273,14 @@ for (let i = 0; i < lines.length; i++) {
 }
 
 // --- poll and related card (articles) ---------------------------------------
-// Every /bs2 article carries one tom-poll div, right after the lead and before
-// the first H2, and one related-article preview card.
+// A /bs2 article carries a tom-poll div only when the user asked for a poll;
+// when present it sits right after the lead, before the first H2. Every
+// article carries a related-article preview card (two without a poll).
 const polls = htmlBlocks.filter((b) => b.text.some((t) => /class="tom-poll"/.test(t)));
 const cards = htmlBlocks.filter((b) => b.text.some((t) => />Related<\/span>/.test(t)));
 if (long) {
   if (polls.length === 0) {
-    errors.push({ line: 1, rule: 'poll', msg: 'no poll - every article carries one tom-poll div after the lead (add-poll.mjs prints it)' });
+    notes.push({ line: 1, rule: 'poll', msg: 'no poll - fine unless the user asked for a survey (add-poll.mjs prints the fence)' });
   } else if (polls.length > 1) {
     errors.push({ line: polls[1].line, rule: 'poll', msg: `${polls.length} polls - one per article` });
   } else if (h2.length && polls[0].line > h2[0].line) {

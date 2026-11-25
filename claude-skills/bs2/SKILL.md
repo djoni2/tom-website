@@ -48,9 +48,9 @@ to an exact place in a source.
 | Tags         | **Exactly two existing tags** from the live taxonomy (`blog-writer/references/tags.md`, check the live list). Never create one. Write them with their accents (`Câmara de Lobos`): the tag search is accent-sensitive, so `Camara de Lobos` silently drops the tag. |
 | Cover        | An existing library image you have **looked at**, picked with `find-media.mjs` (see `/bs` "The cover image"), published with `--featured-url`. |
 | Description  | 110-160 characters, factual, for search results. |
-| Poll         | **Every article carries one poll** (the user calls it a survey): right after the lead paragraph(s), before the first H2. One question, **3 answers (never more than 4)**. See "Poll". |
-| Related      | **One other Times of Madeira article** as a preview card (image, headline, one-sentence description). Two cards only on an article without a poll. See "Related article card". |
-| Comments     | Where it genuinely fits, end with one short question that invites readers to the comments. Not on every article, and never the poll's question. See "Comment prompt". |
+| Poll         | **Only when the user asks for one** (they call it a survey: "add a survey", "with a poll"). Never add one on your own. When asked: right after the lead paragraph(s), before the first H2, one question, **3 answers (never more than 4)**. See "Poll". |
+| Related      | **One other Times of Madeira article** as a preview card (image, headline, one-sentence description). Two cards are fine on an article without a poll. See "Related article card". |
+| Comments     | Where it genuinely fits, end with one short question that invites readers to the comments. Not on every article, and never the poll's question when there is a poll. See "Comment prompt". |
 
 ### Banned words
 
@@ -92,6 +92,12 @@ on a phone). Paste each under the lead or the H2 it belongs to. A table does
 not replace the prose: the key figures still appear in the text.
 
 ## Poll
+
+**Polls are opt-in.** Add one only when the user asks for it in the request
+(a "survey" or "poll"). Without that ask, skip this section entirely, write
+"Poll: none (not requested)" in the report, and do not create one in
+`polls.json`. Everything below applies only to an article the user wants a
+poll on.
 
 **The question** asks the one thing the story leaves open for readers: a
 decision they can take a side on (a fee, a closure, a new rule), a trade-off
@@ -187,36 +193,37 @@ iframe (`/p/<ID>/` instead of `/reel/<ID>/` for a photo post):
 1. **Read every source** and save the text to `articles/<date>-<slug>.source.txt`.
 2. **Plan.** Note the lead, every fact with its source line, the quotes
    (original beside your translation), the figures for tables, the embeds,
-   the poll question, the related article, and what the source does **not**
-   say.
+   the poll question (only if the user asked for a poll), the related
+   article, and what the source does **not** say.
 3. **Draft** `articles/<date>-<slug>.summary.md` with the `/bs` front matter
    (title, slug, description, tags, `author: Mat`, source_url, cover_url).
    Pick the tags from the live list and the cover with `find-media.mjs`,
-   looking at the images. Register the poll with `add-poll.mjs` and paste its
-   fence after the lead; build the related card with `make-related.mjs`.
+   looking at the images. If the user asked for a poll, register it with
+   `add-poll.mjs` and paste its fence after the lead; build the related card
+   with `make-related.mjs`.
 4. **Lint, then check by hand.**
 
    ```bash
    node C:/Users/samad/.claude/skills/blog-summary/scripts/lint-summary.mjs articles/<slug>.summary.md --long
    ```
 
-   `--long` applies the article rules (length, H2s, poll, related card, bold
-   links). Fix every error, judge every warning, then read the source and the
+   `--long` applies the article rules (length, H2s, poll placement when there
+   is one, related card, bold links). Fix every error, judge every warning, then read the source and the
    draft side by side once more.
 5. **Publish, dev first, then live**, with the `/bs` step 5 commands and
    `--featured-url <cover_url>`. Live uses
    `HYVOR_CONSOLE_KEY=$(cat ~/.hyvor/console-key-prod)` and
    `--blog times-of-madeira`; **never print the prod key**. Before the live
    call, check that the tags exist and the slug is free on `times-of-madeira`,
-   and that the poll is live. A Hyvor 522 is usually temporary: retry once.
+   and, if there is a poll, that it is live. A Hyvor 522 is usually temporary: retry once.
    **A post that is already published is a different procedure** (below);
    never just re-run publish on it.
 6. **Verify both pages.** curl each URL for HTTP 200, the H2 count, the cover,
-   zero "By Mat", the poll div and the source link. Then
+   zero "By Mat", the poll div (if the article has one) and the source link. Then
    `node C:/Users/samad/.claude/skills/bs2/scripts/check-page.cjs <url> <scratchpad>`
    saves desktop and mobile screenshots and prints the table count and
    `scrollWidth`; on mobile it must be 390 (no sideways scrolling). **Look at
-   the screenshots** and check the poll shows its question and options.
+   the screenshots** and, with a poll, check it shows its question and options.
 7. **Report back** (format below).
 
 ## Editing a published post
@@ -241,7 +248,8 @@ read it before touching a live post. Never use `--force` on your own.
    derived figures, contradictions in the source, quotes or callouts left out
    and why.
 6. The **poll**, as plain text (no code block): the id and whether it is new
-   or reused, the question, then one line per answer.
+   or reused, the question, then one line per answer. Without a poll, one
+   line: "Poll: none (not requested)".
 7. The **social posts**, as plain text (no code block, so they paste clean),
    short, neutral and factual, banned words excluded:
    - **Twitter/X:** under 280 characters, 2-3 emojis, key terms in
@@ -257,8 +265,9 @@ read it before touching a live post. Never use `--force` on your own.
   location known. Allegations always worded as allegations.
 - No banned words, no em dashes, no "By Mat" in the body, every link bold.
 - Exactly two existing tags, and a cover you have looked at.
-- One poll per article, 3 answers (4 at most), live on the Worker before the
-  live publish, and printed in the report. One related card with a poll.
+- No poll unless the user asked for one. When asked: one poll, 3 answers (4
+  at most), live on the Worker before the live publish, and printed in the
+  report. One related card with a poll, up to two without.
 - Lint with `--long` and publish nothing that still has errors.
 - Publish to the dev blog first, then live, every time, and verify both pages.
 - Never update a published post without pulling it first. The user's edits in
