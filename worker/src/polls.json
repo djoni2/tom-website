@@ -253,5 +253,22 @@
         "label": "Both, about equally"
       }
     ]
+  },
+  "living-standards-priority-madeira": {
+    "question": "What would do most to raise living standards in Madeira?",
+    "options": [
+      {
+        "key": "wages",
+        "label": "Higher wages and pensions"
+      },
+      {
+        "key": "housing",
+        "label": "Cheaper housing"
+      },
+      {
+        "key": "prices",
+        "label": "Lower prices for everyday goods"
+      }
+    ]
   }
 }
