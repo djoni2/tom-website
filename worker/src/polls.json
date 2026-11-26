@@ -236,5 +236,22 @@
         "label": "No, visitors simply spend less in local shops"
       }
     ]
+  },
+  "tourism-economy-living-standard": {
+    "question": "Does Madeira's tourism economy raise your own standard of living?",
+    "options": [
+      {
+        "key": "yes",
+        "label": "Yes, my income depends on it"
+      },
+      {
+        "key": "no",
+        "label": "No, it mainly pushes up my costs"
+      },
+      {
+        "key": "mixed",
+        "label": "Both, about equally"
+      }
+    ]
   }
 }
