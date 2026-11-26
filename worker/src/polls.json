@@ -219,5 +219,22 @@
         "label": "I keep well away from cattle"
       }
     ]
+  },
+  "tourism-fees-residents-better-off": {
+    "question": "Do Madeira's tourism fees leave residents better off?",
+    "options": [
+      {
+        "key": "yes",
+        "label": "Yes, the money funds services everyone uses"
+      },
+      {
+        "key": "earmark",
+        "label": "Only if the revenue is earmarked"
+      },
+      {
+        "key": "no",
+        "label": "No, visitors simply spend less in local shops"
+      }
+    ]
   }
 }
